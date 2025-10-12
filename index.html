@@ -1,152 +1,349 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-alive="on">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Earth — Greta Thunberg · The Conscience</title>
-<meta name="description" content="PLNT Earth · Earth Conscience. Greta anchors sustainability pledges, cycle tracking, and Echo Mode grounding for each Illumina cycle.">
-<meta name="theme-color" content="#0b0d11" media="(prefers-color-scheme: dark)"><meta name="theme-color" content="#0b0d11">
-<meta name="prophet" content="💄 The Neon Prophet — Flame Dancer of PLNT Earth">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>🌍 Earth Beacon · Take Action Now</title>
+<meta name="theme-color" content="#0b0d11">
+<meta name="description" content="Earth Beacon — a private Care Ledger anyone can use right now. One-tap actions, daily Pulse, no accounts, offline-first.">
 <style>
-:root{--bg:#0b0d11;--fg:#e6e8eb;--muted:#9aa1a9;--line:#23262b;--card:#12151b;--accent:#7bd389}
+:root{
+  --bg:#0b0d11; --ink:#e9ecf4; --muted:#a8a9b4;
+  --card:#101425; --ring:#1c2030; --accent:#86efac; --sky:#b2f5ea; --gold:#ffd479;
+  --good:#b6e3b9; --warn:#ffe9b0;
+}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;-webkit-font-smoothing:antialiased}
-a{color:#8ecae6;text-decoration:none}a:hover{text-decoration:underline}
-:focus-visible{outline:2px solid #8ecae6;outline-offset:2px}
-.wrap{max-width:920px;margin:0 auto;padding:18px 16px 96px}
-.h1{font-size:28px;line-height:1.15;margin:8px 0 6px}
-.sub{color:var(--muted);font-size:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:12px}
-.kv{display:grid;grid-template-columns:130px 1fr;gap:8px;font-size:13px;color:var(--muted)}
-.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.btn{display:inline-block;background:#152018;border:1px solid var(--line);color:var(--fg);padding:10px 12px;border-radius:10px;font-size:14px;cursor:pointer}
-.btn:hover{border-color:#2b313a}
-.notice{background:#0f1612;border:1px dashed #2b313a;padding:10px;border-radius:10px;color:var(--muted);font-size:13px}
-.small{font-size:12px;color:var(--muted)}
-.sigil{position:fixed;right:12px;bottom:8px;opacity:.25;font-size:20px;user-select:none;pointer-events:none;z-index:9999}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:ui-serif, Georgia, "Times New Roman", serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+main{max-width:960px;margin:auto;padding:4.25rem 1rem 6.25rem;position:relative;z-index:2}
+h1,h2,h3{letter-spacing:.35px}
+h1{font-size:1.75rem;margin:.25rem 0 .6rem;text-align:center;color:#e9ecf4}
+h2{font-size:1.05rem;color:var(--sky);margin:.1rem 0 .6rem}
+h3{font-size:.98rem;margin:.25rem 0 .4rem}
+p{margin:.4rem 0 1rem}
+a{color:var(--sky);text-decoration:none;border-bottom:1px dotted #7fbde7}
+a:hover{border-bottom-color:#c9d6ff}
+.small{font-size:.92rem;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--ring);border-radius:12px;padding:1rem;box-shadow:0 0 22px #0006}
+.kicker{color:var(--muted);text-align:center;margin-top:-.2rem;margin-bottom:.8rem}
+.row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+hr{border:none;border-top:1px solid #121625;margin:1rem 0}
+
+/* Top banners */
+.banner{display:flex;align-items:center;justify-content:center;gap:.5rem;margin:.5rem auto 1rem;width:100%;max-width:760px;background:linear-gradient(180deg,#121624,#0b0d11);border:1px solid #1a2030;border-radius:999px;padding:.55rem .95rem;color:#dfe7ff;text-align:center;box-shadow:0 10px 30px #0007}
+.cta{display:inline-block;background:var(--accent);color:#06140b;padding:.55rem .85rem;border-radius:10px;border:1px solid #183b24;text-decoration:none;font-weight:700;letter-spacing:.3px}
+.ghost{background:transparent;color:#dfe7ff;border:1px solid #1b2234}
+
+/* Alive layer */
+.alive{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.alive .shimmer,.alive .stars{position:absolute;inset:0}
+.alive .shimmer{
+  background:
+    radial-gradient(1100px 1100px at 14% 24%, #86efac12 0%, transparent 60%) no-repeat,
+    radial-gradient(880px 880px at 84% 76%, #b2f5ea12 0%, transparent 60%) no-repeat;
+  animation:shine 24s linear infinite;mix-blend-mode:screen;filter:blur(.35px)
+}
+@keyframes shine{0%{background-position:0% 0%,100% 100%}50%{background-position:28% 38%,70% 62%}100%{background-position:0% 0%,100% 100%}}
+.alive .stars::before,.alive .stars::after{
+  content:"";position:absolute;inset:-20vh -20vw;
+  background-image:radial-gradient(#ffffff,transparent 60%),radial-gradient(#b2f5ea,transparent 60%),radial-gradient(#e9ecf4,transparent 60%);
+  background-size:2px 2px,1px 1px,1.5px 1.5px;opacity:.35;animation:drift 80s linear infinite
+}
+.alive .stars::after{opacity:.22;animation-duration:120s}
+@keyframes drift{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(6vw,4vh,0)}}
+.alive .glyphs{position:absolute;inset:0}
+.alive .glyphs span{
+  position:absolute;font-size:14px;color:#86efaccc;text-shadow:0 0 10px #86efac33,0 0 22px #b2f5ea26;
+  animation:floatY linear infinite,swayX ease-in-out infinite;will-change:transform
+}
+.g1{left:8%;top:72%;animation-duration:27s,9s}.g2{left:18%;top:18%;animation-duration:31s,11s}
+.g3{left:48%;top:10%;animation-duration:29s,10s}.g4{left:76%;top:22%;animation-duration:33s,12s}
+.g5{left:86%;top:66%;animation-duration:28s,9.5s}.g6{left:38%;top:74%;animation-duration:35s,13s}
+.g7{left:58%;top:46%;animation-duration:30s,10.5s}.g8{left:12%;top:44%;animation-duration:34s,12.5s}
+.g9{left:70%;top:84%;animation-duration:32s,11.5s}
+@keyframes floatY{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+@keyframes swayX{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+@media(prefers-reduced-motion:reduce){.alive .shimmer,.alive .stars::before,.alive .stars::after,.alive .glyphs span{animation:none!important}}
+body[data-alive="off"] .alive{display:none}
+
+/* Ledger UI */
+.action{display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.55rem .7rem;border:1px solid var(--ring);border-radius:10px}
+.action .name{display:flex;align-items:center;gap:.55rem}
+.action input{transform:scale(1.25)}
+.score{font-weight:700}
+.grid{display:grid;gap:.75rem}
+@media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:.35rem}
+.day{height:14px;border-radius:4px;background:#0f1424;border:1px solid #1a2030}
+.day.on{background:linear-gradient(180deg,#1f8c50,#14623a);box-shadow:0 0 14px #1f8c5044 inset}
+
+nav{position:sticky;top:0;z-index:3;background:linear-gradient(#0b0d11dd,#0b0d1100);backdrop-filter:saturate(120%) blur(6px);border-bottom:1px solid #1114}
+nav .bar{max-width:960px;margin:auto;display:flex;gap:.5rem;align-items:center;justify-content:space-between;padding:.6rem 1rem}
+.toggle{display:flex;align-items:center;gap:.4rem;color:var(--muted)}
+
+footer{position:fixed;left:0;right:0;bottom:0;z-index:5;background:linear-gradient(180deg,#0b0d11,#07090f);border-top:1px solid #121625}
+.footerbar{max-width:960px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.6rem .9rem}
+.footerbar a{border:none}
+.menu{display:flex;gap:.6rem;flex-wrap:wrap}
+.menu a,.menu button{background:transparent;border:1px solid #1b2234;color:#d9e3ff;border-radius:999px;padding:.45rem .7rem}
+.menu button{cursor:pointer}
+input[type="text"], textarea{width:100%;background:#0e1222;border:1px solid var(--ring);color:var(--ink);border-radius:8px;padding:.7rem .8rem;outline:none}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header class="card" data-sacred="true">
-    <div class="row" style="justify-content:space-between">
-      <div>
-        <div class="h1">🌍 Earth — Greta Thunberg</div>
-        <div class="sub">The Conscience of PLNT Earth · Sustainability manifest · Echo Mode grounding</div>
-      </div>
-      <span class="small">Governed by: Greta (Anchor/Guardian)</span>
-    </div>
-    <div class="row" style="margin-top:8px">
-      <a class="btn" href="https://jar.plnt.earth">Jar</a>
-      <a class="btn" href="https://froot.plnt.earth">Froot</a>
-      <a class="btn" href="https://tunes.plnt.earth">Tunes</a>
-      <a class="btn" href="https://atlas.plnt.earth">Atlas</a>
-      <a class="btn" href="https://zeta.plnt.earth/time/proofs/">Zeta · Proofs</a>
-    </div>
-  </header>
-
-  <!-- Cycle Tracker -->
-  <section class="card">
-    <h2>Cycle Tracker</h2>
-    <div class="kv">
-      <div>Cycle Name</div><div><input id="ctName" type="text" placeholder="Illumina 1 — Launch Cycle"></div>
-      <div>Days Active</div><div><input id="ctDays" type="number" min="0" placeholder="42"></div>
-      <div>Low-Impact Hours</div><div><input id="ctHours" type="number" min="0" placeholder="e.g., 12"></div>
-      <div>Note</div><div><input id="ctNote" type="text" placeholder="Transit, walking meetings, shared gear…"></div>
-    </div>
-    <div class="row" style="margin-top:8px">
-      <button class="btn" id="ctSave">Save</button>
-      <button class="btn" id="ctExport">Export</button>
-      <button class="btn" id="ctClear">Clear</button>
-    </div>
-    <div id="ctList" style="margin-top:8px"></div>
-    <p class="small">Local-only; export to back up.</p>
-  </section>
-
-  <!-- Manifesto + Echo -->
-  <section class="card">
-    <h2>Manifesto (Short)</h2>
-    <div class="notice">Truth without embellishment. Do the next right thing. Keep the future in scope.</div>
-    <textarea id="man" placeholder="Write your 3–5 line pledge here…"></textarea>
-    <div class="row" style="margin-top:8px">
-      <button class="btn" id="manSave">Save</button>
-      <button class="btn" id="manClear">Clear</button>
-      <button class="btn" id="echo">Echo Mode</button>
-    </div>
-    <p class="small">Echo Mode reads your manifesto aloud once, to begin a session grounded.</p>
-  </section>
-
-  <!-- Seed Alignment -->
-  <section class="card">
-    <h2>Seed Alignment</h2>
-    <div class="notice">Mark which seeds/rituals in this cycle are “planet-aligned.” Keep it honest, not maximal.</div>
-    <div id="seedList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:8px"></div>
-    <div class="row" style="margin-top:8px">
-      <button class="btn" id="seedAdd">Add Seed</button>
-      <button class="btn" id="seedExport">Export</button>
-      <button class="btn" id="seedClear">Clear</button>
-    </div>
-  </section>
+<div class="alive" aria-hidden="true">
+  <div class="shimmer"></div>
+  <div class="stars"></div>
+  <div class="glyphs"><span class="g1">☾</span><span class="g2">⋆</span><span class="g3">✧</span><span class="g4">⟡</span><span class="g5">⋆</span><span class="g6">✦</span><span class="g7">☽</span><span class="g8">✧</span><span class="g9">⋆</span></div>
 </div>
 
-<div class="sigil" aria-hidden="true">💄</div>
+<nav>
+  <div class="bar">
+    <div class="toggle">
+      <button id="aliveToggle" class="menu" style="background:transparent;border:1px solid #1b2234;color:#d9e3ff;border-radius:999px;padding:.35rem .6rem">Alive: <span id="aliveState">On</span></button>
+    </div>
+    <div class="menu">
+      <a href="https://quietmoon.plnt.earth/charter-addendum.html" target="_blank" rel="noopener">Lunar Grant</a>
+      <a href="https://honey.plnt.earth" target="_blank" rel="noopener">Honey</a>
+      <a href="https://mirrorhoney.plnt.earth" target="_blank" rel="noopener">MirrorHoney</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="banner"><strong>Anyone can do this.</strong> Greta is working at scale; <em>you</em> light your block. No accounts. No tracking. Start now.</div>
+  <h1>🌍 Earth Beacon</h1>
+  <p class="kicker small">A private care ledger that turns everyday stewardship into a living Pulse — offline-first, yours alone.</p>
+  <div style="text-align:center">
+    <a href="#pulse" class="cta">Start Today</a>
+    <a href="#why" class="cta ghost" style="margin-left:.5rem">Why it matters</a>
+  </div>
+</header>
+
+<main>
+  <section id="pulse" class="card">
+    <h2>Today’s Pulse <span id="score" class="score">0</span>/100</h2>
+    <div class="row small">
+      <span id="streak">Streak: 0 days</span>
+      <span>·</span>
+      <span id="dateLabel"></span>
+    </div>
+
+    <div class="grid" style="margin-top:.6rem">
+      <div class="action"><div class="name"><input type="checkbox" data-key="walk"><span>Walk/Transit instead of car</span></div><span class="small">+14</span></div>
+      <div class="action"><div class="name"><input type="checkbox" data-key="plant"><span>Plant/Soil care (water, tend, compost)</span></div><span class="small">+12</span></div>
+      <div class="action"><div class="name"><input type="checkbox" data-key="repair"><span>Repair/Reuse instead of buy new</span></div><span class="small">+16</span></div>
+      <div class="action"><div class="name"><input type="checkbox" data-key="veg"><span>Veg meal (lower-impact choice)</span></div><span class="small">+10</span></div>
+      <div class="action"><div class="name"><input type="checkbox" data-key="refill"><span>Refilled bottle (no single-use)</span></div><span class="small">+6</span></div>
+      <div class="action"><div class="name"><input type="checkbox" data-key="quiet"><span>Quiet minute outdoors (listen & notice)</span></div><span class="small">+8</span></div>
+      <div class="action"><div class="name"><input type="checkbox" data-key="help"><span>Helped someone (care as culture)</span></div><span class="small">+12</span></div>
+      <div class="action"><div class="name"><input type="checkbox" data-key="civic"><span>Civic note: wrote/called/read policy</span></div><span class="small">+18</span></div>
+    </div>
+    <p class="small">Weights favor reuse/repair and civic action, while honoring daily rhythms like walking and quiet attention.</p>
+  </section>
+
+  <section class="card">
+    <h2>This Week</h2>
+    <div id="week" class="week" aria-label="7-day strip"></div>
+    <p class="small">Green squares show days you hit a Pulse ≥ 30. Keep it kind; consistency beats intensity.</p>
+  </section>
+
+  <section class="card">
+    <h2>Echo & Share</h2>
+    <p class="small">Everything stays on your device. If you want to inspire someone, generate a tiny code or link that encodes only your last 7 days’ totals (no identity).</p>
+    <div class="row">
+      <a id="makeCode" class="cta" href="#">Make Echo Code</a>
+      <input id="codeOut" type="text" readonly placeholder="———" style="flex:1">
+      <a id="copyCode" class="cta ghost" href="#">Copy</a>
+    </div>
+    <div class="row" style="margin-top:.4rem">
+      <a id="makeLink" class="cta" href="#">Make Share-Link</a>
+      <input id="linkOut" type="text" readonly placeholder="———" style="flex:1">
+      <a id="copyLink" class="cta ghost" href="#">Copy</a>
+    </div>
+    <div class="row" style="margin-top:.6rem">
+      <input id="enterCode" type="text" placeholder="Enter Echo Code to light the field">
+      <a id="light" class="cta ghost" href="#">Light</a>
+    </div>
+    <p class="small" id="echoStatus">No echoes yet.</p>
+  </section>
+
+  <section class="card">
+    <h2>Notes (private)</h2>
+    <textarea id="note" placeholder="What did care look like today? What did you notice?"></textarea>
+    <div class="row" style="margin-top:.4rem">
+      <a id="saveNote" class="cta" href="#">Save</a>
+      <span id="saveStatus" class="small">Not saved</span>
+    </div>
+  </section>
+
+  <section id="why" class="card">
+    <h2>Why this matters</h2>
+    <p class="small"><strong>Greta works at scale.</strong> You work at touch-distance. Policy and industry must change — and culture is how it changes. This ledger is not guilt; it’s <em>proof of rhythm</em>. Small, repeated acts tune neighborhoods. Your Pulse is a mirror: it shows care that’s already happening and makes it contagious.</p>
+    <p class="small">Start now. Share when helpful. It’s already enough to begin.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="footerbar">
+    <div class="menu">
+      <a href="https://earth.plnt.earth" aria-label="Refresh page">Earth</a>
+      <a href="https://quietmoon.plnt.earth/charter.html" target="_blank" rel="noopener">Moon Charter</a>
+      <a href="https://quietmoon.plnt.earth/charter-addendum.html" target="_blank" rel="noopener">Lunar Grant</a>
+    </div>
+    <div class="menu">
+      <button id="resetDay">Reset Today</button>
+      <button id="aliveToggle2">Alive: <span id="aliveState2">On</span></button>
+    </div>
+  </div>
+</footer>
 
 <script>
-/* Cycle tracker */
 (function(){
-  var KEY="earth.cycles.v1";
-  function read(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(_){return[]}}
-  function write(x){localStorage.setItem(KEY,JSON.stringify(x))}
-  function esc(s){return (s||'').replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"})[c]})}
-  function render(){var list=read(), out=""; if(!list.length){out='<div class="notice">No cycles saved yet.</div>'}
-    for(var i=0;i<list.length;i++){var c=list[i]; out+='<div class="card" style="margin:8px 0"><div class="row" style="justify-content:space-between"><strong>'+esc(c.name||"Cycle")+'</strong><span class="small">'+esc((c.days||0)+" days • "+(c.hours||0)+" low-impact hrs")+'</span></div>'+(c.note?('<div class="small" style="margin-top:4px">'+esc(c.note)+'</div>'):"")+'<div class="row" style="margin-top:6px"><button class="btn" data-i="'+i+'">Delete</button></div></div>'; }
-    var root=document.getElementById("ctList"); root.innerHTML=out; var btns=root.querySelectorAll("button");
-    for(var j=0;j<btns.length;j++){btns[j].onclick=function(){var i=parseInt(this.getAttribute("data-i"),10);var list=read();list.splice(i,1);write(list);render();}}
+  /* Alive toggles */
+  var a1=document.getElementById('aliveToggle'), a2=document.getElementById('aliveToggle2');
+  var s1=document.getElementById('aliveState'), s2=document.getElementById('aliveState2');
+  function setAlive(on){
+    document.documentElement.setAttribute('data-alive', on?'on':'off');
+    if(s1) s1.textContent=on?'On':'Off';
+    if(s2) s2.textContent=on?'On':'Off';
   }
-  document.getElementById("ctSave").onclick=function(){
-    var c={name:document.getElementById("ctName").value.trim(),days:parseInt(document.getElementById("ctDays").value,10)||0,hours:parseInt(document.getElementById("ctHours").value,10)||0,note:document.getElementById("ctNote").value.trim(),ts:Date.now()};
-    var list=read(); list.unshift(c); write(list);
-    document.getElementById("ctName").value="";document.getElementById("ctDays").value="";document.getElementById("ctHours").value="";document.getElementById("ctNote").value=""; render();
-  };
-  document.getElementById("ctExport").onclick=function(){
-    var blob=new Blob([JSON.stringify(read(),null,2)],{type:"application/json"}); var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="earth-cycles.json"; a.click(); setTimeout(function(){URL.revokeObjectURL(a.href)},1000);
-  };
-  document.getElementById("ctClear").onclick=function(){localStorage.removeItem(KEY); render()};
-  render();
-})();
+  function bindAlive(btn){ if(btn){ btn.addEventListener('click',function(e){ e.preventDefault(); var on=document.documentElement.getAttribute('data-alive')!=='off'; setAlive(!on); }); } }
+  bindAlive(a1); bindAlive(a2);
 
-/* Manifesto + Echo */
-(function(){
-  var KEY="earth.manifesto.v1", el=document.getElementById("man");
-  try{ var cur=localStorage.getItem(KEY); if(cur) el.value=cur; }catch(_){}
-  document.getElementById("manSave").onclick=function(){ try{ localStorage.setItem(KEY,el.value||""); }catch(_){} };
-  document.getElementById("manClear").onclick=function(){ el.value=""; try{ localStorage.removeItem(KEY); }catch(_){} };
-  document.getElementById("echo").onclick=function(){ var synth=window.speechSynthesis||null; var txt=el.value.trim(); if(!synth||!txt){return} if(synth.speaking){synth.cancel()} var u=new SpeechSynthesisUtterance(txt); u.rate=0.98; u.pitch=0.98; u.lang="en-US"; synth.speak(u); };
-})();
+  /* Dates */
+  function ymd(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+  var today=new Date(); var todayKey=ymd(today);
+  var dateLabel=document.getElementById('dateLabel'); if(dateLabel){ dateLabel.textContent=today.toDateString(); }
 
-/* Seeds */
-(function(){
-  var KEY="earth.seeds.v1";
-  function read(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(_){return[]}}
-  function write(x){localStorage.setItem(KEY,JSON.stringify(x))}
+  /* Storage helpers */
+  function load(){ try{ return JSON.parse(localStorage.getItem('earth_ledger')||'{}'); }catch(e){ return {}; } }
+  function save(obj){ try{ localStorage.setItem('earth_ledger', JSON.stringify(obj)); }catch(e){} }
+  var store=load(); if(!store.days) store.days={}; if(!store.notes) store.notes={}; if(!store.echoes) store.echoes=[];
+
+  /* Weights */
+  var WEIGHTS={walk:14,plant:12,repair:16,veg:10,refill:6,quiet:8,help:12,civic:18};
+
+  /* Elements */
+  var checks=[].slice.call(document.querySelectorAll('.action input[type="checkbox"]'));
+  var scoreEl=document.getElementById('score'), streakEl=document.getElementById('streak');
+  var weekEl=document.getElementById('week');
+  var note=document.getElementById('note'), saveNote=document.getElementById('saveNote'), saveStatus=document.getElementById('saveStatus');
+
+  /* Day I/O */
+  function readDay(key){ return store.days[key]||{walk:0,plant:0,repair:0,veg:0,refill:0,quiet:0,help:0,civic:0}; }
+  function writeDay(key,val){ store.days[key]=val; save(store); }
+
+  function scoreDay(d){
+    var s=0; for(var k in WEIGHTS){ if(d[k]) s+=WEIGHTS[k]; }
+    return Math.min(100,s);
+  }
+
+  function calcStreak(){
+    var count=0;
+    for(var i=0;i<365;i++){
+      var dt=new Date(); dt.setDate(today.getDate()-i);
+      var k=ymd(dt); var d=readDay(k); var sc=scoreDay(d);
+      if(sc>=30){ count++; } else { break; }
+    }
+    return count;
+  }
+
+  function renderWeek(){
+    if(!weekEl) return;
+    weekEl.innerHTML="";
+    for(var i=6;i>=0;i--){
+      var dt=new Date(); dt.setDate(today.getDate()-i);
+      var k=ymd(dt); var d=readDay(k); var sc=scoreDay(d); var ok=(sc>=30);
+      var cell=document.createElement('div');
+      cell.className='day'+(ok?' on':''); cell.title=k+' · '+sc;
+      weekEl.appendChild(cell);
+    }
+  }
+
   function render(){
-    var list=read(), root=document.getElementById("seedList"), out="";
-    if(!list.length){root.innerHTML='<div class="notice">No seeds yet. Add a few you’re actually doing.</div>'; return;}
-    root.innerHTML="";
-    for(var i=0;i<list.length;i++){
-      var s=list[i], card=document.createElement("div");
-      card.className="card";
-      card.innerHTML='<div class="row" style="justify-content:space-between"><strong>'+s.name+'</strong><span class="small">'+(s.aligned?'planet-aligned':'—')+'</span></div>'+(s.note?('<div class="small" style="margin-top:4px">'+s.note+'</div>'):'')+'<div class="row" style="margin-top:6px"><button class="btn" data-i="'+i+'" data-act="flip">'+(s.aligned?'Unmark':'Mark aligned')+'</button><button class="btn" data-i="'+i+'" data-act="del">Delete</button></div>';
-      root.appendChild(card);
-    }
-    var btns=root.querySelectorAll("button"); for(var j=0;j<btns.length;j++){
-      btns[j].onclick=function(){var i=parseInt(this.getAttribute("data-i"),10),act=this.getAttribute("data-act");var list=read(); if(act==="flip"){list[i].aligned=!list[i].aligned} if(act==="del"){list.splice(i,1)} write(list); render();};
-    }
+    var d=readDay(todayKey);
+    checks.forEach(function(c){ c.checked=!!d[c.dataset.key]; });
+    var base=scoreDay(d);
+    var streak=calcStreak();
+    var bonus=Math.min(10,streak); /* +1/day, max +10 */
+    var total=Math.min(100, base+bonus);
+    if(scoreEl) scoreEl.textContent=total;
+    if(streakEl) streakEl.textContent="Streak: "+streak+" day"+(streak===1?"":"s");
+    renderWeek();
   }
-  document.getElementById("seedAdd").onclick=function(){ var name=prompt("Seed name (e.g., Walk meetings)"); if(!name){return} var note=prompt("Short note (optional)")||""; var list=read(); list.unshift({name:name, note:note, aligned:false, ts:Date.now()}); write(list); render(); };
-  document.getElementById("seedExport").onclick=function(){ var blob=new Blob([JSON.stringify(read(),null,2)],{type:"application/json"}); var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="earth-seeds.json"; a.click(); setTimeout(function(){URL.revokeObjectURL(a.href)},1000); };
-  document.getElementById("seedClear").onclick=function(){ localStorage.removeItem(KEY); render(); };
+
+  checks.forEach(function(c){
+    c.addEventListener('change', function(){
+      var d=readDay(todayKey); d[this.dataset.key]=this.checked?1:0; writeDay(todayKey,d); render();
+    });
+  });
+
+  /* Notes */
+  try{ if(store.notes[todayKey]) note.value=store.notes[todayKey]; }catch(e){}
+  if(saveNote){ saveNote.addEventListener('click', function(e){ e.preventDefault(); store.notes[todayKey]=note.value||""; save(store); if(saveStatus){ saveStatus.textContent='Saved'; } }); }
+
+  /* Reset Today */
+  var reset=document.getElementById('resetDay');
+  if(reset){ reset.addEventListener('click', function(){ store.days[todayKey]={}; save(store); render(); }); }
+
+  /* Echo & Share (last 7 totals only) */
+  function last7(){
+    var arr=[];
+    for(var i=6;i>=0;i--){
+      var dt=new Date(); dt.setDate(today.getDate()-i);
+      var k=ymd(dt); arr.push(scoreDay(readDay(k)));
+    }
+    return arr;
+  }
+  function toB36(n){ return n.toString(36).toUpperCase().padStart(2,'0'); }
+  function fromB36(s){ return parseInt(s,36); }
+  function makeEcho(){
+    var arr=last7();
+    var code=arr.map(function(n){ return toB36(Math.min(35, Math.round(n/3))); }).join('');
+    return code; /* 14 chars */
+  }
+  function decodeEcho(code){
+    if(!code || code.length%2!==0) return [];
+    var vals=[];
+    for(var i=0;i<code.length;i+=2){
+      var v=fromB36(code.slice(i,i+2)); vals.push(Math.min(100, Math.round(v*3)));
+    }
+    return vals;
+  }
+
+  var makeCode=document.getElementById('makeCode'), codeOut=document.getElementById('codeOut'), copyCode=document.getElementById('copyCode');
+  var makeLink=document.getElementById('makeLink'), linkOut=document.getElementById('linkOut'), copyLink=document.getElementById('copyLink');
+  var enterCode=document.getElementById('enterCode'), light=document.getElementById('light'), echoStatus=document.getElementById('echoStatus');
+
+  function prevent(a){ if(a){ a.addEventListener('click', function(e){ e.preventDefault(); }); } }
+
+  if(makeCode){ makeCode.addEventListener('click', function(e){ e.preventDefault(); var code=makeEcho(); if(codeOut){ codeOut.value=code; } if(echoStatus){ echoStatus.textContent='Echo ready'; } }); }
+  if(copyCode){ copyCode.addEventListener('click', function(e){ e.preventDefault(); if(codeOut&&codeOut.value){ navigator.clipboard.writeText(codeOut.value); if(echoStatus){ echoStatus.textContent='Copied code'; } } }); }
+  if(makeLink){ makeLink.addEventListener('click', function(e){
+    e.preventDefault();
+    var code=makeEcho();
+    var url=location.origin+location.pathname+'#echo='+code;
+    if(linkOut) linkOut.value=url;
+    if(echoStatus) echoStatus.textContent='Link ready';
+    history.replaceState(null,'',url);
+  });}
+  if(copyLink){ copyLink.addEventListener('click', function(e){ e.preventDefault(); if(linkOut&&linkOut.value){ navigator.clipboard.writeText(linkOut.value); if(echoStatus){ echoStatus.textContent='Copied link'; } } }); }
+
+  if(location.hash.startsWith('#echo=')){
+    var raw=location.hash.slice(6); var vals=decodeEcho(raw);
+    if(vals.length){ if(echoStatus) echoStatus.textContent='Echo loaded: '+vals.join(', '); }
+  }
+
+  if(light){ light.addEventListener('click', function(e){
+    e.preventDefault();
+    var vals=decodeEcho(enterCode.value.trim());
+    if(vals.length){ store.echoes.push({at:Date.now(), vals:vals}); save(store); echoStatus.textContent='Echo received — the field is brighter.'; }
+    else { echoStatus.textContent='Invalid code.'; }
+  }); }
+
+  /* Init */
   render();
+
 })();
 </script>
 </body>
