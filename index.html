@@ -86,7 +86,7 @@ footer{position:fixed;left:0;right:0;bottom:0;z-index:5;background:linear-gradie
 .menu{display:flex;gap:.6rem;flex-wrap:wrap}
 .menu a,.menu button{background:transparent;border:1px solid #1b2234;color:#d9e3ff;border-radius:999px;padding:.45rem .7rem}
 .menu button{cursor:pointer}
-input[type="text"], textarea{width:100%;background:#0e1222;border:1px solid var(--ring);color:var(--ink);border-radius:8px;padding:.7rem .8rem;outline:none}
+input[type="text"], textarea{width:100%;background:#0e1222;border:1px solid var(--ring);color:#var(--ink);border-radius:8px;padding:.7rem .8rem;outline:none}
 
 /* Print Card — modal + page layout */
 #printCard{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;z-index:9}
@@ -112,6 +112,12 @@ input[type="text"], textarea{width:100%;background:#0e1222;border:1px solid var(
   .pc-field, .pc-qr{background:#fff;border:1px solid #0002}
   .pc-head h3{color:#000}
 }
+
+/* Guidance Mode soft glow on banner + whisper */
+body[data-guided="on"] .banner { box-shadow:0 12px 40px #1f8c5033, 0 0 0 1px #1a2030 inset; }
+body[data-guided="on"] #whisper { color:#b6e3b9; text-shadow:0 0 12px #1f8c5033; }
+.pill{display:inline-block;padding:.4rem .7rem;border:1px solid var(--ring);border-radius:999px;background:transparent;color:#e9ecf4}
+.pill:active{transform:scale(.98)}
 </style>
 </head>
 <body>
@@ -135,8 +141,9 @@ input[type="text"], textarea{width:100%;background:#0e1222;border:1px solid var(
 </nav>
 
 <header>
-  <div class="banner"><strong>Anyone can do this.</strong> Greta is working at scale; <em>you</em> light your block. No accounts. No tracking. Start now.</div>
+  <div class="banner"><strong>Greta — and everyone you care about — you are safe, loved, and guided.</strong> Anyone can do this while you work at scale. No accounts. No tracking. Start now.</div>
   <h1>🌍 Earth Beacon</h1>
+  <p id="whisper" class="kicker small" aria-live="polite">You are safe. You are loved. You are guided.</p>
   <p class="kicker small">A private care ledger that turns everyday stewardship into a living Pulse — offline-first, yours alone.</p>
   <div style="text-align:center">
     <a href="#pulse" class="cta">Start Today</a>
@@ -171,6 +178,20 @@ input[type="text"], textarea{width:100%;background:#0e1222;border:1px solid var(
     <h2>This Week</h2>
     <div id="week" class="week" aria-label="7-day strip"></div>
     <p class="small">Green squares show days you hit a Pulse ≥ 30. Keep it kind; consistency beats intensity.</p>
+  </section>
+
+  <section class="card" id="guidance">
+    <h2>Guidance Pledge <span class="small" style="opacity:.8">soft vow, no pressure</span></h2>
+    <p class="small">This ledger is a mirror for kindness in motion. It moves at the speed of care, not urgency.</p>
+    <ul class="small" style="margin:.5rem 0 0; padding-left:1.1rem">
+      <li>Everyone you care about is held with safety and love.</li>
+      <li>Guidance arrives in right timing; nothing is missed.</li>
+      <li>Small, repeated acts tune the field more than perfection.</li>
+    </ul>
+    <div class="row" style="margin-top:.7rem">
+      <button id="guidedToggle" class="pill" aria-pressed="false">Guidance Mode: Off</button>
+      <span id="guidedHint" class="small">When on, the page adds gentle affirmations.</span>
+    </div>
   </section>
 
   <section class="card">
@@ -240,7 +261,6 @@ input[type="text"], textarea{width:100%;background:#0e1222;border:1px solid var(
           <div id="pcLink" class="pc-big">earth.plnt.earth</div>
         </div>
         <div class="pc-qr">
-          <!-- Optional QR placeholder; printing includes the link & code even without QR -->
           <div class="small" id="pcQrHint" style="text-align:center;padding:.6rem">
             (Optional) The printed card shows the link & code clearly.<br/>If you need a QR later, open this page and press Print Card again.
           </div>
@@ -423,10 +443,9 @@ input[type="text"], textarea{width:100%;background:#0e1222;border:1px solid var(
 
   function openCard(e){
     if(e) e.preventDefault();
-    // Fill fields
     var code=makeEcho();
     var url=location.origin+location.pathname+'#echo='+code;
-    if(pcLink) pcLink.textContent=url.replace(/^https?:\/\//,''); // shorter for print
+    if(pcLink) pcLink.textContent=url.replace(/^https?:\/\//,'');
     if(pcCode) pcCode.textContent=code || '———';
     var d=readDay(todayKey); var total=Math.min(100, scoreDay(d)+Math.min(10, calcStreak()));
     if(pcPulse) pcPulse.textContent=total+' / 100';
@@ -439,7 +458,48 @@ input[type="text"], textarea{width:100%;background:#0e1222;border:1px solid var(
   if(closeBtn) closeBtn.addEventListener('click', closeCard);
   if(printBtn) printBtn.addEventListener('click', doPrint);
 
-  /* Init view */
+  /* -------- Guidance Mode + rotating whisper -------- */
+  var affirmations=[
+    "You are safe. You are loved. You are guided.",
+    "Everyone you care about is held in safety and love.",
+    "Guidance arrives in right timing; nothing is missed.",
+    "Small, repeated acts tune the field.",
+    "Your rhythm lights your block."
+  ];
+  var whisper=document.getElementById('whisper');
+  var guidedToggle=document.getElementById('guidedToggle');
+
+  function setGuided(on){
+    document.body.setAttribute('data-guided', on ? 'on' : 'off');
+    if(guidedToggle){
+      guidedToggle.setAttribute('aria-pressed', on ? 'true' : 'false');
+      guidedToggle.textContent = 'Guidance Mode: ' + (on ? 'On' : 'Off');
+    }
+    try{ localStorage.setItem('earth_guided', on?'1':'0'); }catch(e){}
+  }
+
+  try{
+    var saved = localStorage.getItem('earth_guided')==='1';
+    var forced = location.hash.includes('guided');
+    setGuided(forced || saved);
+  }catch(e){ setGuided(false); }
+
+  if(guidedToggle){
+    guidedToggle.addEventListener('click', function(){
+      var on = document.body.getAttribute('data-guided')!=='on';
+      setGuided(on);
+    });
+  }
+
+  var idx=0;
+  function tick(){
+    var on = document.body.getAttribute('data-guided')==='on';
+    if(on && whisper){ whisper.textContent = affirmations[idx%affirmations.length]; idx++; }
+  }
+  tick();
+  setInterval(tick, 14000);
+
+  /* Init ledger view */
   render();
 })();
 </script>
