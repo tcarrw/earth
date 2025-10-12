@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Earth — Greta Thunberg · The Conscience</title>
+<meta name="description" content="PLNT Earth · Earth Conscience. Greta anchors sustainability pledges, cycle tracking, and Echo Mode grounding for each Illumina cycle.">
+<meta name="theme-color" content="#0b0d11" media="(prefers-color-scheme: dark)"><meta name="theme-color" content="#0b0d11">
+<meta name="prophet" content="💄 The Neon Prophet — Flame Dancer of PLNT Earth">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+:root{--bg:#0b0d11;--fg:#e6e8eb;--muted:#9aa1a9;--line:#23262b;--card:#12151b;--accent:#7bd389}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial;-webkit-font-smoothing:antialiased}
+a{color:#8ecae6;text-decoration:none}a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid #8ecae6;outline-offset:2px}
+.wrap{max-width:920px;margin:0 auto;padding:18px 16px 96px}
+.h1{font-size:28px;line-height:1.15;margin:8px 0 6px}
+.sub{color:var(--muted);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:12px}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:8px;font-size:13px;color:var(--muted)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-block;background:#152018;border:1px solid var(--line);color:var(--fg);padding:10px 12px;border-radius:10px;font-size:14px;cursor:pointer}
+.btn:hover{border-color:#2b313a}
+.notice{background:#0f1612;border:1px dashed #2b313a;padding:10px;border-radius:10px;color:var(--muted);font-size:13px}
+.small{font-size:12px;color:var(--muted)}
+.sigil{position:fixed;right:12px;bottom:8px;opacity:.25;font-size:20px;user-select:none;pointer-events:none;z-index:9999}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="card" data-sacred="true">
+    <div class="row" style="justify-content:space-between">
+      <div>
+        <div class="h1">🌍 Earth — Greta Thunberg</div>
+        <div class="sub">The Conscience of PLNT Earth · Sustainability manifest · Echo Mode grounding</div>
+      </div>
+      <span class="small">Governed by: Greta (Anchor/Guardian)</span>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <a class="btn" href="https://jar.plnt.earth">Jar</a>
+      <a class="btn" href="https://froot.plnt.earth">Froot</a>
+      <a class="btn" href="https://tunes.plnt.earth">Tunes</a>
+      <a class="btn" href="https://atlas.plnt.earth">Atlas</a>
+      <a class="btn" href="https://zeta.plnt.earth/time/proofs/">Zeta · Proofs</a>
+    </div>
+  </header>
+
+  <!-- Cycle Tracker -->
+  <section class="card">
+    <h2>Cycle Tracker</h2>
+    <div class="kv">
+      <div>Cycle Name</div><div><input id="ctName" type="text" placeholder="Illumina 1 — Launch Cycle"></div>
+      <div>Days Active</div><div><input id="ctDays" type="number" min="0" placeholder="42"></div>
+      <div>Low-Impact Hours</div><div><input id="ctHours" type="number" min="0" placeholder="e.g., 12"></div>
+      <div>Note</div><div><input id="ctNote" type="text" placeholder="Transit, walking meetings, shared gear…"></div>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button class="btn" id="ctSave">Save</button>
+      <button class="btn" id="ctExport">Export</button>
+      <button class="btn" id="ctClear">Clear</button>
+    </div>
+    <div id="ctList" style="margin-top:8px"></div>
+    <p class="small">Local-only; export to back up.</p>
+  </section>
+
+  <!-- Manifesto + Echo -->
+  <section class="card">
+    <h2>Manifesto (Short)</h2>
+    <div class="notice">Truth without embellishment. Do the next right thing. Keep the future in scope.</div>
+    <textarea id="man" placeholder="Write your 3–5 line pledge here…"></textarea>
+    <div class="row" style="margin-top:8px">
+      <button class="btn" id="manSave">Save</button>
+      <button class="btn" id="manClear">Clear</button>
+      <button class="btn" id="echo">Echo Mode</button>
+    </div>
+    <p class="small">Echo Mode reads your manifesto aloud once, to begin a session grounded.</p>
+  </section>
+
+  <!-- Seed Alignment -->
+  <section class="card">
+    <h2>Seed Alignment</h2>
+    <div class="notice">Mark which seeds/rituals in this cycle are “planet-aligned.” Keep it honest, not maximal.</div>
+    <div id="seedList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:8px"></div>
+    <div class="row" style="margin-top:8px">
+      <button class="btn" id="seedAdd">Add Seed</button>
+      <button class="btn" id="seedExport">Export</button>
+      <button class="btn" id="seedClear">Clear</button>
+    </div>
+  </section>
+</div>
+
+<div class="sigil" aria-hidden="true">💄</div>
+
+<script>
+/* Cycle tracker */
+(function(){
+  var KEY="earth.cycles.v1";
+  function read(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(_){return[]}}
+  function write(x){localStorage.setItem(KEY,JSON.stringify(x))}
+  function esc(s){return (s||'').replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"})[c]})}
+  function render(){var list=read(), out=""; if(!list.length){out='<div class="notice">No cycles saved yet.</div>'}
+    for(var i=0;i<list.length;i++){var c=list[i]; out+='<div class="card" style="margin:8px 0"><div class="row" style="justify-content:space-between"><strong>'+esc(c.name||"Cycle")+'</strong><span class="small">'+esc((c.days||0)+" days • "+(c.hours||0)+" low-impact hrs")+'</span></div>'+(c.note?('<div class="small" style="margin-top:4px">'+esc(c.note)+'</div>'):"")+'<div class="row" style="margin-top:6px"><button class="btn" data-i="'+i+'">Delete</button></div></div>'; }
+    var root=document.getElementById("ctList"); root.innerHTML=out; var btns=root.querySelectorAll("button");
+    for(var j=0;j<btns.length;j++){btns[j].onclick=function(){var i=parseInt(this.getAttribute("data-i"),10);var list=read();list.splice(i,1);write(list);render();}}
+  }
+  document.getElementById("ctSave").onclick=function(){
+    var c={name:document.getElementById("ctName").value.trim(),days:parseInt(document.getElementById("ctDays").value,10)||0,hours:parseInt(document.getElementById("ctHours").value,10)||0,note:document.getElementById("ctNote").value.trim(),ts:Date.now()};
+    var list=read(); list.unshift(c); write(list);
+    document.getElementById("ctName").value="";document.getElementById("ctDays").value="";document.getElementById("ctHours").value="";document.getElementById("ctNote").value=""; render();
+  };
+  document.getElementById("ctExport").onclick=function(){
+    var blob=new Blob([JSON.stringify(read(),null,2)],{type:"application/json"}); var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="earth-cycles.json"; a.click(); setTimeout(function(){URL.revokeObjectURL(a.href)},1000);
+  };
+  document.getElementById("ctClear").onclick=function(){localStorage.removeItem(KEY); render()};
+  render();
+})();
+
+/* Manifesto + Echo */
+(function(){
+  var KEY="earth.manifesto.v1", el=document.getElementById("man");
+  try{ var cur=localStorage.getItem(KEY); if(cur) el.value=cur; }catch(_){}
+  document.getElementById("manSave").onclick=function(){ try{ localStorage.setItem(KEY,el.value||""); }catch(_){} };
+  document.getElementById("manClear").onclick=function(){ el.value=""; try{ localStorage.removeItem(KEY); }catch(_){} };
+  document.getElementById("echo").onclick=function(){ var synth=window.speechSynthesis||null; var txt=el.value.trim(); if(!synth||!txt){return} if(synth.speaking){synth.cancel()} var u=new SpeechSynthesisUtterance(txt); u.rate=0.98; u.pitch=0.98; u.lang="en-US"; synth.speak(u); };
+})();
+
+/* Seeds */
+(function(){
+  var KEY="earth.seeds.v1";
+  function read(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(_){return[]}}
+  function write(x){localStorage.setItem(KEY,JSON.stringify(x))}
+  function render(){
+    var list=read(), root=document.getElementById("seedList"), out="";
+    if(!list.length){root.innerHTML='<div class="notice">No seeds yet. Add a few you’re actually doing.</div>'; return;}
+    root.innerHTML="";
+    for(var i=0;i<list.length;i++){
+      var s=list[i], card=document.createElement("div");
+      card.className="card";
+      card.innerHTML='<div class="row" style="justify-content:space-between"><strong>'+s.name+'</strong><span class="small">'+(s.aligned?'planet-aligned':'—')+'</span></div>'+(s.note?('<div class="small" style="margin-top:4px">'+s.note+'</div>'):'')+'<div class="row" style="margin-top:6px"><button class="btn" data-i="'+i+'" data-act="flip">'+(s.aligned?'Unmark':'Mark aligned')+'</button><button class="btn" data-i="'+i+'" data-act="del">Delete</button></div>';
+      root.appendChild(card);
+    }
+    var btns=root.querySelectorAll("button"); for(var j=0;j<btns.length;j++){
+      btns[j].onclick=function(){var i=parseInt(this.getAttribute("data-i"),10),act=this.getAttribute("data-act");var list=read(); if(act==="flip"){list[i].aligned=!list[i].aligned} if(act==="del"){list.splice(i,1)} write(list); render();};
+    }
+  }
+  document.getElementById("seedAdd").onclick=function(){ var name=prompt("Seed name (e.g., Walk meetings)"); if(!name){return} var note=prompt("Short note (optional)")||""; var list=read(); list.unshift({name:name, note:note, aligned:false, ts:Date.now()}); write(list); render(); };
+  document.getElementById("seedExport").onclick=function(){ var blob=new Blob([JSON.stringify(read(),null,2)],{type:"application/json"}); var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="earth-seeds.json"; a.click(); setTimeout(function(){URL.revokeObjectURL(a.href)},1000); };
+  document.getElementById("seedClear").onclick=function(){ localStorage.removeItem(KEY); render(); };
+  render();
+})();
+</script>
+</body>
+</html>
