@@ -1,154 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Earth · Grounding Field — 128 Hz</title>
-<meta name="description" content="Earth — a calm grounding field with a seamless 128 Hz tone. Perfect loop engine, mobile-clean header, lock-screen friendly." />
-<meta name="theme-color" content="#0b0d11" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#0b0d11">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Earth · Grounded Night Field — PLNT Earth</title>
+<meta name="description" content="A grounded, airy, sexy, silky, rooted, Venus-night field. 128 Hz Warmth & 136.1 Hz O-tone, Earth Good Points for daily good actions, and a Music Deck for official links. Everything here is for everyone."/>
+<meta name="theme-color" content="#0b0d11" media="(prefers-color-scheme: dark)"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="illumina" content="128 Hz · Shared Field"/>
 <style>
-  :root{ --bg:#0b0d11; --ink:#ecf1f9; --muted:#aeb4c4; --ring:#19243a; --card:#0f1525; --leaf:#9ee6b8; }
-  *{box-sizing:border-box}
-  html,body{margin:0;height:100%;background:#0b0d11;color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
-  @media(prefers-color-scheme:light){html,body{background:#0b0d11;color:var(--ink)}}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:900px;margin:0 auto;padding:16px 16px 72px}
-  header{padding:12px 16px 0}
-  .brand{display:flex;align-items:center;gap:10px}
-  .glyph{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#1b2639,#0f1422);display:grid;place-items:center;box-shadow:inset 0 0 0 1px #22304d}
-  .glyph span{font-size:16px}
-  h1{font-size:18px;margin:0 0 6px 0}
-  .tag{font-size:12px;color:#c9d1e2}
-  .ribbon{margin:10px 0 8px;display:flex;gap:8px;overflow:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .ribbon::-webkit-scrollbar{display:none}
-  .chip{white-space:nowrap;font-size:13px;padding:8px 12px;border-radius:999px;flex:0 0 auto;background:#111a31;border:1px solid #26365a;color:#e5ebfb}
-  .chip[data-hi="1"]{border-color:#4b7a58;background:#12211b}
-  .card{background:linear-gradient(180deg,#0f1525 0%, #0b101f 100%);border:1px solid var(--ring);border-radius:14px;padding:14px;box-shadow:0 10px 28px #0007;margin:12px 0}
-  .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .controls{display:grid;grid-template-columns:1fr;gap:10px}
-  @media(min-width:660px){ .controls{grid-template-columns:1fr 1fr 1fr} }
-  button,.pill{appearance:none;border:1px solid #26365a;background:#111a31;color:var(--ink);padding:10px 14px;border-radius:999px;font-weight:600;letter-spacing:.2px}
-  button:active{transform:translateY(1px)}
-  .on{background:linear-gradient(90deg,#1b2c21,#132418);border-color:#3f6d4e;box-shadow:0 0 0 1px #274232 inset, 0 0 20px #142a1e}
-  .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#111a31;border:1px solid #26365a;font-size:13px}
-  label{font-size:13px;color:var(--muted)}
-  input[type="range"]{width:100%}
-  .meter{height:8px;background:#0e1426;border:1px solid #1c2a46;border-radius:999px;overflow:hidden}
-  .bar{height:100%;width:0%;background:linear-gradient(90deg,#9ee6b8,#ecf1f9);transition:width .35s ease}
-  .note{font-size:14px;color:#cfd6ea}
-  .footer{opacity:.9;text-align:center;font-size:12px;color:#aab1c6;margin-top:10px}
+:root{
+  --bg:#0b0d11; --ink:#e9ecf4; --muted:#a9a9b6; --ring:#1b2030; --card:#0f1426;
+  --mint:#b2f5ea; --lav:#c8b6ff; --gold:#ffd66e; --rose:#ff8fb3; --leaf:#80e2a7; --vio:#8ea2ff;
+  --accent: var(--lav); --glow: rgba(200,182,255,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+a{color:var(--mint);text-decoration:none}
+a:hover{opacity:.9}
+.wrap{max-width:1040px;margin:0 auto;padding:24px env(safe-area-inset-right,16px) 24px env(safe-area-inset-left,16px)}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:12px}
+.glyph{width:34px;height:34px;border-radius:50%;
+  background:radial-gradient(120% 120% at 25% 25%, var(--accent), transparent 60%), linear-gradient(#1a1e33,#0f1426);
+  box-shadow:0 0 24px 4px var(--glow);
+}
+h1{margin:0;font-size:clamp(22px,2.6vw,34px)}
+.subtitle{color:var(--muted);font-size:14px}
+.hero{margin:16px 0 18px;border:1px solid var(--ring);border-radius:20px;padding:16px;
+  background:radial-gradient(1200px 300px at 50% -70%, var(--glow), transparent 60%), linear-gradient(180deg,#0b0d11,#0b0d11);}
+.hero p{margin:8px 0 0;color:var(--muted)}
+
+.section-grid{display:grid;gap:14px;grid-template-columns:1.1fr 1fr}
+@media (max-width:980px){.section-grid{grid-template-columns:1fr}}
+.card{border:1px solid var(--ring);border-radius:16px;background:var(--card);padding:14px}
+h2{margin:0 0 8px;font-size:18px}
+.note{color:var(--muted);font-size:13px;line-height:1.4}
+
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:740px){.controls{grid-template-columns:1fr}}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn{
+  appearance:none;border:1px solid var(--ring);background:#0e1430;color:var(--ink);
+  padding:10px 14px;border-radius:12px;font-size:14px;cursor:pointer;transition:transform .12s ease,opacity .2s;}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.btn:hover{transform:translateY(-1px)}
+.input{background:#0e1430;border:1px solid var(--ring);color:var(--ink);border-radius:10px;padding:8px 10px}
+.range{width:170px}
+.small{font-size:12px}
+
+.modebar{display:flex;flex-wrap:wrap;gap:8px}
+.modebar .mode{border:1px solid var(--ring);padding:8px 10px;border-radius:999px;font-size:13px;background:#0e1430;opacity:.92;cursor:pointer}
+.modebar .mode.active{outline:1px solid var(--accent);box-shadow:0 0 16px 2px var(--glow);opacity:1}
+
+.leds{display:flex;gap:10px;margin-top:8px}
+.led{width:12px;height:12px;border-radius:50%;border:1px solid var(--ring);background:#12182d;box-shadow:0 0 0 0 transparent;transition:box-shadow .2s ease, background .2s ease}
+.led.on{background:#241b44;box-shadow:0 0 10px 2px rgba(200,182,255,.55)}
+.led.warm{background:#12302a;box-shadow:0 0 12px 2px rgba(128,226,167,.5)}
+
+.grid-3{display:grid;gap:10px;grid-template-columns:repeat(3,1fr)}
+@media (max-width:800px){.grid-3{grid-template-columns:1fr}}
+
+footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px solid var(--ring);color:var(--muted)}
+.resonance-ribbon{letter-spacing:.05em}
+.resonance-ribbon a{color:var(--mint)}
+.warmth-aura{filter:drop-shadow(0 0 10px rgba(200,182,255,.4))}
+
+/* THEMES (night-optimized) via [data-theme] */
+[data-theme="ground"]  { --accent: var(--leaf); --glow: rgba(128,226,167,.22); --card:#0e1624; }
+[data-theme="air"]     { --accent: var(--mint); --glow: rgba(178,245,234,.25); --card:#0d1726; }
+[data-theme="sexy"]    { --accent: var(--rose); --glow: rgba(255,143,179,.22); --card:#111326; }
+[data-theme="silky"]   { --accent: var(--lav);  --glow: rgba(200,182,255,.25); --card:#0f1426; }
+[data-theme="rooted"]  { --accent: #86efac;     --glow: rgba(134,239,172,.22); --card:#0e1822; }
+[data-theme="venus"]   { --accent: #ffd6a8;     --glow: rgba(255,214,168,.25); --card:#161225; }
+[data-theme="venus"] .hero{background:
+  radial-gradient(1200px 300px at 50% -70%, rgba(255,214,168,.12), transparent 60%),
+  linear-gradient(180deg,#0b0d11,#0b0d11);}
 </style>
 </head>
-<body>
-  <header class="wrap" aria-label="Site header">
-    <div class="brand">
-      <div class="glyph"><span>🌍</span></div>
-      <div>
-        <h1>Earth · <span style="text-shadow:0 0 14px #9ee6b877">Grounding Field</span></h1>
-        <div class="tag">Seamless 128 Hz · perfect-loop engine · lock-screen friendly</div>
+<body data-theme="ground">
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="glyph" aria-hidden="true"></div>
+        <div>
+          <h1>Earth · Grounded Night Field</h1>
+          <div class="subtitle">Optimized for iPhone 17 Air & headphones · Everything here is for everyone.</div>
+        </div>
       </div>
-    </div>
-    <nav class="ribbon" aria-label="Sites">
-      <a class="chip" href="https://mirrorhoney.plnt.earth/">MirrorHoney</a>
-      <a class="chip" href="https://mirrorsea.plnt.earth/">Mirror Sea</a>
-      <a class="chip" data-hi="1" href="https://earth.plnt.earth/">Earth</a>
-      <a class="chip" href="https://honey.plnt.earth/">Honey</a>
-      <a class="chip" href="https://mask.plnt.earth/">Mask</a>
-      <a class="chip" href="https://voice.plnt.earth/">Voice</a>
-      <a class="chip" href="https://jar.plnt.earth/">Jar</a>
-      <a class="chip" href="https://froot.plnt.earth/">Froot</a>
-      <a class="chip" href="https://tunes.plnt.earth/">Tunes</a>
-      <a class="chip" href="https://bridge.plnt.earth/">Bridge</a>
-    </nav>
-  </header>
+    </header>
 
-  <main class="wrap">
-    <section class="card" aria-label="Ground controls">
-      <div class="row" style="justify-content:space-between">
-        <div class="badge">🌿 Ground — 128 Hz</div>
-        <div class="badge">Status: <strong id="status">Off</strong></div>
-      </div>
-      <div class="row" style="margin-top:8px">
-        <button id="start" class="pill">▶︎ Start</button>
-        <button id="stop"  class="pill">■ Stop</button>
-        <button id="newtab" class="pill">↗︎ Open in New Tab</button>
-        <a id="download" class="pill" download="earth-128hz.wav" href="#">⬇︎ Download</a>
-      </div>
-      <div class="controls" style="margin-top:10px">
-        <div><label for="level">Level</label><input id="level" type="range" min="0" max="100" value="58" step="1" /></div>
-        <div><label for="detune">Fine Detune (±2%)</label><input id="detune" type="range" min="-2" max="2" value="0" step="0.01" /></div>
-        <div><label for="loopsec">Loop length (sec)</label><input id="loopsec" type="range" min="60" max="600" value="180" step="30" /></div>
-      </div>
-      <div class="meter" style="margin-top:10px"><div id="bar" class="bar"></div></div>
-      <p class="note" style="margin-top:10px">Perfect loop (48 kHz / 128 Hz with micro-fades). Plays smoothly on iPhone and can continue under lock-screen after a tap.</p>
-      <audio id="tone" preload="auto" loop playsinline></audio>
+    <section class="hero">
+      <p><strong>Welcome.</strong> Start the tone, choose a mode, and take one good action. Earth is a field we all carry. Rewards do not require Greta; your action is the reward, and the points help you see your impact.</p>
     </section>
-    <div class="footer">Night-safe UI · zero external libs · same engine as Honey/Mask/Voice.</div>
-  </main>
+
+    <!-- TONE + MODES -->
+    <section class="section-grid">
+      <!-- Warmth / O-tone Engine -->
+      <div class="card">
+        <h2>Warmth & O-tone</h2>
+        <p class="note">Two gentle presets: <b>128 Hz Warmth</b> (steady grounding) and <b>136.1 Hz O-tone</b> (soft “Om” feel). Use headphones if you can.</p>
+        <div class="controls" style="margin-top:10px">
+          <div class="card">
+            <div class="row" style="justify-content:space-between">
+              <strong>Engine</strong>
+              <span id="stateLabel" aria-live="polite">idle</span>
+            </div>
+            <div class="row" style="margin-top:8px">
+              <button class="btn" id="startBtn">Start</button>
+              <button class="btn" id="stopBtn" disabled>Stop</button>
+              <button class="btn" id="preset128" aria-pressed="true">128 Warmth</button>
+              <button class="btn" id="preset136">136.1 O-tone</button>
+            </div>
+            <div class="row" style="margin-top:8px">
+              <label class="note" for="freq">Freq</label>
+              <input id="freq" class="input" type="number" min="60" max="300" value="128" style="width:84px"/>
+              <label class="note" for="gain" style="margin-left:4px">Level</label>
+              <input id="gain" class="range" type="range" min="0" max="100" value="9"/>
+            </div>
+            <div class="row" style="margin-top:8px">
+              <label class="note" for="detune">Air detune (±0.50 Hz)</label>
+              <input id="detune" class="range" type="range" min="-50" max="50" value="6"/>
+              <label class="note" for="width">Stereo width</label>
+              <input id="width" class="range" type="range" min="0" max="100" value="90"/>
+            </div>
+            <div class="row" style="margin-top:8px">
+              <label class="note"><input id="sub64" type="checkbox" class="input" style="width:auto;margin-right:6px"/>Sub-ground 64 Hz</label>
+              <label class="note"><input id="pink" type="checkbox" class="input" style="width:auto;margin-right:6px"/>Silk noise veil</label>
+            </div>
+            <div class="leds">
+              <div class="led" id="ledCtx" title="AudioContext state"></div>
+              <div class="led" id="ledTone" title="Tone health"></div>
+            </div>
+            <p class="note small" style="margin-top:8px">Background tip: iOS may pause when fully locked; dim screen instead for long sessions.</p>
+          </div>
+
+          <div class="card">
+            <strong>Quick Check</strong>
+            <div class="row" style="margin-top:6px">
+              <button class="btn" id="leftOnly">Left</button>
+              <button class="btn" id="rightOnly">Right</button>
+              <button class="btn" id="both">Both</button>
+            </div>
+            <p class="note" style="margin-top:8px">Smooth, non-scratchy hum = healthy. If dropouts: reduce Level slightly, then restart.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modes -->
+      <div class="card">
+        <h2>Modes</h2>
+        <div class="modebar" id="modebar" role="tablist" aria-label="Theme Modes">
+          <button class="mode active" data-mode="ground" role="tab" aria-selected="true">Ground</button>
+          <button class="mode" data-mode="air" role="tab">Air</button>
+          <button class="mode" data-mode="sexy" role="tab">Sexy</button>
+          <button class="mode" data-mode="silky" role="tab">Silky</button>
+          <button class="mode" data-mode="rooted" role="tab">Rooted</button>
+          <button class="mode" data-mode="venus" role="tab">Venus</button>
+        </div>
+        <div class="card" style="margin-top:10px">
+          <strong>Headphone placement</strong>
+          <ul class="note" style="margin:8px 0 0; padding-left:18px">
+            <li>Over-ear or good in-ear; start low.</li>
+            <li>Ground = centered width; sub-64 adds chest/abdomen warmth.</li>
+            <li>Air = wider stereo + slight detune.</li>
+            <li>Silky = add pink veil to smooth edges.</li>
+            <li>Sexy = warm width + small positive detune (body-felt shimmer).</li>
+            <li>Rooted = narrow width + sub-ground to anchor.</li>
+            <li>Venus = soft gold-lavender glow; keep level gentle, breathe slowly.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EARTH GOOD POINTS -->
+    <section class="card" style="margin-top:14px">
+      <h2>Earth Good Points</h2>
+      <p class="note">Simple, real actions you can do today — no permission, no waiting. Your points live on your device (private). Rewards don’t require Greta; the planet feels your action immediately.</p>
+      <div class="grid-3" id="pointsGrid" style="margin-top:8px">
+        <!-- Actions are buttons with data-points -->
+        <button class="btn" data-action="kind-note" data-points="5">Send a kind note (5)</button>
+        <button class="btn" data-action="plant-meal" data-points="8">Plant-based meal (8)</button>
+        <button class="btn" data-action="walk-cycle" data-points="6">Walk / cycle errand (6)</button>
+        <button class="btn" data-action="pick-litter" data-points="7">Pick up litter (7)</button>
+        <button class="btn" data-action="learn-10" data-points="4">Learn 10 min (4)</button>
+        <button class="btn" data-action="donate-1" data-points="10">$1 to a local need (10)</button>
+        <button class="btn" data-action="share-seed" data-points="5">Share a seed / idea (5)</button>
+        <button class="btn" data-action="cook-share" data-points="9">Cook & share food (9)</button>
+        <button class="btn" data-action="rest-gently" data-points="3">Rest gently, no doomscroll (3)</button>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div class="card" style="min-width:220px">
+          <strong>Total</strong>
+          <div class="note" id="totalPoints" style="font-size:22px;margin-top:6px">0</div>
+        </div>
+        <div class="card" style="min-width:220px">
+          <strong>Streak</strong>
+          <div class="note" id="streakDays" style="font-size:22px;margin-top:6px">0 days</div>
+        </div>
+        <div class="card" style="min-width:280px">
+          <strong>Why it matters</strong>
+          <p class="note" style="margin-top:6px">Small actions compound. Score is a mirror — not judgment. Do one thing, then another.</p>
+        </div>
+      </div>
+      <p class="note small" style="margin-top:8px">Tip: Add a shortcut on your home screen; tap after each action to keep momentum.</p>
+    </section>
+
+    <!-- MUSIC DECK -->
+    <section class="card" style="margin-top:14px">
+      <h2>Music Deck</h2>
+      <p class="note">Paste official links (e.g., AURORA) and tap <b>Load</b>. The player starts only after you interact.</p>
+      <div class="grid-3" style="margin-top:8px">
+        <div class="card">
+          <label class="note" for="yt1">YouTube URL 1</label>
+          <input id="yt1" class="input" placeholder="https://www.youtube.com/watch?v=..."/>
+          <div class="row" style="margin-top:8px">
+            <button class="btn" data-slot="1" id="load1">Load</button>
+            <label class="note small"><input type="checkbox" id="loop1" style="width:auto;margin-right:6px"/>Loop</label>
+          </div>
+          <div id="frame1" style="margin-top:8px"></div>
+        </div>
+        <div class="card">
+          <label class="note" for="yt2">YouTube URL 2</label>
+          <input id="yt2" class="input" placeholder="https://youtu.be/..."/>
+          <div class="row" style="margin-top:8px">
+            <button class="btn" data-slot="2" id="load2">Load</button>
+            <label class="note small"><input type="checkbox" id="loop2" style="width:auto;margin-right:6px"/>Loop</label>
+          </div>
+          <div id="frame2" style="margin-top:8px"></div>
+        </div>
+        <div class="card">
+          <label class="note" for="yt3">YouTube URL 3</label>
+          <input id="yt3" class="input" placeholder="https://www.youtube.com/watch?v=..."/>
+          <div class="row" style="margin-top:8px">
+            <button class="btn" data-slot="3" id="load3">Load</button>
+            <label class="note small"><input type="checkbox" id="loop3" style="width:auto;margin-right:6px"/>Loop</label>
+          </div>
+          <div id="frame3" style="margin-top:8px"></div>
+        </div>
+      </div>
+      <p class="note small" style="margin-top:8px">Loop tries to use the ID-as-playlist trick for seamless looping (works for many official videos after interaction).</p>
+    </section>
+
+    <!-- UNIFIED FIELD RIBBON -->
+    <footer>
+      <div class="resonance-ribbon" id="ribbon">
+        <a href="https://froot.plnt.earth" target="_blank" rel="noopener">FROOT</a> ·
+        <a href="https://tunes.plnt.earth" target="_blank" rel="noopener">TUNES</a> ·
+        <a href="https://jar.plnt.earth" target="_blank" rel="noopener">JAR</a> ·
+        <a href="https://earth.plnt.earth" target="_blank" rel="noopener">EARTH</a> ·
+        <a href="https://charter.plnt.earth" target="_blank" rel="noopener">CHARTER</a> ·
+        <a href="https://warmth.plnt.earth" target="_blank" rel="noopener">WARMTH TEST</a>
+      </div>
+      <div class="note">part of the Illumina 42-day field · tone = 128 Hz / 136.1 Hz · everything here is for everyone</div>
+    </footer>
+  </div>
 
 <script>
+/* ---------- Audio Engine: 128 Warmth + 136.1 O-tone (no console logs) ---------- */
 (() => {
-  const tone=document.getElementById('tone');
-  const status=document.getElementById('status');
-  const start=document.getElementById('start');
-  const stop =document.getElementById('stop');
-  const newtab=document.getElementById('newtab');
-  const download=document.getElementById('download');
-  const level=document.getElementById('level');
-  const detune=document.getElementById('detune');
-  const loopsec=document.getElementById('loopsec');
-  const bar=document.getElementById('bar');
+  let ctx=null, master=null, l=null, r=null, panL=null, panR=null, sub=null, pinkNode=null;
+  const startBtn = document.getElementById('startBtn');
+  const stopBtn  = document.getElementById('stopBtn');
+  const preset128= document.getElementById('preset128');
+  const preset136= document.getElementById('preset136');
+  const freqEl   = document.getElementById('freq');
+  const gainEl   = document.getElementById('gain');
+  const detuneEl = document.getElementById('detune'); // ±0.50 Hz (x/100)
+  const widthEl  = document.getElementById('width');
+  const subCB    = document.getElementById('sub64');
+  const pinkCB   = document.getElementById('pink');
+  const ledCtx   = document.getElementById('ledCtx');
+  const ledTone  = document.getElementById('ledTone');
+  const stateLabel = document.getElementById('stateLabel');
+  const ribbon   = document.getElementById('ribbon');
 
-  let url=null, blob=null, tabURL=null, on=false;
+  function aura(on){ ribbon.classList.toggle('warmth-aura', !!on); ledCtx.className = 'led ' + (on?'on':''); }
+  function health(ok){ ledTone.className = 'led ' + (ok ? 'warm' : 'on'); }
+  function label(t){ stateLabel.textContent=t; }
 
-  function setBadge(v){ status.textContent=v?'On':'Off'; start.classList.toggle('on',v); }
-  function applyLevel(){ tone.volume=Math.min(1,Math.max(0,level.value/100)); bar.style.width=Math.round(tone.volume*100)+'%'; }
-  function applyDetune(){ const p=parseFloat(detune.value)||0; tone.playbackRate=1+(p/100); }
+  function createCtx(){
+    ctx = new (window.AudioContext||window.webkitAudioContext)();
+    master = ctx.createGain(); master.gain.value = (parseInt(gainEl.value,10)||9)/100;
+    master.connect(ctx.destination);
 
-  function makeWav(freq, seconds){
-    const sr=48000, secs=Math.max(5,Math.min(600,seconds||180));
-    const spc=sr/freq; const cyc=Math.round((sr*secs)/spc); const total=Math.floor(cyc*spc);
-    const data=new Int16Array(total); const amp=0.25*0x7FFF; const fade=Math.floor(sr*0.01);
-    for(let i=0;i<total;i++){ const s=Math.sin(2*Math.PI*freq*(i/sr));
-      let w=1; if(i<fade){const k=i/fade; w=0.5-0.5*Math.cos(Math.PI*k);} else if(i>total-fade){const k=(total-i)/fade; w=0.5-0.5*Math.cos(Math.PI*k);}
-      data[i]=Math.round(amp*s*w);
+    l = ctx.createOscillator(); r = ctx.createOscillator(); l.type='sine'; r.type='sine';
+    panL = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+    panR = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+    if(panL){ panL.pan.value = -0.0001; } if(panR){ panR.pan.value = 0.0001; }
+
+    const hz = +freqEl.value || 128;
+    const d  = (parseInt(detuneEl.value,10)||0)/100; // Hz
+    if(l.frequency && r.frequency){
+      l.frequency.value = hz - d/2;
+      r.frequency.value = hz + d/2;
     }
-    const header=new ArrayBuffer(44), dv=new DataView(header); const put=(o,s)=>{for(let i=0;i<s.length;i++)dv.setUint8(o+i,s.charCodeAt(i));};
-    const bytes=data.length*2; put(0,"RIFF"); dv.setUint32(4,36+bytes,true); put(8,"WAVE"); put(12,"fmt "); dv.setUint32(16,16,true);
-    dv.setUint16(20,1,true); dv.setUint16(22,1,true); dv.setUint32(24,sr,true); dv.setUint32(28,sr*2,true); dv.setUint16(32,2,true); dv.setUint16(34,16,true);
-    put(36,"data"); dv.setUint32(40,bytes,true);
-    const out=new Uint8Array(44+bytes); out.set(new Uint8Array(header),0); out.set(new Uint8Array(new Int16Array(data).buffer),44);
-    return new Blob([out],{type:"audio/wav"});
+
+    if(panL){ l.connect(panL).connect(master); } else { l.connect(master); }
+    if(panR){ r.connect(panR).connect(master); } else { r.connect(master); }
+
+    if(subCB.checked){
+      sub = ctx.createOscillator(); sub.type='sine'; sub.frequency.value=64;
+      const sg = ctx.createGain(); sg.gain.value = Math.min(master.gain.value*0.7, 0.06);
+      sub.connect(sg).connect(master);
+    }
+    if(pinkCB.checked){
+      const bufferSize = 4096;
+      const node = (ctx.createScriptProcessor ? ctx.createScriptProcessor(bufferSize,1,1) : null);
+      if(node){
+        let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
+        node.onaudioprocess = function(e){
+          const out = e.outputBuffer.getChannelData(0);
+          for(let i=0;i<out.length;i++){
+            const white = Math.random()*2-1;
+            b0=0.99886*b0+white*0.0555179; b1=0.99332*b1+white*0.0750759; b2=0.96900*b2+white*0.1538520;
+            b3=0.86650*b3+white*0.3104856; b4=0.55000*b4+white*0.5329522; b5=-0.7616*b5-white*0.0168980;
+            out[i]=(b0+b1+b2+b3+b4+b5+b6*0.5362)*0.02; b6=white*0.115926;
+          }
+        };
+        pinkNode = node; node.connect(master);
+      }
+    }
+    setWidth(widthEl.value);
   }
 
-  function ensureTone(){
-    if(!blob){ blob=makeWav(128, parseInt(loopsec.value,10)||180); url=URL.createObjectURL(blob); tone.src=url; download.href=url; }
+  function start(){
+    if(!ctx || ctx.state==='closed'){ createCtx(); }
+    if(ctx.state==='suspended'){ ctx.resume(); }
+    const now = ctx.currentTime;
+    try{ l.start(now+0.01); r.start(now+0.01); if(sub){ sub.start(now+0.02);} }catch(e){}
+    label('tone on'); startBtn.disabled=true; stopBtn.disabled=false; aura(true); health(true);
+    if('mediaSession' in navigator){ navigator.mediaSession.metadata = new MediaMetadata({title:'Earth · Tone', artist:'PLNT Earth', album:'Unified Field'}); }
+    localStorage.setItem('earth_warmth','on');
+  }
+  function stop(){
+    if(!ctx) return;
+    try{ l.stop(); r.stop(); if(sub){sub.stop();} }catch(e){}
+    try{ if(pinkNode){ pinkNode.disconnect(); pinkNode=null; } }catch(e){}
+    try{ ctx.close(); }catch(e){}
+    ctx=master=l=r=panL=panR=sub=null;
+    startBtn.disabled=false; stopBtn.disabled=true; label('idle'); aura(false); health(false);
+    localStorage.setItem('earth_warmth','off');
   }
 
-  async function doStart(){
-    ensureTone(); tone.currentTime=0; applyDetune(); applyLevel();
-    try{ await tone.play(); on=true; setBadge(true);}catch(_){}
+  function setLevel(v){ if(master){ const t=Math.max(0,Math.min(1,(parseInt(v,10)||0)/100)); master.gain.setTargetAtTime(t, ctx.currentTime||0, .03); } }
+  function setFreq(hz){
+    const base = Math.max(60,Math.min(300, hz||128));
+    const d = (parseInt(detuneEl.value,10)||0)/100;
+    if(l&&r){ l.frequency.setValueAtTime(base - d/2, ctx.currentTime||0); r.frequency.setValueAtTime(base + d/2, ctx.currentTime||0); }
   }
-  function doStop(){ try{ tone.pause(); }catch(_){ } on=false; setBadge(false); }
+  function setDetune(val){
+    const d = (parseInt(val,10)||0)/100;
+    if(l&&r&&l.frequency&&r.frequency){
+      const base = +freqEl.value || 128;
+      l.frequency.setValueAtTime(base - d/2, ctx.currentTime||0);
+      r.frequency.setValueAtTime(base + d/2, ctx.currentTime||0);
+    }
+  }
+  function setWidth(v){
+    const w = (parseInt(v,10)||0)/100;
+    if(panL){ panL.pan.value = -w; } if(panR){ panR.pan.value =  w; }
+  }
 
-  loopsec.addEventListener('input', ()=>{ if(on) return; blob=null; url=null; ensureTone(); });
-  level.addEventListener('input', applyLevel); detune.addEventListener('input', applyDetune);
-  start.addEventListener('click', doStart); stop.addEventListener('click', doStop);
+  // UI bindings
+  document.getElementById('leftOnly').addEventListener('click', ()=>{ if(!ctx||ctx.state==='closed'){createCtx();} if(ctx.state==='suspended'){ctx.resume();}
+    setWidth(100); start(); if(panL){ panL.pan.value=-1; } if(panR){ panR.pan.value=-1; } health(true); }, {passive:true});
+  document.getElementById('rightOnly').addEventListener('click', ()=>{ if(!ctx||ctx.state==='closed'){createCtx();} if(ctx.state==='suspended'){ctx.resume();}
+    setWidth(100); start(); if(panL){ panL.pan.value=1; } if(panR){ panR.pan.value=1; } health(true); }, {passive:true});
+  document.getElementById('both').addEventListener('click', ()=>{ if(!ctx||ctx.state==='closed'){createCtx();} if(ctx.state==='suspended'){ctx.resume();}
+    setWidth(widthEl.value); start(); health(true); }, {passive:true});
 
-  newtab.addEventListener('click', ()=>{
-    ensureTone();
-    const html = `<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><title>Earth 128 Hz</title>
-      <style>html,body{margin:0;height:100%;background:#000;color:#fff;display:grid;place-items:center;font:16px system-ui}</style>
-      <audio src="${url}" loop controls autoplay playsinline style="width:90%"></audio>
-      <p style="opacity:.8">Earth — 128 Hz · Perfect loop · Lock-screen friendly tab.</p>`;
-    const b=new Blob([html],{type:"text/html"}); tabURL=URL.createObjectURL(b); window.open(tabURL,"_blank","noopener");
+  startBtn.addEventListener('click', start, {passive:true});
+  stopBtn.addEventListener('click', stop, {passive:true});
+  gainEl.addEventListener('input', e=>{ if(ctx){ setLevel(e.target.value); } }, {passive:true});
+  freqEl.addEventListener('change', e=>{ if(ctx){ setFreq(+e.target.value); } }, {passive:true});
+  detuneEl.addEventListener('input', e=>{ if(ctx){ setDetune(e.target.value); } }, {passive:true});
+  widthEl.addEventListener('input', e=>{ if(ctx){ setWidth(e.target.value); } }, {passive:true});
+  subCB.addEventListener('change', ()=>{ const wasOn = ctx && ctx.state==='running'; stop(); if(wasOn){ start(); } }, {passive:true});
+  pinkCB.addEventListener('change', ()=>{ const wasOn = ctx && ctx.state==='running'; stop(); if(wasOn){ start(); } }, {passive:true});
+
+  // Presets
+  function pickPreset(hz){
+    freqEl.value = hz;
+    if(ctx){ setFreq(hz); }
+    preset128.setAttribute('aria-pressed', hz==128 ? 'true':'false');
+    preset136.setAttribute('aria-pressed', hz==136.1 ? 'true':'false');
+    localStorage.setItem('earth_preset', String(hz));
+  }
+  preset128.addEventListener('click', ()=>{ pickPreset(128); }, {passive:true});
+  preset136.addEventListener('click', ()=>{ pickPreset(136.1); }, {passive:true});
+
+  // Passive health watch
+  setInterval(()=>{ const ok = !!(ctx && ctx.state==='running'); health(ok); ledCtx.className = 'led ' + (ok?'on':''); }, 900);
+
+  // Modes (themes + presets)
+  const presets = {
+    ground: ()=>{ document.body.setAttribute('data-theme','ground'); widthEl.value=40; detuneEl.value=0;   subCB.checked=true;  pinkCB.checked=false; if(ctx){ setWidth(40); setDetune(0);} },
+    air:    ()=>{ document.body.setAttribute('data-theme','air');    widthEl.value=100; detuneEl.value=8;  subCB.checked=false; pinkCB.checked=false; if(ctx){ setWidth(100); setDetune(8);} },
+    sexy:   ()=>{ document.body.setAttribute('data-theme','sexy');   widthEl.value=85; detuneEl.value=10; subCB.checked=false; pinkCB.checked=false; if(ctx){ setWidth(85); setDetune(10);} },
+    silky:  ()=>{ document.body.setAttribute('data-theme','silky');  widthEl.value=70; detuneEl.value=6;  subCB.checked=false; pinkCB.checked=true;  if(ctx){ setWidth(70); setDetune(6);} },
+    rooted: ()=>{ document.body.setAttribute('data-theme','rooted'); widthEl.value=20; detuneEl.value=0;  subCB.checked=true;  pinkCB.checked=false; if(ctx){ setWidth(20); setDetune(0);} },
+    venus:  ()=>{ document.body.setAttribute('data-theme','venus');  widthEl.value=65; detuneEl.value=5;  subCB.checked=false; pinkCB.checked=true;  if(ctx){ setWidth(65); setDetune(5);} },
+  };
+  document.getElementById('modebar').addEventListener('click', (e)=>{
+    const btn = e.target.closest('.mode'); if(!btn) return;
+    const m = btn.getAttribute('data-mode'); if(!presets[m]) return;
+    Array.from(document.querySelectorAll('.modebar .mode')).forEach(x=>x.classList.remove('active'));
+    btn.classList.add('active'); presets[m]();
+    const running = ctx && ctx.state==='running'; if(running){ stop(); start(); }
+    localStorage.setItem('earth_mode', m);
+  }, {passive:true});
+
+  // Restore remembered preferences
+  const prevMode   = localStorage.getItem('earth_mode')   || 'ground';
+  const prevWarm   = localStorage.getItem('earth_warmth') || 'off';
+  const prevPreset = parseFloat(localStorage.getItem('earth_preset') || '128');
+  const btn = document.querySelector(`.modebar .mode[data-mode="${prevMode}"]`);
+  if(btn){ btn.classList.add('active'); presets[prevMode](); }
+  if(!isNaN(prevPreset)){ freqEl.value = prevPreset; }
+  if(prevWarm==='on'){ label('ready'); } else { label('idle'); }
+})();
+
+/* ---------- Earth Good Points (local only) ---------- */
+(() => {
+  const grid = document.getElementById('pointsGrid');
+  const totalEl = document.getElementById('totalPoints');
+  const streakEl= document.getElementById('streakDays');
+
+  function todayKey(){ const d=new Date(); return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`; }
+  function read(key, fallback){ try{ return JSON.parse(localStorage.getItem(key)) ?? fallback; }catch(e){ return fallback; } }
+  function write(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+
+  function updateTotals(){
+    const total = read('earth_points_total', 0);
+    totalEl.textContent = total;
+    const streak = read('earth_points_streak', {count:0, last: null});
+    streakEl.textContent = `${streak.count||0} day${(streak.count||0)===1?'':'s'}`;
+  }
+  function bumpStreak(){
+    const key = 'earth_points_streak';
+    const t = todayKey();
+    const s = read(key, {count:0,last:null});
+    if(s.last !== t){ s.count = (s.last? s.count+1 : 1); s.last = t; write(key,s); }
+  }
+
+  grid.addEventListener('click', (e)=>{
+    const b = e.target.closest('button[data-points]'); if(!b) return;
+    const pts = parseInt(b.getAttribute('data-points'),10)||0;
+    const sum = (read('earth_points_total',0)||0) + pts;
+    write('earth_points_total', sum);
+    bumpStreak();
+    updateTotals();
+    b.classList.add('small'); // subtle feedback
+    setTimeout(()=>{ b.classList.remove('small'); }, 300);
+  }, {passive:true});
+
+  updateTotals();
+})();
+
+/* ---------- Music Deck (paste official YouTube links) ---------- */
+(() => {
+  function idFromURL(url){
+    try{
+      const u = new URL(url.trim());
+      if(u.hostname.includes('youtu.be')){ return u.pathname.slice(1); }
+      if(u.hostname.includes('youtube.com')){
+        const p = u.searchParams.get('v');
+        if(p) return p;
+        const list=u.searchParams.get('list'); if(list) return null;
+      }
+      return null;
+    }catch(e){ return null; }
+  }
+  function load(slot){
+    const urlEl = document.getElementById('yt'+slot);
+    const loopEl= document.getElementById('loop'+slot);
+    const frame = document.getElementById('frame'+slot);
+    const id = idFromURL(urlEl.value||'');
+    frame.innerHTML = '';
+    if(!id) return;
+    const loop = loopEl.checked ? `&loop=1&playlist=${encodeURIComponent(id)}` : '';
+    const src = `https://www.youtube.com/embed/${encodeURIComponent(id)}?rel=0&modestbranding=1&playsinline=1${loop}`;
+    const ifr = document.createElement('iframe');
+    ifr.width = '100%'; ifr.height = '220'; ifr.src = src;
+    ifr.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+    ifr.setAttribute('allowfullscreen','');
+    ifr.style.border='1px solid var(--ring)'; ifr.style.borderRadius='12px'; ifr.style.background='#0b0d11';
+    frame.appendChild(ifr);
+  }
+  ['1','2','3'].forEach(n=>{
+    const btn = document.getElementById('load'+n);
+    btn.addEventListener('click', ()=>load(n), {passive:true});
   });
-
-  setBadge(false); bar.style.width=level.value+'%';
 })();
 </script>
 </body>
 </html>
+
