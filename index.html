@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>earth · grounding studio</title>
 <meta name="theme-color" content="#0b0d11"/>
-<meta name="description" content="Grounding tones, breath + step trainer, brown/pink noise, and simple rituals. Alter Fire / Prism themes. Safe, gentle, present."/>
+<meta name="description" content="Grounding tones, breath + step trainer, brown/pink noise, and simple rituals. Alter Fire / Prism themes. Scene presets + deep links. Safe, gentle, present."/>
 <style>
   :root{
     /* theme vars (Color Engine writes these) */
@@ -65,6 +65,7 @@
   /* chips & lists */
   .chips{display:flex;gap:8px;flex-wrap:wrap}
   .chip{font-size:12px;padding:6px 8px;border-radius:999px;border:1px solid var(--ring);background:#131c31;cursor:pointer}
+  .chip.on{outline:2px solid var(--accent2)}
 
   /* timer */
   .timer{font-variant-numeric:tabular-nums}
@@ -173,7 +174,7 @@
       <div class="sub">Tip: walk at your step BPM while breathing the box. Barefoot on safe ground if possible.</div>
     </section>
 
-    <!-- Right: Field timer + Rituals + Notes -->
+    <!-- Right: Field timer + Rituals + Notes + Scene presets -->
     <aside class="card col">
       <b>Field timer</b>
       <div class="row">
@@ -211,14 +212,17 @@
         <button class="btn small" id="save">Save Earth Card</button>
         <span class="sub" id="savedCount">cards: 0</span>
       </div>
+
       <div class="hr"></div>
-      <div class="chips" id="themePairs">
-        <div class="chip" data-theme="honey">honey + warmth</div>
-        <div class="chip" data-theme="ocean">ocean + horizon</div>
-        <div class="chip" data-theme="forest">forest + breath</div>
-        <div class="chip" data-theme="alter">alter fire + courage</div>
-        <div class="chip" data-theme="prism">prism + curiosity</div>
+      <b>Scene presets</b>
+      <div class="chips" id="themePairs" title="Click to load a scene">
+        <div class="chip" data-scene="honey-warmth">honey + warmth</div>
+        <div class="chip" data-scene="ocean-horizon">ocean + horizon</div>
+        <div class="chip" data-scene="forest-breath">forest + breath</div>
+        <div class="chip" data-scene="alter-curiosity">alter fire + curiosity</div>
+        <div class="chip" data-theme="prism" data-scene="prism-curiosity">prism + curiosity</div>
       </div>
+      <div class="sub">Tip: open directly with <code>?scene=honey-warmth</code>.</div>
     </aside>
   </div>
 
@@ -269,15 +273,14 @@
 
     o64.start(); o96.start(); o128.start();
 
-    $('status').classList.add('ok'); $('statusText').textContent='Audio — live (muted device volume recommended)';
+    $('status').classList.add('ok'); $('statusText').textContent='Audio — live';
   }
 
-  function toggleOsc(btn, gain, label){
+  function toggleOsc(btn, gain){
     if(!ctx) return;
     const on = btn.getAttribute('aria-pressed')==='true';
     btn.setAttribute('aria-pressed', on?'false':'true');
-    btn.textContent = on?label:label;
-    gain.gain.value = on?0:parseFloat(document.getElementById('g'+label.replace(/\D/g,'')).value);
+    gain.gain.value = on?0:parseFloat(document.getElementById('g'+btn.textContent.replace(/\D/g,'')).value);
   }
 
   function initNoise(){
@@ -295,17 +298,9 @@
       const output = e.outputBuffer.getChannelData(0);
       for (let i=0;i<bufferSize;i++){
         const white = Math.random()*2-1;
-        let sample;
-        if(type==='pink'){
-          // simple pink-ish
-          sample = (lastOut + (0.02 * white)) / 1.02;
-          lastOut = sample;
-          sample *= 3.5;
-        } else { // brown
-          sample = (lastOut + (0.02 * white)) / 1.02;
-          lastOut = sample;
-          sample *= 8;
-        }
+        let sample = (lastOut + (0.02 * white)) / 1.02;
+        lastOut = sample;
+        sample *= (type==='pink') ? 3.5 : 8.0;
         output[i] = sample * 0.05; // safe low
       }
     };
@@ -314,9 +309,9 @@
 
   $('startAudio').addEventListener('click', function(){ initAudio(); this.disabled=true; });
 
-  $('t64').addEventListener('click', ()=>{ if(!ctx) initAudio(); toggleOsc($('t64'), g64, '64 Hz'); });
-  $('t96').addEventListener('click', ()=>{ if(!ctx) initAudio(); toggleOsc($('t96'), g96, '96 Hz'); });
-  $('t128').addEventListener('click',()=>{ if(!ctx) initAudio(); toggleOsc($('t128'),g128,'128 Hz'); });
+  $('t64').addEventListener('click', ()=>{ if(!ctx) initAudio(); toggleOsc($('t64'),  g64); });
+  $('t96').addEventListener('click', ()=>{ if(!ctx) initAudio(); toggleOsc($('t96'),  g96); });
+  $('t128').addEventListener('click',()=>{ if(!ctx) initAudio(); toggleOsc($('t128'), g128); });
 
   $('g64').addEventListener('input', function(){ if(g64) g64.gain.value = Math.min(0.25,Math.max(0,parseFloat(this.value))); });
   $('g96').addEventListener('input', function(){ if(g96) g96.gain.value = Math.min(0.25,Math.max(0,parseFloat(this.value))); });
@@ -338,10 +333,9 @@
     if(!ctx) return;
     const on=this.getAttribute('aria-pressed')==='true';
     this.setAttribute('aria-pressed', on?'false':'true');
-    const target = on?0:parseFloat($('g128').value);
     g64.gain.value = on?0:parseFloat($('g64').value);
     g96.gain.value = on?0:parseFloat($('g96').value);
-    g128.gain.value=target;
+    g128.gain.value= on?0:parseFloat($('g128').value);
   });
 
   /* ===== Breath / Step Trainer ===== */
@@ -374,7 +368,6 @@
   });
 
   $('runCycle').addEventListener('click', ()=>{
-    // simple 2-minute box-breath guide with soft text prompts in status
     const unit = parseInt($('boxIn').value,10)||4;
     const phases = ['inhale','hold','exhale','hold'];
     let phase=0, count=0, total=120;
@@ -430,6 +423,72 @@
   });
   (function initCards(){ try{ const arr=JSON.parse(localStorage.getItem(STORE)||'[]'); $('savedCount').textContent='cards: '+arr.length; }catch(e){} })();
 
+  /* ===== Scene presets + deep links ===== */
+  function setRange(id, v){ const el=$(id); if(!el) return; el.value=String(v); el.dispatchEvent(new Event('input')); }
+  function press(btn, on){ if(!btn) return; const is = btn.getAttribute('aria-pressed')==='true'; if(is!==on) btn.click(); }
+  function applyThemeName(name){ if(typeof applyTheme==='function') applyTheme(name); }
+
+  const SCENES = {
+    'honey-warmth':   { theme:'honey', tones:{64:0.00, 96:0.00, 128:0.18}, noise:null,   bpm:96,  box:'4', tick:false, note:'stand heavy; breathe 4-4-4-4' },
+    'ocean-horizon':  { theme:'ocean', tones:{64:0.00, 96:0.06, 128:0.00}, noise:'pink', bpm:84,  box:'5', tick:true,  note:'gaze far; soft steps @84' },
+    'forest-breath':  { theme:'forest',tones:{64:0.06, 96:0.10, 128:0.00}, noise:null,   bpm:72,  box:'5', tick:false, note:'widen ribs; slow nasal' },
+    'alter-curiosity':{ theme:'alter', tones:{64:0.00, 96:0.04, 128:0.12}, noise:'brown',bpm:118, box:'4', tick:true,  note:'walk @118; notice new color' },
+    'prism-curiosity':{ theme:'prism', tones:{64:0.04, 96:0.04, 128:0.10}, noise:null,   bpm:100, box:'4', tick:false, note:'scan body; follow interest' }
+  };
+
+  function applyNoise(kind){
+    if(!kind){ // turn both off
+      const b = document.getElementById('brown'), p=document.getElementById('pink');
+      if(b?.getAttribute('aria-pressed')==='true') b.click();
+      if(p?.getAttribute('aria-pressed')==='true') p.click();
+      return;
+    }
+    document.getElementById(kind)?.click();
+  }
+
+  function applyScene(key){
+    const s = SCENES[key]; if(!s) return;
+    // theme
+    applyThemeName(s.theme);
+    // audio on
+    document.getElementById('startAudio')?.click();
+    // ensure Bed ON
+    press(document.getElementById('allToggle'), true);
+    // tone levels
+    setRange('g64',  s.tones[64]  ?? 0);
+    setRange('g96',  s.tones[96]  ?? 0);
+    setRange('g128', s.tones[128] ?? 0);
+    press(document.getElementById('t64'),  (s.tones[64]  ??0)>0);
+    press(document.getElementById('t96'),  (s.tones[96]  ??0)>0);
+    press(document.getElementById('t128'), (s.tones[128] ??0)>0);
+    // noise
+    applyNoise(s.noise);
+    // trainer
+    setRange('bpm', s.bpm); document.getElementById('bpmVal').textContent = String(s.bpm);
+    const boxSel = document.getElementById('boxIn'); if(boxSel){ boxSel.value = s.box; }
+    press(document.getElementById('tick'), !!s.tick);
+    // status hint
+    const st = document.getElementById('statusText'); if(st) { st.textContent = s.note || 'scene loaded'; setTimeout(()=>st.textContent='Grounding…', 2000); }
+  }
+
+  // chip wiring
+  const pairs = document.getElementById('themePairs');
+  if(pairs){
+    pairs.addEventListener('click', (e)=>{
+      const c = e.target.closest('.chip'); if(!c) return;
+      const key = c.dataset.scene || (c.textContent||'').toLowerCase().replace(/\s*\+\s*/g,'-').replace(/\s+/g,'');
+      applyScene(key);
+    });
+  }
+  // deep link
+  (function(){
+    const scene = new URLSearchParams(location.search).get('scene');
+    if(scene && SCENES[scene]) applyScene(scene);
+  })();
+
+  // expose (optional)
+  window.__earthApplyScene = applyScene;
+
   /* ===== Theme Engine ===== */
   const themes={
     alter:{bg:'#0b0d11',ink:'#f6f0ff',muted:'#c9c0e6',card:'#11122a',ring:'#2b2250',mint:'#b2f5ea',vio:'#b7a9ff',gold:'#ffd479',rose:'#ff6bd6',good:'#9cf3d2',a1:'#ff6bd6',a2:'#7a00ff',a3:'#4af2d8',a4:'#ffd479',glow:'rgba(255,107,214,.45)'},
@@ -467,6 +526,8 @@
     (function(){ let s=''; try{s=localStorage.getItem(key)||'';}catch(e){} go(s==='1'); })();
   })();
 
+  /* ===== init saved cards count ===== */
+  (function initCards(){ try{ const arr=JSON.parse(localStorage.getItem('earth_cards_v1')||'[]'); $('savedCount').textContent='cards: '+arr.length; }catch(e){} })();
 })();
 </script>
 </body>
