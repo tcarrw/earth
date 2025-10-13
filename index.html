@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <title>Earth · Grounded Night Field — PLNT Earth</title>
-<meta name="description" content="Earth field with 128 Hz Warmth & 136.1 Hz O-tone, Good Points, and Music Deck. One-tap Play & Tune auto-sets tone/mode for The Seed, Running With The Wolves, and Holocene."/>
+<meta name="description" content="Earth field with 128 Hz Warmth & 136.1 Hz O-tone, Earth Good Points, and a Music Deck with one-tap Play & Tune. Gentle alter.fire fallback and daily logging vibe. Everything here is for everyone."/>
 <meta name="theme-color" content="#0b0d11" media="(prefers-color-scheme: dark)"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -92,7 +92,15 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
     </header>
 
     <section class="hero">
-      <p><strong>Welcome.</strong> One tap on any <em>Play &amp; Tune</em> button will load the video, set the tone/mode, and start the engine. Your action is the reward; the points just reflect it.</p>
+      <p><strong>Welcome.</strong> Start the tone, choose a mode, and take one good action. Return daily to log points and soak in music. The field stays warm every visit.</p>
+    </section>
+
+    <!-- alter.fire fallback card -->
+    <section class="card" style="margin-top:12px">
+      <h2>Need a stronger spark?</h2>
+      <p class="note">If Earth feels soft but you want immediate activation, try the Fire field. It’s the same Illumina engine with a hotter archetype.</p>
+      <a class="btn" href="https://alter.fire" target="_blank" rel="noopener" style="margin-top:8px">Go to alter.fire</a>
+      <p class="note small" style="margin-top:6px">Tip: Start low on Fire, then return here to stabilize and log.</p>
     </section>
 
     <!-- TONE + MODES -->
@@ -100,7 +108,7 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
       <!-- Warmth / O-tone Engine -->
       <div class="card">
         <h2>Warmth & O-tone</h2>
-        <p class="note">Presets: <b>128 Hz Warmth</b> (steady grounding) and <b>136.1 Hz O-tone</b> (“Om” feel). Use headphones if you can.</p>
+        <p class="note">Two gentle presets: <b>128 Hz Warmth</b> (steady grounding) and <b>136.1 Hz O-tone</b> (soft “Om” feel). Use headphones if you can.</p>
         <div class="controls" style="margin-top:10px">
           <div class="card">
             <div class="row" style="justify-content:space-between">
@@ -133,7 +141,7 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
               <div class="led" id="ledCtx" title="AudioContext state"></div>
               <div class="led" id="ledTone" title="Tone health"></div>
             </div>
-            <p class="note small" style="margin-top:8px">iOS may pause when fully locked; dim screen for long sessions.</p>
+            <p class="note small" style="margin-top:8px">iOS may pause when fully locked; dim the screen for long sessions.</p>
           </div>
 
           <div class="card">
@@ -143,7 +151,7 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
               <button class="btn" id="rightOnly">Right</button>
               <button class="btn" id="both">Both</button>
             </div>
-            <p class="note" style="margin-top:8px">Smooth, non-scratchy hum = healthy. If dropouts: reduce Level slightly, then restart.</p>
+            <p class="note" style="margin-top:8px">Smooth, non-scratchy hum = healthy. If dropouts: lower Level slightly, then restart.</p>
           </div>
         </div>
       </div>
@@ -162,13 +170,13 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
         <div class="card" style="margin-top:10px">
           <strong>Headphone placement</strong>
           <ul class="note" style="margin:8px 0 0; padding-left:18px">
-            <li>Start low. Over-ear or good in-ear.</li>
+            <li>Over-ear or good in-ear; start low.</li>
             <li>Ground = centered width; sub-64 adds chest/abdomen warmth.</li>
             <li>Air = wider stereo + slight detune.</li>
-            <li>Silky = add pink veil to smooth edges.</li>
+            <li>Silky = add pink veil to soften edges.</li>
             <li>Sexy = warm width + small positive detune (body-felt shimmer).</li>
             <li>Rooted = narrow width + sub-ground to anchor.</li>
-            <li>Venus = soft gold-lavender glow; keep level gentle.</li>
+            <li>Venus = soft gold-lavender glow; breathe slowly.</li>
           </ul>
         </div>
       </div>
@@ -177,7 +185,7 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
     <!-- EARTH GOOD POINTS -->
     <section class="card" style="margin-top:14px">
       <h2>Earth Good Points</h2>
-      <p class="note">Do one simple thing today — no permission needed. Points stay on your device (private).</p>
+      <p class="note">Simple actions you can do today — no permission, no waiting. Points stay on your device. Do one, then another.</p>
       <div class="grid-3" id="pointsGrid" style="margin-top:8px">
         <button class="btn" data-action="kind-note" data-points="5">Send a kind note (5)</button>
         <button class="btn" data-action="plant-meal" data-points="8">Plant-based meal (8)</button>
@@ -200,15 +208,16 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
         </div>
         <div class="card" style="min-width:280px">
           <strong>Why it matters</strong>
-          <p class="note" style="margin-top:6px">Small actions compound. Score is a mirror — not judgment.</p>
+          <p class="note" style="margin-top:6px">Small actions compound. This score is a mirror, not judgment.</p>
         </div>
       </div>
+      <p class="note small" style="margin-top:8px">Tip: Add Earth to your Home Screen; tap after each action to keep momentum.</p>
     </section>
 
-    <!-- MUSIC DECK (pre-filled + Play & Tune) -->
+    <!-- MUSIC DECK (prefilled + Play & Tune) -->
     <section class="card" style="margin-top:14px">
       <h2>Music Deck</h2>
-      <p class="note">Tap <b>Play &amp; Tune</b> for one-tap video load + tone/mode preset. (You can still edit URLs.)</p>
+      <p class="note">Tap <b>Play &amp; Tune</b> for one-tap video load + tone/mode preset. (You can edit URLs.)</p>
       <div class="grid-3" style="margin-top:8px">
         <div class="card">
           <strong>AURORA — The Seed</strong>
@@ -255,6 +264,9 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
         <a href="https://warmth.plnt.earth" target="_blank" rel="noopener">WARMTH TEST</a>
       </div>
       <div class="note">part of the Illumina 42-day field · tone = 128 Hz / 136.1 Hz · everything here is for everyone</div>
+      <div class="note" style="margin-top:8px">
+        🔥 Prefer a quicker release? Visit <a href="https://alter.fire" target="_blank" rel="noopener">alter.fire</a> — then come back to Earth to stabilize.
+      </div>
     </footer>
   </div>
 
@@ -332,7 +344,9 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
     const now = ctx.currentTime;
     try{ l.start(now+0.01); r.start(now+0.01); if(sub){ sub.start(now+0.02);} }catch(e){}
     label('tone on'); startBtn.disabled=true; stopBtn.disabled=false; aura(true); health(true);
-    if('mediaSession' in navigator){ navigator.mediaSession.metadata = new MediaMetadata({title:'Earth · Tone', artist:'PLNT Earth', album:'Unified Field'}); }
+    if('mediaSession' in navigator){
+      navigator.mediaSession.metadata = new MediaMetadata({title:'Earth · Tone', artist:'PLNT Earth', album:'Unified Field'});
+    }
     localStorage.setItem('earth_warmth','on');
   }
   function stop(){
@@ -375,7 +389,7 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
     setOptions({sub=false, pink=false}){
       subCB.checked=sub; pinkCB.checked=pink;
       const running = ctx && ctx.state==='running';
-      if(running){ stop(); start(); } // re-instantiate optional nodes
+      if(running){ stop(); start(); }
     },
     setMode(m){
       const modes = document.querySelectorAll('.modebar .mode');
@@ -461,7 +475,7 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
   updateTotals();
 })();
 
-/* ---------- Music Deck (with Play & Tune auto-adjust) ---------- */
+/* ---------- Music Deck (prefilled + Play & Tune) ---------- */
 (() => {
   function idFromURL(url){
     try{
@@ -492,18 +506,16 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
     frame.appendChild(ifr);
   }
 
-  // Button wires
   ['1','2','3'].forEach(n=>document.getElementById('load'+n).addEventListener('click', ()=>load(n), {passive:true}));
 
-  // Play & Tune buttons — auto-apply tone/mode and start
+  // Play & Tune buttons — auto apply tone/mode and start
   const A = window.__earthAudio;
 
   // 1) The Seed — 136.1 O-tone, Air mode, wide, light detune, no sub, no veil
   document.getElementById('playTune1').addEventListener('click', ()=>{
     load('1'); A.ensure();
     A.setPreset(136.1); A.setMode('air'); A.setWidth(1.00*100); A.setDetune(8);
-    A.setOptions({sub:false, pink:false}); A.start && A.start(); // fallback if start exposed
-    // if not exposed, call internal start button:
+    A.setOptions({sub:false, pink:false});
     const s=document.getElementById('startBtn'); if(s && !s.disabled){ s.click(); }
   }, {passive:true});
 
@@ -522,6 +534,24 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
     A.setOptions({sub:false, pink:true});
     const s=document.getElementById('startBtn'); if(s && !s.disabled){ s.click(); }
   }, {passive:true});
+})();
+
+/* ---------- Smart nudge to alter.fire when tone isn't running ---------- */
+(() => {
+  const hint = document.createElement('div');
+  hint.className = 'note';
+  hint.style.marginTop = '10px';
+  hint.style.textAlign = 'center';
+  hint.style.opacity = '.85';
+  hint.innerHTML = 'Not feeling it yet? Try <a href="https://alter.fire" target="_blank" rel="noopener">alter.fire</a> for a stronger spark, then return to Earth.';
+  let shown = false;
+  setInterval(() => {
+    const ctxHealthy = document.querySelector('#ledCtx')?.className.includes('on');
+    if (!ctxHealthy && !shown) {
+      const f = document.querySelector('footer');
+      if (f) { f.appendChild(hint); shown = true; }
+    }
+  }, 4000);
 })();
 </script>
 </body>
