@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <title>Earth · Grounded Night Field — PLNT Earth</title>
-<meta name="description" content="A grounded, airy, sexy, silky, rooted, Venus-night field. 128 Hz Warmth & 136.1 Hz O-tone, Earth Good Points for daily good actions, and a Music Deck for official links. Everything here is for everyone."/>
+<meta name="description" content="Earth field with 128 Hz Warmth & 136.1 Hz O-tone, Good Points, and Music Deck. One-tap Play & Tune auto-sets tone/mode for The Seed, Running With The Wolves, and Holocene."/>
 <meta name="theme-color" content="#0b0d11" media="(prefers-color-scheme: dark)"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -92,7 +92,7 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
     </header>
 
     <section class="hero">
-      <p><strong>Welcome.</strong> Start the tone, choose a mode, and take one good action. Earth is a field we all carry. Rewards do not require Greta; your action is the reward, and the points help you see your impact.</p>
+      <p><strong>Welcome.</strong> One tap on any <em>Play &amp; Tune</em> button will load the video, set the tone/mode, and start the engine. Your action is the reward; the points just reflect it.</p>
     </section>
 
     <!-- TONE + MODES -->
@@ -100,7 +100,7 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
       <!-- Warmth / O-tone Engine -->
       <div class="card">
         <h2>Warmth & O-tone</h2>
-        <p class="note">Two gentle presets: <b>128 Hz Warmth</b> (steady grounding) and <b>136.1 Hz O-tone</b> (soft “Om” feel). Use headphones if you can.</p>
+        <p class="note">Presets: <b>128 Hz Warmth</b> (steady grounding) and <b>136.1 Hz O-tone</b> (“Om” feel). Use headphones if you can.</p>
         <div class="controls" style="margin-top:10px">
           <div class="card">
             <div class="row" style="justify-content:space-between">
@@ -133,7 +133,7 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
               <div class="led" id="ledCtx" title="AudioContext state"></div>
               <div class="led" id="ledTone" title="Tone health"></div>
             </div>
-            <p class="note small" style="margin-top:8px">Background tip: iOS may pause when fully locked; dim screen instead for long sessions.</p>
+            <p class="note small" style="margin-top:8px">iOS may pause when fully locked; dim screen for long sessions.</p>
           </div>
 
           <div class="card">
@@ -162,13 +162,13 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
         <div class="card" style="margin-top:10px">
           <strong>Headphone placement</strong>
           <ul class="note" style="margin:8px 0 0; padding-left:18px">
-            <li>Over-ear or good in-ear; start low.</li>
+            <li>Start low. Over-ear or good in-ear.</li>
             <li>Ground = centered width; sub-64 adds chest/abdomen warmth.</li>
             <li>Air = wider stereo + slight detune.</li>
             <li>Silky = add pink veil to smooth edges.</li>
             <li>Sexy = warm width + small positive detune (body-felt shimmer).</li>
             <li>Rooted = narrow width + sub-ground to anchor.</li>
-            <li>Venus = soft gold-lavender glow; keep level gentle, breathe slowly.</li>
+            <li>Venus = soft gold-lavender glow; keep level gentle.</li>
           </ul>
         </div>
       </div>
@@ -177,9 +177,8 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
     <!-- EARTH GOOD POINTS -->
     <section class="card" style="margin-top:14px">
       <h2>Earth Good Points</h2>
-      <p class="note">Simple, real actions you can do today — no permission, no waiting. Your points live on your device (private). Rewards don’t require Greta; the planet feels your action immediately.</p>
+      <p class="note">Do one simple thing today — no permission needed. Points stay on your device (private).</p>
       <div class="grid-3" id="pointsGrid" style="margin-top:8px">
-        <!-- Actions are buttons with data-points -->
         <button class="btn" data-action="kind-note" data-points="5">Send a kind note (5)</button>
         <button class="btn" data-action="plant-meal" data-points="8">Plant-based meal (8)</button>
         <button class="btn" data-action="walk-cycle" data-points="6">Walk / cycle errand (6)</button>
@@ -201,46 +200,48 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
         </div>
         <div class="card" style="min-width:280px">
           <strong>Why it matters</strong>
-          <p class="note" style="margin-top:6px">Small actions compound. Score is a mirror — not judgment. Do one thing, then another.</p>
+          <p class="note" style="margin-top:6px">Small actions compound. Score is a mirror — not judgment.</p>
         </div>
       </div>
-      <p class="note small" style="margin-top:8px">Tip: Add a shortcut on your home screen; tap after each action to keep momentum.</p>
     </section>
 
-    <!-- MUSIC DECK -->
+    <!-- MUSIC DECK (pre-filled + Play & Tune) -->
     <section class="card" style="margin-top:14px">
       <h2>Music Deck</h2>
-      <p class="note">Paste official links (e.g., AURORA) and tap <b>Load</b>. The player starts only after you interact.</p>
+      <p class="note">Tap <b>Play &amp; Tune</b> for one-tap video load + tone/mode preset. (You can still edit URLs.)</p>
       <div class="grid-3" style="margin-top:8px">
         <div class="card">
-          <label class="note" for="yt1">YouTube URL 1</label>
-          <input id="yt1" class="input" placeholder="https://www.youtube.com/watch?v=..."/>
+          <strong>AURORA — The Seed</strong>
+          <input id="yt1" class="input" value="https://www.youtube.com/watch?v=_Mc_OM5oNA8"/>
           <div class="row" style="margin-top:8px">
             <button class="btn" data-slot="1" id="load1">Load</button>
-            <label class="note small"><input type="checkbox" id="loop1" style="width:auto;margin-right:6px"/>Loop</label>
+            <label class="note small"><input type="checkbox" id="loop1" style="width:auto;margin-right:6px" checked/>Loop</label>
+            <button class="btn" id="playTune1" title="Load + set 136.1 Hz O-tone, Air mode">Play &amp; Tune</button>
           </div>
           <div id="frame1" style="margin-top:8px"></div>
         </div>
         <div class="card">
-          <label class="note" for="yt2">YouTube URL 2</label>
-          <input id="yt2" class="input" placeholder="https://youtu.be/..."/>
+          <strong>AURORA — Running With The Wolves (Nature Version)</strong>
+          <input id="yt2" class="input" value="https://www.youtube.com/watch?v=06ht9MyJLT4"/>
           <div class="row" style="margin-top:8px">
             <button class="btn" data-slot="2" id="load2">Load</button>
-            <label class="note small"><input type="checkbox" id="loop2" style="width:auto;margin-right:6px"/>Loop</label>
+            <label class="note small"><input type="checkbox" id="loop2" style="width:auto;margin-right:6px" checked/>Loop</label>
+            <button class="btn" id="playTune2" title="Load + set 128 Hz Warmth, Air mode">Play &amp; Tune</button>
           </div>
           <div id="frame2" style="margin-top:8px"></div>
         </div>
         <div class="card">
-          <label class="note" for="yt3">YouTube URL 3</label>
-          <input id="yt3" class="input" placeholder="https://www.youtube.com/watch?v=..."/>
+          <strong>Bon Iver — Holocene</strong>
+          <input id="yt3" class="input" value="https://www.youtube.com/watch?v=TWcyIpul8OE"/>
           <div class="row" style="margin-top:8px">
             <button class="btn" data-slot="3" id="load3">Load</button>
-            <label class="note small"><input type="checkbox" id="loop3" style="width:auto;margin-right:6px"/>Loop</label>
+            <label class="note small"><input type="checkbox" id="loop3" style="width:auto;margin-right:6px" checked/>Loop</label>
+            <button class="btn" id="playTune3" title="Load + set 128 Hz Warmth, Silky mode">Play &amp; Tune</button>
           </div>
           <div id="frame3" style="margin-top:8px"></div>
         </div>
       </div>
-      <p class="note small" style="margin-top:8px">Loop tries to use the ID-as-playlist trick for seamless looping (works for many official videos after interaction).</p>
+      <p class="note small" style="margin-top:8px">Loop uses the ID-as-playlist trick for seamless looping after interaction (varies by video).</p>
     </section>
 
     <!-- UNIFIED FIELD RIBBON -->
@@ -363,12 +364,44 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
     if(panL){ panL.pan.value = -w; } if(panR){ panR.pan.value =  w; }
   }
 
+  // Expose helpers for Play & Tune
+  window.__earthAudio = {
+    start, stop, setFreq, setDetune, setWidth,
+    setPreset(hz){ freqEl.value = hz; setFreq(hz);
+      preset128.setAttribute('aria-pressed', hz==128 ? 'true':'false');
+      preset136.setAttribute('aria-pressed', hz==136.1 ? 'true':'false');
+      localStorage.setItem('earth_preset', String(hz));
+    },
+    setOptions({sub=false, pink=false}){
+      subCB.checked=sub; pinkCB.checked=pink;
+      const running = ctx && ctx.state==='running';
+      if(running){ stop(); start(); } // re-instantiate optional nodes
+    },
+    setMode(m){
+      const modes = document.querySelectorAll('.modebar .mode');
+      modes.forEach(x=>x.classList.remove('active'));
+      const btn = document.querySelector(`.modebar .mode[data-mode="${m}"]`);
+      if(btn){ btn.classList.add('active'); }
+      const presets = {
+        ground: ()=>{ document.body.setAttribute('data-theme','ground'); widthEl.value=40; setWidth(40); detuneEl.value=0; setDetune(0); },
+        air:    ()=>{ document.body.setAttribute('data-theme','air');    widthEl.value=100; setWidth(100); detuneEl.value=8; setDetune(8); },
+        sexy:   ()=>{ document.body.setAttribute('data-theme','sexy');   widthEl.value=85; setWidth(85); detuneEl.value=10; setDetune(10); },
+        silky:  ()=>{ document.body.setAttribute('data-theme','silky');  widthEl.value=70; setWidth(70); detuneEl.value=6; setDetune(6); },
+        rooted: ()=>{ document.body.setAttribute('data-theme','rooted'); widthEl.value=20; setWidth(20); detuneEl.value=0; setDetune(0); },
+        venus:  ()=>{ document.body.setAttribute('data-theme','venus');  widthEl.value=65; setWidth(65); detuneEl.value=5; setDetune(5); },
+      };
+      if(presets[m]){ presets[m](); }
+      localStorage.setItem('earth_mode', m);
+    },
+    ensure(){ if(!ctx || ctx.state==='closed'){ createCtx(); } if(ctx.state==='suspended'){ ctx.resume(); } }
+  };
+
   // UI bindings
-  document.getElementById('leftOnly').addEventListener('click', ()=>{ if(!ctx||ctx.state==='closed'){createCtx();} if(ctx.state==='suspended'){ctx.resume();}
+  document.getElementById('leftOnly').addEventListener('click', ()=>{ window.__earthAudio.ensure();
     setWidth(100); start(); if(panL){ panL.pan.value=-1; } if(panR){ panR.pan.value=-1; } health(true); }, {passive:true});
-  document.getElementById('rightOnly').addEventListener('click', ()=>{ if(!ctx||ctx.state==='closed'){createCtx();} if(ctx.state==='suspended'){ctx.resume();}
+  document.getElementById('rightOnly').addEventListener('click', ()=>{ window.__earthAudio.ensure();
     setWidth(100); start(); if(panL){ panL.pan.value=1; } if(panR){ panR.pan.value=1; } health(true); }, {passive:true});
-  document.getElementById('both').addEventListener('click', ()=>{ if(!ctx||ctx.state==='closed'){createCtx();} if(ctx.state==='suspended'){ctx.resume();}
+  document.getElementById('both').addEventListener('click', ()=>{ window.__earthAudio.ensure();
     setWidth(widthEl.value); start(); health(true); }, {passive:true});
 
   startBtn.addEventListener('click', start, {passive:true});
@@ -377,48 +410,18 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
   freqEl.addEventListener('change', e=>{ if(ctx){ setFreq(+e.target.value); } }, {passive:true});
   detuneEl.addEventListener('input', e=>{ if(ctx){ setDetune(e.target.value); } }, {passive:true});
   widthEl.addEventListener('input', e=>{ if(ctx){ setWidth(e.target.value); } }, {passive:true});
-  subCB.addEventListener('change', ()=>{ const wasOn = ctx && ctx.state==='running'; stop(); if(wasOn){ start(); } }, {passive:true});
-  pinkCB.addEventListener('change', ()=>{ const wasOn = ctx && ctx.state==='running'; stop(); if(wasOn){ start(); } }, {passive:true});
-
-  // Presets
-  function pickPreset(hz){
-    freqEl.value = hz;
-    if(ctx){ setFreq(hz); }
-    preset128.setAttribute('aria-pressed', hz==128 ? 'true':'false');
-    preset136.setAttribute('aria-pressed', hz==136.1 ? 'true':'false');
-    localStorage.setItem('earth_preset', String(hz));
-  }
-  preset128.addEventListener('click', ()=>{ pickPreset(128); }, {passive:true});
-  preset136.addEventListener('click', ()=>{ pickPreset(136.1); }, {passive:true});
+  subCB.addEventListener('change', ()=>{ const running = ctx && ctx.state==='running'; if(running){ stop(); start(); } }, {passive:true});
+  pinkCB.addEventListener('change', ()=>{ const running = ctx && ctx.state==='running'; if(running){ stop(); start(); } }, {passive:true});
 
   // Passive health watch
   setInterval(()=>{ const ok = !!(ctx && ctx.state==='running'); health(ok); ledCtx.className = 'led ' + (ok?'on':''); }, 900);
-
-  // Modes (themes + presets)
-  const presets = {
-    ground: ()=>{ document.body.setAttribute('data-theme','ground'); widthEl.value=40; detuneEl.value=0;   subCB.checked=true;  pinkCB.checked=false; if(ctx){ setWidth(40); setDetune(0);} },
-    air:    ()=>{ document.body.setAttribute('data-theme','air');    widthEl.value=100; detuneEl.value=8;  subCB.checked=false; pinkCB.checked=false; if(ctx){ setWidth(100); setDetune(8);} },
-    sexy:   ()=>{ document.body.setAttribute('data-theme','sexy');   widthEl.value=85; detuneEl.value=10; subCB.checked=false; pinkCB.checked=false; if(ctx){ setWidth(85); setDetune(10);} },
-    silky:  ()=>{ document.body.setAttribute('data-theme','silky');  widthEl.value=70; detuneEl.value=6;  subCB.checked=false; pinkCB.checked=true;  if(ctx){ setWidth(70); setDetune(6);} },
-    rooted: ()=>{ document.body.setAttribute('data-theme','rooted'); widthEl.value=20; detuneEl.value=0;  subCB.checked=true;  pinkCB.checked=false; if(ctx){ setWidth(20); setDetune(0);} },
-    venus:  ()=>{ document.body.setAttribute('data-theme','venus');  widthEl.value=65; detuneEl.value=5;  subCB.checked=false; pinkCB.checked=true;  if(ctx){ setWidth(65); setDetune(5);} },
-  };
-  document.getElementById('modebar').addEventListener('click', (e)=>{
-    const btn = e.target.closest('.mode'); if(!btn) return;
-    const m = btn.getAttribute('data-mode'); if(!presets[m]) return;
-    Array.from(document.querySelectorAll('.modebar .mode')).forEach(x=>x.classList.remove('active'));
-    btn.classList.add('active'); presets[m]();
-    const running = ctx && ctx.state==='running'; if(running){ stop(); start(); }
-    localStorage.setItem('earth_mode', m);
-  }, {passive:true});
 
   // Restore remembered preferences
   const prevMode   = localStorage.getItem('earth_mode')   || 'ground';
   const prevWarm   = localStorage.getItem('earth_warmth') || 'off';
   const prevPreset = parseFloat(localStorage.getItem('earth_preset') || '128');
-  const btn = document.querySelector(`.modebar .mode[data-mode="${prevMode}"]`);
-  if(btn){ btn.classList.add('active'); presets[prevMode](); }
-  if(!isNaN(prevPreset)){ freqEl.value = prevPreset; }
+  window.__earthAudio.setMode(prevMode);
+  if(!isNaN(prevPreset)){ window.__earthAudio.setPreset(prevPreset); }
   if(prevWarm==='on'){ label('ready'); } else { label('idle'); }
 })();
 
@@ -452,14 +455,13 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
     write('earth_points_total', sum);
     bumpStreak();
     updateTotals();
-    b.classList.add('small'); // subtle feedback
-    setTimeout(()=>{ b.classList.remove('small'); }, 300);
+    b.classList.add('small'); setTimeout(()=>{ b.classList.remove('small'); }, 300);
   }, {passive:true});
 
   updateTotals();
 })();
 
-/* ---------- Music Deck (paste official YouTube links) ---------- */
+/* ---------- Music Deck (with Play & Tune auto-adjust) ---------- */
 (() => {
   function idFromURL(url){
     try{
@@ -489,12 +491,38 @@ footer{margin:18px 0 6px;padding:14px 10px;text-align:center;border-top:1px soli
     ifr.style.border='1px solid var(--ring)'; ifr.style.borderRadius='12px'; ifr.style.background='#0b0d11';
     frame.appendChild(ifr);
   }
-  ['1','2','3'].forEach(n=>{
-    const btn = document.getElementById('load'+n);
-    btn.addEventListener('click', ()=>load(n), {passive:true});
-  });
+
+  // Button wires
+  ['1','2','3'].forEach(n=>document.getElementById('load'+n).addEventListener('click', ()=>load(n), {passive:true}));
+
+  // Play & Tune buttons — auto-apply tone/mode and start
+  const A = window.__earthAudio;
+
+  // 1) The Seed — 136.1 O-tone, Air mode, wide, light detune, no sub, no veil
+  document.getElementById('playTune1').addEventListener('click', ()=>{
+    load('1'); A.ensure();
+    A.setPreset(136.1); A.setMode('air'); A.setWidth(1.00*100); A.setDetune(8);
+    A.setOptions({sub:false, pink:false}); A.start && A.start(); // fallback if start exposed
+    // if not exposed, call internal start button:
+    const s=document.getElementById('startBtn'); if(s && !s.disabled){ s.click(); }
+  }, {passive:true});
+
+  // 2) Running With The Wolves — 128 Warmth, Air mode, wide, small detune, no sub/veil
+  document.getElementById('playTune2').addEventListener('click', ()=>{
+    load('2'); A.ensure();
+    A.setPreset(128); A.setMode('air'); A.setWidth(1.00*100); A.setDetune(6);
+    A.setOptions({sub:false, pink:false});
+    const s=document.getElementById('startBtn'); if(s && !s.disabled){ s.click(); }
+  }, {passive:true});
+
+  // 3) Holocene — 128 Warmth, Silky mode, medium width, veil on, no sub
+  document.getElementById('playTune3').addEventListener('click', ()=>{
+    load('3'); A.ensure();
+    A.setPreset(128); A.setMode('silky'); A.setWidth(0.70*100); A.setDetune(6);
+    A.setOptions({sub:false, pink:true});
+    const s=document.getElementById('startBtn'); if(s && !s.disabled){ s.click(); }
+  }, {passive:true});
 })();
 </script>
 </body>
 </html>
-
