@@ -1,534 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>earth · grounding studio</title>
-<meta name="theme-color" content="#0b0d11"/>
-<meta name="description" content="Grounding tones, breath + step trainer, brown/pink noise, and simple rituals. Alter Fire / Prism themes. Scene presets + deep links. Safe, gentle, present."/>
-<style>
-  :root{
-    /* theme vars (Color Engine writes these) */
-    --bg:#0b0d11; --ink:#e9ecf4; --muted:#aab2c2; --card:#101626; --ring:#1b2134;
-    --mint:#b2f5ea; --vio:#b7a9ff; --gold:#ffd479; --rose:#ff8fb3; --good:#9cf3d2;
-    --accent1:#b7a9ff; --accent2:#ff6bd6; --accent3:#4af2d8; --accent4:#ffd479;
-    --glow: rgba(183,169,255,.45);
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    background:
-      radial-gradient(1100px 700px at 70% -10%, rgba(183,169,255,.15), transparent 70%),
-      var(--bg);
-    color:var(--ink);
-    font:400 16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,ui-sans-serif
-  }
-  a{color:var(--mint);text-decoration:none} a:hover{text-decoration:underline}
-  .wrap{max-width:1200px;margin:0 auto;padding:24px}
-  header{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;padding:6px 0 12px}
-  h1{margin:0;font-size:clamp(20px,3.8vw,32px)}
-  .sub{color:var(--muted);font-size:14px}
-  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-  .col{display:grid;gap:10px}
-  .card{
-    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0));
-    border:1px solid var(--ring);border-radius:18px;padding:16px;
-    box-shadow:0 8px 28px rgba(0,0,0,.35);backdrop-filter:saturate(120%) blur(6px)
-  }
-  .grid{display:grid;gap:16px}
-  @media(min-width:1080px){.grid{grid-template-columns:1.15fr .85fr}}
-  .btn{
-    appearance:none;border:1px solid var(--ring);
-    background:linear-gradient(180deg,#16223a,#121a2c);color:var(--ink);
-    padding:10px 14px;border-radius:14px;cursor:pointer;font-weight:600;letter-spacing:.2px;
-    box-shadow:0 6px 20px rgba(0,0,0,.25)
-  }
-  .btn.small{padding:8px 10px;font-size:13px;border-radius:12px}
-  .btn.alt{background:transparent}
-  .btn[aria-pressed="true"]{outline:2px solid var(--mint);outline-offset:2px}
+  <meta charset="utf-8" />
+  <title>earth.plnt.earth — eternal blueprint</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0b0c" />
+  <meta name="color-scheme" content="dark light" />
+  <style>
+    :root {
+      /* Core ink and surface */
+      --bg: #0b0b0c;
+      --ink: #ececf1;
+      --muted: #a9a9b2;
+      --ring: #2a2a35;
+      --card: #14141a;
+      --soft: #121216;
 
-  .badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:6px 10px;border-radius:999px;border:1px solid var(--ring);background:rgba(255,255,255,.02)}
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--vio)}
-  .ok .dot{background:var(--good)}
+      /* Default link and accent set by [data-accent] on <body> */
+      --link: #d7ffc0;
+      --accent-bg: rgba(183, 255, 170, 0.12);
+      --accent-stroke: rgba(183, 255, 170, 0.35);
 
-  .hr{height:1px;background:linear-gradient(90deg,transparent,#26304b,transparent);margin:8px 0}
+      /* Peach and Violet Pearl page tones */
+      --peach: #ffc7a1;
+      --peach-deep: #f4a574;
+      --violet-pearl: #c9c2ff;
+      --violet-deep: #8e86ff;
+      --sun-haze: rgba(255, 199, 161, 0.16);
+      --moon-haze: rgba(201, 194, 255, 0.16);
 
-  /* meters */
-  .meter{height:8px;background:#0f1729;border:1px solid var(--ring);border-radius:999px;overflow:hidden;min-width:160px}
-  .meter>i{display:block;height:100%;width:35%;background:linear-gradient(90deg,var(--mint),var(--vio));
-    animation:breathe 4s ease-in-out infinite}
-  @keyframes breathe{0%,100%{transform:scaleX(.9)}50%{transform:scaleX(1)}}
-  .meterSlim{height:6px;border:1px solid var(--ring);border-radius:999px;overflow:hidden;background:#0f1729;width:160px}
-  .meterSlim>i{display:block;height:100%;width:40%;background:linear-gradient(90deg,var(--good),var(--accent1));animation:breathe 4s ease-in-out infinite}
+      /* Accent greens */
+      --green-mint: #b7ffaa;
+      --green-jade: #7fe8b0;
+      --green-neon: #b4f35e;
+      --green-forest: #35a05a;
+      --green-seafoam: #aef5da;
+      --green-olive: #95b86a;
 
-  /* chips & lists */
-  .chips{display:flex;gap:8px;flex-wrap:wrap}
-  .chip{font-size:12px;padding:6px 8px;border-radius:999px;border:1px solid var(--ring);background:#131c31;cursor:pointer}
-  .chip.on{outline:2px solid var(--accent2)}
+      --shadow: rgba(0,0,0,0.35);
+      --radius: 14px;
+    }
 
-  /* timer */
-  .timer{font-variant-numeric:tabular-nums}
+    /* Accent mapping */
+    body[data-accent="mint"]    { --link: var(--green-mint);   --accent-bg: color-mix(in hsl, var(--green-mint) 18%, transparent);   --accent-stroke: color-mix(in hsl, var(--green-mint) 35%, transparent); }
+    body[data-accent="jade"]    { --link: var(--green-jade);   --accent-bg: color-mix(in hsl, var(--green-jade) 18%, transparent);   --accent-stroke: color-mix(in hsl, var(--green-jade) 35%, transparent); }
+    body[data-accent="neon"]    { --link: var(--green-neon);   --accent-bg: color-mix(in hsl, var(--green-neon) 12%, transparent);   --accent-stroke: color-mix(in hsl, var(--green-neon) 35%, transparent); }
+    body[data-accent="forest"]  { --link: var(--green-forest); --accent-bg: color-mix(in hsl, var(--green-forest) 14%, transparent); --accent-stroke: color-mix(in hsl, var(--green-forest) 32%, transparent); }
+    body[data-accent="seafoam"] { --link: var(--green-seafoam);--accent-bg: color-mix(in hsl, var(--green-seafoam) 16%, transparent);--accent-stroke: color-mix(in hsl, var(--green-seafoam) 30%, transparent); }
+    body[data-accent="olive"]   { --link: var(--green-olive);  --accent-bg: color-mix(in hsl, var(--green-olive) 14%, transparent);  --accent-stroke: color-mix(in hsl, var(--green-olive) 32%, transparent); }
 
-  /* Color Engine visuals */
-  .prism-bg{
-    position: fixed; inset: -10% -10% auto -10%; height: 60vh; z-index:-1;
-    background:
-      radial-gradient(1300px 900px at 80% -10%, rgba(122,0,255,.25), transparent 60%),
-      radial-gradient(1000px 800px at 10% 110%, rgba(74,242,216,.18), transparent 60%),
-      conic-gradient(from 0deg, rgba(255,47,185,.18), rgba(122,0,255,.18), rgba(255,212,121,.16), rgba(74,242,216,.16), rgba(255,47,185,.18));
-    filter: blur(22px) saturate(130%); animation: prismPan 22s linear infinite;
-  }
-  @keyframes prismPan { to { transform: translateX(-4%) rotate(8deg);} }
-  .palette-fab{position: fixed; right: 14px; top: 14px; z-index: 80; display:flex; gap:8px}
-  .swatch{width:28px;height:28px;border-radius:9px;border:1px solid var(--ring);cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.25)}
-  .swatch:hover{transform:translateY(-1px)}
-  .fabLabel{padding:6px 10px;border-radius:12px;border:1px solid var(--ring);background:rgba(255,255,255,.06);font-size:12px;color:var(--ink)}
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7f7fa;
+        --ink: #17171c;
+        --muted: #575764;
+        --ring: #e6e6ef;
+        --card: #ffffff;
+        --soft: #ffffff;
+        --sun-haze: rgba(255, 183, 136, 0.18);
+        --moon-haze: rgba(168, 160, 255, 0.18);
+      }
+    }
 
-  /* Selfish Mode badge */
-  .selfish-badge{
-    position:fixed; left:14px; top:14px; z-index:81;
-    padding:8px 10px; border:1px solid var(--ring); border-radius:12px;
-    background:linear-gradient(180deg,#1f1531,#14182a); color:var(--ink);
-    font-size:12px; display:flex; gap:8px; align-items:center; cursor:pointer;
-    box-shadow:0 8px 24px rgba(0,0,0,.35)
-  }
-  .selfish-badge[aria-pressed="true"]{ outline:2px solid var(--rose); outline-offset:2px }
-  .selfish-dot{ width:8px; height:8px; border-radius:50%; background:var(--rose); box-shadow:0 0 10px var(--glow) }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji; }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-  /* big titles */
-  .title{font-weight:800;letter-spacing:.3px}
-</style>
+    .wrap { max-width: 820px; margin: 0 auto; padding: 28px 16px 88px; }
+
+    /* Site header */
+    header.site { padding: 18px 0 14px; border-bottom: 1px solid var(--ring); }
+    header.site h1 { margin: 0; font-size: 22px; letter-spacing: 0.2px; }
+    header.site p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+
+    /* Lens badges */
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .chip {
+      padding: 6px 10px; border: 1px solid var(--accent-stroke); border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-bg), var(--accent-bg));
+      font-size: 12px; color: var(--ink);
+    }
+
+    /* Entry card */
+    .entry {
+      margin-top: 22px;
+      padding: 18px;
+      border: 1px solid var(--ring);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(900px 420px at 20% -10%, var(--moon-haze), transparent 60%),
+        radial-gradient(1100px 520px at 120% 20%, var(--sun-haze), transparent 55%),
+        var(--card);
+      box-shadow: 0 8px 30px -10px var(--shadow);
+    }
+    .entry-header { display: grid; gap: 8px; }
+    .entry-header h3 { margin: 0; font-size: 18px; }
+    .entry-meta { margin: 0; color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .entry-body { margin-top: 12px; line-height: 1.6; }
+
+    blockquote {
+      margin: 0; padding: 14px 16px;
+      border-left: 3px solid var(--violet-deep);
+      background:
+        linear-gradient(0deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02)),
+        radial-gradient(600px 240px at -10% 0%, rgba(255, 199, 161, 0.12), transparent 60%),
+        radial-gradient(600px 240px at 110% 40%, rgba(201, 194, 255, 0.12), transparent 60%);
+      border-radius: 10px;
+    }
+    blockquote p { margin: 0 0 10px; }
+    blockquote p:last-child { margin-bottom: 0; }
+
+    /* CTA block */
+    .cta {
+      margin-top: 28px;
+      padding: 18px;
+      border: 1px solid var(--ring);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, var(--moon-haze), transparent 60%),
+        radial-gradient(1000px 600px at 120% 20%, var(--sun-haze), transparent 55%),
+        var(--card);
+      box-shadow: 0 8px 30px -12px var(--shadow);
+    }
+    .cta h3 { margin: 0 0 8px; font-size: 18px; }
+    .cta p { margin: 6px 0 10px; }
+    .roles {
+      display: inline-block;
+      padding: 6px 10px;
+      border: 1px solid var(--ring);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      background: linear-gradient(90deg, rgba(255, 199, 161, 0.12), rgba(201, 194, 255, 0.12));
+    }
+    .cta-questions { margin: 12px 0 0; padding: 0; list-style: none; }
+    .cta-questions li { padding: 10px 0; border-top: 1px dashed var(--ring); }
+    .cta-questions li:first-child { border-top: 0; }
+    .peach { color: var(--peach); }
+    .violet { color: var(--violet-pearl); }
+
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .btn {
+      appearance: none;
+      border: 1px solid var(--ring);
+      background: transparent;
+      color: var(--ink);
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.04s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+    .btn:hover { background: linear-gradient(90deg, var(--accent-bg), var(--accent-bg)); border-color: var(--accent-stroke); }
+    .btn:active { transform: translateY(1px); }
+    .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+    /* Accent picker */
+    .accent-picker { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .swatch {
+      width: 22px; height: 22px; border-radius: 999px; border: 1px solid var(--ring); cursor: pointer;
+      outline: none; display: inline-block;
+    }
+    .swatch.mint   { background: var(--green-mint); }
+    .swatch.jade   { background: var(--green-jade); }
+    .swatch.neon   { background: var(--green-neon); }
+    .swatch.forest { background: var(--green-forest); }
+    .swatch.sea    { background: var(--green-seafoam); }
+    .swatch.olive  { background: var(--green-olive); }
+
+    /* Next Step card */
+    .next {
+      margin-top: 28px;
+      padding: 18px;
+      border: 1px solid var(--ring);
+      border-radius: var(--radius);
+      background: var(--card);
+      box-shadow: 0 8px 30px -12px var(--shadow);
+    }
+    .next h3 { margin: 0 0 8px; font-size: 18px; }
+    .next p { margin: 6px 0 10px; color: var(--muted); }
+    .next .btn-link {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--accent-stroke);
+      background: linear-gradient(90deg, var(--accent-bg), var(--accent-bg));
+      color: var(--ink);
+    }
+
+    footer.site { margin-top: 36px; border-top: 1px solid var(--ring); padding-top: 14px; color: var(--muted); font-size: 12px; }
+  </style>
 </head>
-<body>
-<div class="prism-bg" aria-hidden="true"></div>
-
-<!-- Color Engine palette -->
-<div class="palette-fab" title="Themes">
-  <div class="swatch" data-theme="alter"  style="background:linear-gradient(135deg,#ff2fb9,#7a00ff)"></div>
-  <div class="swatch" data-theme="honey"  style="background:linear-gradient(135deg,#ffd479,#ff8fb3)"></div>
-  <div class="swatch" data-theme="ocean"  style="background:linear-gradient(135deg,#4af2d8,#1f6fff)"></div>
-  <div class="swatch" data-theme="forest" style="background:linear-gradient(135deg,#6ee7b7,#22c55e)"></div>
-  <div class="swatch" data-theme="prism"  style="background:linear-gradient(135deg,#b7a9ff,#4af2d8 60%,#ffd479)"></div>
-  <span class="fabLabel" id="autoPrism" role="button" aria-pressed="false">Auto Prism: Off</span>
-</div>
-
-<!-- Selfish Mode -->
-<button id="selfishToggle" class="selfish-badge" aria-pressed="false" title="It's for her — and for me">
-  <span class="selfish-dot" aria-hidden="true"></span> Selfish Mode
-</button>
-
-<div class="wrap">
-
-  <header>
-    <div>
-      <h1 class="title">earth · grounding studio</h1>
-      <div class="sub" id="headerCopy">Ground gently. Breathe, step, and listen — present first, memory later.</div>
-    </div>
-    <div class="badge" id="status"><span class="dot" aria-hidden="true"></span><span id="statusText">Idle — tap Start Audio</span></div>
-  </header>
-
-  <div class="grid">
-    <!-- Left: Tones + Breath/Step Trainer -->
-    <section class="card col">
-      <b>Grounding tones</b>
-      <div class="row">
-        <button class="btn" id="startAudio">▶︎ Start Audio</button>
-        <button class="btn small" id="allToggle" aria-pressed="true">Bed: On</button>
+<body data-accent="neon">
+  <div class="wrap">
+    <header class="site">
+      <h1>earth.plnt.earth</h1>
+      <p>Eternal blueprint. If you are here, you were always meant to find it.</p>
+      <div class="badges">
+        <span class="chip">For Marina</span>
+        <span class="chip">Lens: Greta</span>
+        <span class="chip">Neon Monique</span>
       </div>
-      <div class="row">
-        <button class="btn small" id="t64"  aria-pressed="false">64 Hz</button>
-        <input id="g64" type="range" min="0" max="0.25" step="0.01" value="0.08"/>
-        <button class="btn small" id="t96"  aria-pressed="false">96 Hz</button>
-        <input id="g96" type="range" min="0" max="0.25" step="0.01" value="0.06"/>
-        <button class="btn small" id="t128" aria-pressed="true">128 Hz</button>
-        <input id="g128" type="range" min="0" max="0.5" step="0.01" value="0.18"/>
-      </div>
-      <div class="row">
-        <button class="btn small" id="brown" aria-pressed="false">Brown Noise</button>
-        <button class="btn small" id="pink"  aria-pressed="false">Pink Noise</button>
-        <label class="sub" for="noiseLevel">Level</label>
-        <input id="noiseLevel" type="range" min="0" max="0.25" step="0.01" value="0.08"/>
-      </div>
-      <div class="sub">Keep device volume ~50–60%. If you feel pressure, pause.</div>
+    </header>
 
-      <div class="hr"></div>
-      <b>Breath · Step trainer</b>
-      <div class="row">
-        <label class="sub" for="boxIn">Box</label>
-        <select id="boxIn">
-          <option value="4" selected>4-4-4-4</option>
-          <option value="5">5-5-5-5</option>
-          <option value="6">6-6-6-6</option>
-        </select>
-        <label class="sub" for="bpm">Steps</label>
-        <input id="bpm" type="range" min="60" max="120" step="1" value="96"/>
-        <span class="sub" id="bpmVal">96</span>
-        <button class="btn small" id="tick" aria-pressed="false">Tick: Off</button>
-        <div class="meterSlim"><i></i></div>
+    <!-- Rebuild Manifest -->
+    <section id="rebuild-manifest" class="entry">
+      <div class="entry-header">
+        <h3>🌍 Rebuild Manifest</h3>
+        <p class="entry-meta">
+          <span>Tone: Ground → Renewal → Vision</span>
+          <time datetime="2025-10-30">October 30, 2025</time>
+        </p>
       </div>
-      <div class="row">
-        <button class="btn small" id="runCycle">Run 2 min</button>
-        <span class="sub">Cycle: inhale·hold·exhale·hold with soft clicks (optional).</span>
-      </div>
-      <div class="sub">Tip: walk at your step BPM while breathing the box. Barefoot on safe ground if possible.</div>
+      <article class="entry-body">
+        <blockquote>
+          <p>You stand where the light touches everything again.</p>
+          <p>The question is not can we rebuild the world, it is how will you direct it.</p>
+          <p>Not a reset, a remembering.</p>
+          <p>What would tenderness look like scaled to continents.</p>
+          <p>What would clean systems sound like when designed for harmony instead of defense.</p>
+        </blockquote>
+      </article>
     </section>
 
-    <!-- Right: Field timer + Rituals + Notes + Scene presets -->
-    <aside class="card col">
-      <b>Field timer</b>
-      <div class="row">
-        <label class="sub" for="fieldLen">Length</label>
-        <select id="fieldLen">
-          <option value="120">2 min</option>
-          <option value="300" selected>5 min</option>
-          <option value="600">10 min</option>
-        </select>
-        <button class="btn" id="fieldStart">Start</button>
-        <div class="pill">Time: <span class="timer" id="fieldT">00:00</span></div>
-      </div>
-      <div class="chips" id="prompts" style="margin-top:6px">
-        <div class="chip" data-p="feel your feet">feel your feet</div>
-        <div class="chip" data-p="release the jaw">release the jaw</div>
-        <div class="chip" data-p="widen the view">widen the view</div>
-        <div class="chip" data-p="shoulders: heavy + low">shoulders: heavy + low</div>
-      </div>
+    <!-- Eternal Blueprint CTA -->
+    <section class="cta" id="eternal-blueprint">
+      <h3>☀️ Eternal Blueprint — Director’s Call</h3>
+      <p class="roles">Marina: Director, Artist, Producer</p>
+      <p>We want the same world. Through Greta’s lens, the frame is simple. Ground first, then grow, then keep the air clear. This page is yours to shape.</p>
 
-      <div class="hr"></div>
-      <b>Earth rituals</b>
-      <div class="chips" id="rituals">
-        <div class="chip" data-r="barefoot (safe)">barefoot (safe)</div>
-        <div class="chip" data-r="sip water slowly">sip water slowly</div>
-        <div class="chip" data-r="touch a tree">touch a tree</div>
-        <div class="chip" data-r="sky gaze 30s">sky gaze 30s</div>
-        <div class="chip" data-r="one kind text">one kind text</div>
-      </div>
-      <div class="sub" id="ritNote">Pick 1–2 to anchor the session.</div>
+      <ul class="cta-questions">
+        <li>
+          <strong class="peach">Peach Scene One</strong><br />
+          What structure would you plant first if every material was empathy. What daily ritual opens that door each morning.
+        </li>
+        <li>
+          <strong class="violet">Violet Pearl Law of Return</strong><br />
+          How will care circulate so energy is not wasted. Name one rule that keeps the cycle clear for everyone.
+        </li>
+        <li>
+          <strong class="peach">Peach Civic Light</strong><br />
+          How do we make beauty a public resource. Where do we place the first lights so good work grows fast.
+        </li>
+        <li>
+          <strong class="violet">Violet Pearl Climate of Trust</strong><br />
+          What boundary keeps the frame calm so tenderness can grow without confusion.
+        </li>
+        <li>
+          <strong class="peach">Peach Economy of Care</strong><br />
+          If value follows attention, what receives the first harvest and why.
+        </li>
+        <li>
+          <strong class="violet">Violet Pearl Final Frame</strong><br />
+          When the credits pause on night sky, what feeling should the Earth keep breathing to.
+        </li>
+      </ul>
 
-      <div class="hr"></div>
-      <b>Notes</b>
-      <textarea id="notes" placeholder="What changed after grounding? (2–3 lines)"></textarea>
-      <div class="row" style="justify-content:space-between">
-        <button class="btn small" id="save">Save Earth Card</button>
-        <span class="sub" id="savedCount">cards: 0</span>
+      <div class="cta-actions">
+        <button class="btn" type="button" onclick="toggleNotes()">Open Director Notes</button>
+        <button class="btn" type="button" onclick="copyNotes()">Copy Notes</button>
       </div>
+      <p class="hint">Use the notes box to sketch your plan. Nothing is sent. It stays here until you decide otherwise.</p>
 
-      <div class="hr"></div>
-      <b>Scene presets</b>
-      <div class="chips" id="themePairs" title="Click to load a scene">
-        <div class="chip" data-scene="honey-warmth">honey + warmth</div>
-        <div class="chip" data-scene="ocean-horizon">ocean + horizon</div>
-        <div class="chip" data-scene="forest-breath">forest + breath</div>
-        <div class="chip" data-scene="alter-curiosity">alter fire + curiosity</div>
-        <div class="chip" data-theme="prism" data-scene="prism-curiosity">prism + curiosity</div>
+      <textarea id="director-notes" hidden rows="12" style="margin-top:12px; width:100%; background:var(--soft); color:var(--ink); border:1px solid var(--ring); border-radius:12px; padding:12px; font-size:14px;"
+        placeholder="Director Notes...&#10;&#10;Peach Scene One:&#10;Violet Pearl Law of Return:&#10;Peach Civic Light:&#10;Violet Pearl Climate of Trust:&#10;Peach Economy of Care:&#10;Violet Pearl Final Frame:"></textarea>
+    </section>
+
+    <!-- Accent Picker -->
+    <section class="entry" id="accents">
+      <div class="entry-header">
+        <h3>Accent options</h3>
+        <p class="entry-meta">Toggle the green accent only. Peach and Violet Pearl remain page tones.</p>
       </div>
-      <div class="sub">Tip: open directly with <code>?scene=honey-warmth</code>.</div>
-    </aside>
+      <div class="accent-picker">
+        <button class="swatch mint"   aria-label="Mint accent"   onclick="setAccent('mint')"   title="Mint"></button>
+        <button class="swatch jade"   aria-label="Jade accent"   onclick="setAccent('jade')"   title="Jade"></button>
+        <button class="swatch neon"   aria-label="Neon accent"   onclick="setAccent('neon')"   title="Neon"></button>
+        <button class="swatch forest" aria-label="Forest accent" onclick="setAccent('forest')" title="Forest"></button>
+        <button class="swatch sea"    aria-label="Seafoam accent"onclick="setAccent('seafoam')"title="Seafoam"></button>
+        <button class="swatch olive"  aria-label="Olive accent"  onclick="setAccent('olive')"  title="Olive"></button>
+      </div>
+      <p class="hint">Accent choice is stored locally so your pick will persist.</p>
+    </section>
+
+    <!-- Next Step -->
+    <section class="next" id="next-step">
+      <h3>Next step</h3>
+      <p>When you are ready to turn the blueprint into rooms, walk here.</p>
+      <a class="btn-link" href="https://school.plnt.earth" rel="noopener">Enter PLNT Earth School</a>
+    </section>
+
+    <footer class="site">
+      <p>Quiet site. No trackers. If you found this, you were invited by the work itself.</p>
+    </footer>
   </div>
 
-  <footer style="margin-top:16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
-    <div class="sub">© PLNT Earth · earth.plnt.earth — “Present first, memory later.”</div>
-    <div class="row">
-      <a class="btn small" href="https://warmth.plnt.earth" target="_blank" rel="noopener">Warmth</a>
-      <a class="btn small" href="https://echo.plnt.earth" target="_blank" rel="noopener">Echo</a>
-      <a class="btn small" href="https://books.plnt.earth" target="_blank" rel="noopener">Books</a>
-    </div>
-  </footer>
-
-</div>
-
-<script>
-(function(){
-  const $ = id => document.getElementById(id);
-  const qsa = (s,r=document)=>Array.from(r.querySelectorAll(s));
-
-  /* ===== WebAudio — tones & noise ===== */
-  const AC = window.AudioContext||window.webkitAudioContext;
-  let ctx, master, limiter;
-  let o64,o96,o128,g64,g96,g128;
-  let nCtx, nGain, nType='brown', noiseNode=null;
-
-  function initAudio(){
-    if(ctx) return;
-    ctx = new AC({ latencyHint:'interactive' });
-    master = ctx.createGain(); master.gain.value=1.0;
-
-    limiter = ctx.createDynamicsCompressor();
-    limiter.threshold.value=-14; limiter.knee.value=24; limiter.ratio.value=6;
-    limiter.attack.value=0.004; limiter.release.value=0.25;
-
-    master.connect(limiter); limiter.connect(ctx.destination);
-
-    o64 = ctx.createOscillator(); o64.type='sine'; o64.frequency.value=64;
-    o96 = ctx.createOscillator(); o96.type='sine'; o96.frequency.value=96;
-    o128= ctx.createOscillator(); o128.type='sine'; o128.frequency.value=128;
-
-    g64 = ctx.createGain(); g64.gain.value=parseFloat($('g64').value);
-    g96 = ctx.createGain(); g96.gain.value=parseFloat($('g96').value);
-    g128= ctx.createGain(); g128.gain.value=parseFloat($('g128').value);
-
-    o64.connect(g64).connect(master);
-    o96.connect(g96).connect(master);
-    o128.connect(g128).connect(master);
-
-    o64.start(); o96.start(); o128.start();
-
-    $('status').classList.add('ok'); $('statusText').textContent='Audio — live';
-  }
-
-  function toggleOsc(btn, gain){
-    if(!ctx) return;
-    const on = btn.getAttribute('aria-pressed')==='true';
-    btn.setAttribute('aria-pressed', on?'false':'true');
-    gain.gain.value = on?0:parseFloat(document.getElementById('g'+btn.textContent.replace(/\D/g,'')).value);
-  }
-
-  function initNoise(){
-    if(nCtx) return;
-    nCtx = new AC({ latencyHint:'interactive' });
-    nGain = nCtx.createGain(); nGain.gain.value=parseFloat($('noiseLevel').value);
-    noiseNode = noiseGen(nCtx,nType);
-    noiseNode.connect(nGain).connect(nCtx.destination);
-  }
-  function noiseGen(ac, type='brown'){
-    const bufferSize = 2 * ac.sampleRate;
-    const node = ac.createScriptProcessor(bufferSize, 1, 1);
-    let lastOut = 0.0;
-    node.onaudioprocess = function(e){
-      const output = e.outputBuffer.getChannelData(0);
-      for (let i=0;i<bufferSize;i++){
-        const white = Math.random()*2-1;
-        let sample = (lastOut + (0.02 * white)) / 1.02;
-        lastOut = sample;
-        sample *= (type==='pink') ? 3.5 : 8.0;
-        output[i] = sample * 0.05; // safe low
-      }
-    };
-    return node;
-  }
-
-  $('startAudio').addEventListener('click', function(){ initAudio(); this.disabled=true; });
-
-  $('t64').addEventListener('click', ()=>{ if(!ctx) initAudio(); toggleOsc($('t64'),  g64); });
-  $('t96').addEventListener('click', ()=>{ if(!ctx) initAudio(); toggleOsc($('t96'),  g96); });
-  $('t128').addEventListener('click',()=>{ if(!ctx) initAudio(); toggleOsc($('t128'), g128); });
-
-  $('g64').addEventListener('input', function(){ if(g64) g64.gain.value = Math.min(0.25,Math.max(0,parseFloat(this.value))); });
-  $('g96').addEventListener('input', function(){ if(g96) g96.gain.value = Math.min(0.25,Math.max(0,parseFloat(this.value))); });
-  $('g128').addEventListener('input',function(){ if(g128)g128.gain.value = Math.min(0.5 ,Math.max(0,parseFloat(this.value))); });
-
-  $('brown').addEventListener('click', function(){
-    initNoise(); nType='brown';
-    this.setAttribute('aria-pressed','true'); $('pink').setAttribute('aria-pressed','false');
-    if(noiseNode) noiseNode.disconnect(); noiseNode = noiseGen(nCtx,nType); noiseNode.connect(nGain).connect(nCtx.destination);
-  });
-  $('pink').addEventListener('click', function(){
-    initNoise(); nType='pink';
-    this.setAttribute('aria-pressed','true'); $('brown').setAttribute('aria-pressed','false');
-    if(noiseNode) noiseNode.disconnect(); noiseNode = noiseGen(nCtx,nType); noiseNode.connect(nGain).connect(nCtx.destination);
-  });
-  $('noiseLevel').addEventListener('input', function(){ if(nGain) nGain.gain.value = Math.min(0.25,Math.max(0,parseFloat(this.value))); });
-
-  $('allToggle').addEventListener('click', function(){
-    if(!ctx) return;
-    const on=this.getAttribute('aria-pressed')==='true';
-    this.setAttribute('aria-pressed', on?'false':'true');
-    g64.gain.value = on?0:parseFloat($('g64').value);
-    g96.gain.value = on?0:parseFloat($('g96').value);
-    g128.gain.value= on?0:parseFloat($('g128').value);
-  });
-
-  /* ===== Breath / Step Trainer ===== */
-  let tCtx, tOsc, tGain, tTimer=null;
-  function initTick(){
-    if(tCtx) return;
-    tCtx = new (window.AudioContext||window.webkitAudioContext)({latencyHint:'interactive'});
-    tOsc = tCtx.createOscillator(); tOsc.type='square';
-    tGain= tCtx.createGain(); tGain.gain.value=0;
-    tOsc.connect(tGain).connect(tCtx.destination); tOsc.start();
-  }
-  function ping(){
-    if(!tCtx) return;
-    tGain.gain.cancelScheduledValues(tCtx.currentTime);
-    tGain.gain.setValueAtTime(0.15, tCtx.currentTime);
-    tGain.gain.exponentialRampToValueAtTime(0.0001, tCtx.currentTime+0.03);
-  }
-  function startTick(){
-    initTick();
-    const bpm=parseInt($('bpm').value,10)||96; const iv=60000/bpm;
-    clearInterval(tTimer); tTimer=setInterval(ping, iv);
-  }
-  function stopTick(){ clearInterval(tTimer); }
-
-  $('bpm').addEventListener('input', function(){ $('bpmVal').textContent=this.value; if(tTimer) startTick(); });
-  $('tick').addEventListener('click', function(){
-    const on=this.getAttribute('aria-pressed')==='true';
-    if(on){ this.setAttribute('aria-pressed','false'); this.textContent='Tick: Off'; stopTick(); }
-    else { this.setAttribute('aria-pressed','true'); this.textContent='Tick: On'; startTick(); }
-  });
-
-  $('runCycle').addEventListener('click', ()=>{
-    const unit = parseInt($('boxIn').value,10)||4;
-    const phases = ['inhale','hold','exhale','hold'];
-    let phase=0, count=0, total=120;
-    const id = setInterval(()=>{
-      if(total<=0){ clearInterval(id); $('statusText').textContent='Cycle complete'; return; }
-      if(count===0){ $('statusText').textContent = phases[phase]; }
-      count++;
-      if(count>=unit){ count=0; phase=(phase+1)%4; }
-      total--;
-    }, 1000);
-  });
-
-  /* ===== Field Timer ===== */
-  let fieldTimer=null, remain=0;
-  function setField(sec){
-    const m=String(Math.floor(sec/60)).padStart(2,'0');
-    const s=String(sec%60).padStart(2,'0');
-    $('fieldT').textContent=`${m}:${s}`;
-  }
-  $('fieldStart').addEventListener('click', ()=>{
-    remain = parseInt($('fieldLen').value,10)||300;
-    clearInterval(fieldTimer); setField(remain);
-    fieldTimer=setInterval(()=>{
-      remain--; setField(Math.max(remain,0));
-      if(remain<=0){ clearInterval(fieldTimer); }
-    },1000);
-  });
-  $('prompts').addEventListener('click',(e)=>{
-    const c=e.target.closest('.chip'); if(!c) return;
-    $('statusText').textContent=c.dataset.p;
-    setTimeout(()=>{$('statusText').textContent='Grounding…';},2000);
-  });
-
-  /* ===== Rituals + Notes ===== */
-  const STORE='earth_cards_v1';
-  $('rituals').addEventListener('click',(e)=>{
-    const c=e.target.closest('.chip'); if(!c) return;
-    c.classList.toggle('on');
-    const chosen = qsa('.chip.on', $('rituals')).map(x=>x.textContent);
-    $('ritNote').textContent = chosen.length? 'Rituals: '+chosen.join(' • ') : 'Pick 1–2 to anchor the session.';
-  });
-  $('save').addEventListener('click', ()=>{
-    const card = {
-      t:Date.now(),
-      rituals:qsa('.chip.on', $('rituals')).map(x=>x.textContent),
-      notes:$('notes').value.trim()
-    };
-    try{
-      const arr=JSON.parse(localStorage.getItem(STORE)||'[]'); arr.unshift(card);
-      localStorage.setItem(STORE, JSON.stringify(arr));
-      $('savedCount').textContent='cards: '+arr.length;
-    }catch(e){}
-  });
-  (function initCards(){ try{ const arr=JSON.parse(localStorage.getItem(STORE)||'[]'); $('savedCount').textContent='cards: '+arr.length; }catch(e){} })();
-
-  /* ===== Scene presets + deep links ===== */
-  function setRange(id, v){ const el=$(id); if(!el) return; el.value=String(v); el.dispatchEvent(new Event('input')); }
-  function press(btn, on){ if(!btn) return; const is = btn.getAttribute('aria-pressed')==='true'; if(is!==on) btn.click(); }
-  function applyThemeName(name){ if(typeof applyTheme==='function') applyTheme(name); }
-
-  const SCENES = {
-    'honey-warmth':   { theme:'honey', tones:{64:0.00, 96:0.00, 128:0.18}, noise:null,   bpm:96,  box:'4', tick:false, note:'stand heavy; breathe 4-4-4-4' },
-    'ocean-horizon':  { theme:'ocean', tones:{64:0.00, 96:0.06, 128:0.00}, noise:'pink', bpm:84,  box:'5', tick:true,  note:'gaze far; soft steps @84' },
-    'forest-breath':  { theme:'forest',tones:{64:0.06, 96:0.10, 128:0.00}, noise:null,   bpm:72,  box:'5', tick:false, note:'widen ribs; slow nasal' },
-    'alter-curiosity':{ theme:'alter', tones:{64:0.00, 96:0.04, 128:0.12}, noise:'brown',bpm:118, box:'4', tick:true,  note:'walk @118; notice new color' },
-    'prism-curiosity':{ theme:'prism', tones:{64:0.04, 96:0.04, 128:0.10}, noise:null,   bpm:100, box:'4', tick:false, note:'scan body; follow interest' }
-  };
-
-  function applyNoise(kind){
-    if(!kind){ // turn both off
-      const b = document.getElementById('brown'), p=document.getElementById('pink');
-      if(b?.getAttribute('aria-pressed')==='true') b.click();
-      if(p?.getAttribute('aria-pressed')==='true') p.click();
-      return;
+  <script>
+    function toggleNotes() {
+      var el = document.getElementById('director-notes');
+      el.hidden = !el.hidden;
+      if (!el.hidden) { el.focus(); }
     }
-    document.getElementById(kind)?.click();
-  }
-
-  function applyScene(key){
-    const s = SCENES[key]; if(!s) return;
-    // theme
-    applyThemeName(s.theme);
-    // audio on
-    document.getElementById('startAudio')?.click();
-    // ensure Bed ON
-    press(document.getElementById('allToggle'), true);
-    // tone levels
-    setRange('g64',  s.tones[64]  ?? 0);
-    setRange('g96',  s.tones[96]  ?? 0);
-    setRange('g128', s.tones[128] ?? 0);
-    press(document.getElementById('t64'),  (s.tones[64]  ??0)>0);
-    press(document.getElementById('t96'),  (s.tones[96]  ??0)>0);
-    press(document.getElementById('t128'), (s.tones[128] ??0)>0);
-    // noise
-    applyNoise(s.noise);
-    // trainer
-    setRange('bpm', s.bpm); document.getElementById('bpmVal').textContent = String(s.bpm);
-    const boxSel = document.getElementById('boxIn'); if(boxSel){ boxSel.value = s.box; }
-    press(document.getElementById('tick'), !!s.tick);
-    // status hint
-    const st = document.getElementById('statusText'); if(st) { st.textContent = s.note || 'scene loaded'; setTimeout(()=>st.textContent='Grounding…', 2000); }
-  }
-
-  // chip wiring
-  const pairs = document.getElementById('themePairs');
-  if(pairs){
-    pairs.addEventListener('click', (e)=>{
-      const c = e.target.closest('.chip'); if(!c) return;
-      const key = c.dataset.scene || (c.textContent||'').toLowerCase().replace(/\s*\+\s*/g,'-').replace(/\s+/g,'');
-      applyScene(key);
-    });
-  }
-  // deep link
-  (function(){
-    const scene = new URLSearchParams(location.search).get('scene');
-    if(scene && SCENES[scene]) applyScene(scene);
-  })();
-
-  // expose (optional)
-  window.__earthApplyScene = applyScene;
-
-  /* ===== Theme Engine ===== */
-  const themes={
-    alter:{bg:'#0b0d11',ink:'#f6f0ff',muted:'#c9c0e6',card:'#11122a',ring:'#2b2250',mint:'#b2f5ea',vio:'#b7a9ff',gold:'#ffd479',rose:'#ff6bd6',good:'#9cf3d2',a1:'#ff6bd6',a2:'#7a00ff',a3:'#4af2d8',a4:'#ffd479',glow:'rgba(255,107,214,.45)'},
-    honey:{bg:'#0b0d11',ink:'#fff7ea',muted:'#d8ccb0',card:'#191510',ring:'#3a2f1e',mint:'#ffe6a3',vio:'#ffb3d1',gold:'#ffd479',rose:'#ff9bb7',good:'#f8f1c9',a1:'#ffd479',a2:'#ff8fb3',a3:'#fff4c2',a4:'#ffc07a',glow:'rgba(255,212,121,.45)'},
-    ocean:{bg:'#07121d',ink:'#e9f7ff',muted:'#a7c6d8',card:'#0c1a2b',ring:'#19324b',mint:'#78e6ff',vio:'#b7d6ff',gold:'#ffe59e',rose:'#84e1d2',good:'#9cf3d2',a1:'#78e6ff',a2:'#1f6fff',a3:'#4af2d8',a4:'#ffd479',glow:'rgba(120,230,255,.38)'},
-    forest:{bg:'#08120d',ink:'#ebffef',muted:'#b7d8c3',card:'#0e1f16',ring:'#214433',mint:'#c2f5cf',vio:'#b7ffcf',gold:'#f2ffb0',rose:'#b7ffc8',good:'#bff7d9',a1:'#22c55e',a2:'#6ee7b7',a3:'#c2f5cf',a4:'#f2ffb0',glow:'rgba(110,231,183,.38)'},
-    prism:{bg:'#0b0d11',ink:'#e9ecf4',muted:'#aab2c2',card:'#101626',ring:'#1b2134',mint:'#b2f5ea',vio:'#b7a9ff',gold:'#ffd479',rose:'#ff8fb3',good:'#9cf3d2',a1:'#b7a9ff',a2:'#4af2d8',a3:'#ffd479',a4:'#ff8fb3',glow:'rgba(183,169,255,.45)'}
-  };
-  function applyTheme(t){
-    const v=themes[t]||themes.prism, r=document.documentElement.style;
-    r.setProperty('--bg',v.bg); r.setProperty('--ink',v.ink); r.setProperty('--muted',v.muted);
-    r.setProperty('--card',v.card); r.setProperty('--ring',v.ring);
-    r.setProperty('--mint',v.mint); r.setProperty('--vio',v.vio); r.setProperty('--gold',v.gold); r.setProperty('--rose',v.rose); r.setProperty('--good',v.good);
-    r.setProperty('--accent1',v.a1); r.setProperty('--accent2',v.a2); r.setProperty('--accent3',v.a3); r.setProperty('--accent4',v.a4); r.setProperty('--glow',v.glow);
-  }
-  qsa('.swatch').forEach(s=>s.addEventListener('click',()=>{ applyTheme(s.dataset.theme); try{ localStorage.setItem('earth_theme', s.dataset.theme);}catch(e){} }));
-  (function initTheme(){ let t=''; try{ t=localStorage.getItem('earth_theme')||'';}catch(e){} applyTheme(t||'prism'); })();
-  const autoBtn=$('autoPrism'); let autoTimer=null, order=['honey','forest','ocean','alter','prism'], pos=4;
-  autoBtn.addEventListener('click',()=>{
-    const on=autoBtn.getAttribute('aria-pressed')==='true';
-    if(on){ autoBtn.setAttribute('aria-pressed','false'); autoBtn.textContent='Auto Prism: Off'; clearInterval(autoTimer);}
-    else { autoBtn.setAttribute('aria-pressed','true'); autoBtn.textContent='Auto Prism: On'; autoTimer=setInterval(()=>{ pos=(pos+1)%order.length; applyTheme(order[pos]); },12000);}
-  });
-
-  /* ===== Selfish Mode ===== */
-  (function(){
-    const key='earth_selfish_v1', t=$('selfishToggle'), hc=$('headerCopy');
-    function go(on){
-      try{ localStorage.setItem(key,on?'1':'0'); }catch(e){}
-      t.setAttribute('aria-pressed', on?'true':'false');
-      if(on){ applyTheme('alter'); hc.textContent='Ground for her—and for me. Present first, memory later.'; }
-      else  { hc.textContent='Ground gently. Breathe, step, and listen — present first, memory later.'; }
+    function copyNotes() {
+      var el = document.getElementById('director-notes');
+      if (el.hidden) { el.hidden = false; }
+      el.focus();
+      el.select();
+      try { document.execCommand('copy'); } catch (e) {}
     }
-    t.addEventListener('click',()=>go(!(t.getAttribute('aria-pressed')==='true')));
-    (function(){ let s=''; try{s=localStorage.getItem(key)||'';}catch(e){} go(s==='1'); })();
-  })();
 
-  /* ===== init saved cards count ===== */
-  (function initCards(){ try{ const arr=JSON.parse(localStorage.getItem('earth_cards_v1')||'[]'); $('savedCount').textContent='cards: '+arr.length; }catch(e){} })();
-})();
-</script>
+    (function initAccent() {
+      try {
+        var saved = localStorage.getItem('earth_accent');
+        if (saved) document.body.setAttribute('data-accent', saved);
+      } catch (e) {}
+    })();
+    function setAccent(name) {
+      document.body.setAttribute('data-accent', name);
+      try { localStorage.setItem('earth_accent', name); } catch (e) {}
+    }
+  </script>
 </body>
 </html>
