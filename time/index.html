@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Imaginary Time Log — earth.plnt.earth</title>
+<style>
+  :root{
+    --ink:#0b0b12;--glass:#12131d;--line:#24263a;--soft:#e9ecff;--muted:#b7bdd8;
+    --gold:#ffd27a;--violet:#b3a4ff;--rose:#f4a9c6;--aqua:#7fd8ff;--green:#9af59b;
+  }
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,#0b0b12 0%,#0d0f18 60%,#0b0b12 100%);color:#fff;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
+  .wrap{min-height:100%;display:grid;grid-template-rows:auto 1fr auto}
+  header{padding:18px 20px 8px;display:flex;align-items:center;justify-content:space-between}
+  .title{font-weight:800;letter-spacing:.2px;font-size:clamp(18px,3.5vw,22px)}
+  .hint{font-size:12px;opacity:.7}
+  main{padding:10px 16px 24px;display:grid;gap:14px}
+  .card{background:linear-gradient(180deg,#12131d 0%, #0f1020 100%);border:1px solid var(--line);
+    border-radius:14px;padding:14px 14px 12px;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  label{font-size:12px;opacity:.85}
+  input[type="time"],input[type="text"],textarea,select{
+    background:#0a0b14;border:1px solid #1f2133;color:#fff;border-radius:10px;padding:10px 12px;font-size:14px;outline:none;width:100%;
+  }
+  textarea{min-height:70px;resize:vertical}
+  .grid{display:grid;gap:10px}
+  @media(min-width:700px){.grid.cols{grid-template-columns:1fr 1fr 1fr}}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{background:#0a0b14;border:1px solid #1f2133;color:#fff;padding:8px 12px;border-radius:999px;font-size:13px;cursor:pointer;user-select:none}
+  .chip.active{border-color:#fff}
+  .glyphs{display:flex;gap:8px}
+  .glyph{padding:8px 12px;border-radius:999px;background:#0a0b14;border:1px solid #1f2133;cursor:pointer}
+  .glyph.active{border-color:#fff}
+  .btn{border:0;border-radius:12px;padding:12px 16px;font-weight:800;cursor:pointer;
+    color:#0b0b12;background:#fff}
+  .btn.ghost{background:transparent;color:#fff;border:1px solid #2a2d44}
+  .bar{display:flex;gap:10px;flex-wrap:wrap}
+  .list{display:grid;gap:10px}
+  .item{background:#0a0b14;border:1px solid #1f2133;border-radius:12px;padding:10px 12px}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .when{font-weight:700}
+  .felt{font-size:12px;opacity:.9}
+  .tones{font-size:12px;opacity:.9}
+  .tags{font-size:12px;opacity:.75}
+  .note{font-size:13px;margin-top:6px;opacity:.95}
+  footer{padding:14px 16px 26px;display:flex;justify-content:center}
+  .small{font-size:11px;opacity:.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="title">Imaginary Time Log</div>
+    <div class="hint">Clock → Felt → Tone • auto-saved</div>
+  </header>
+
+  <main>
+    <section class="card" id="formCard">
+      <div class="grid cols">
+        <div>
+          <label>Start</label>
+          <input id="startTime" type="time" />
+        </div>
+        <div>
+          <label>End</label>
+          <input id="endTime" type="time" />
+        </div>
+        <div>
+          <label>Felt time</label>
+          <select id="felt">
+            <option value="long">long</option>
+            <option value="short">short</option>
+            <option value="stretched">stretched ↔︎</option>
+            <option value="frozen">frozen •</option>
+            <option value="timeless">timeless ∞</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="height:8px"></div>
+
+      <div>
+        <label>Tone (pick 1–3)</label>
+        <div class="chips" id="tones">
+          <div class="chip" data-v="calm">calm</div>
+          <div class="chip" data-v="fast">fast</div>
+          <div class="chip" data-v="heavy">heavy</div>
+          <div class="chip" data-v="bright">bright</div>
+          <div class="chip" data-v="clear">clear</div>
+          <div class="chip" data-v="warm">warm</div>
+          <div class="chip" data-v="electric">electric</div>
+          <div class="chip" data-v="hushed">hushed</div>
+        </div>
+      </div>
+
+      <div style="height:8px"></div>
+
+      <div class="row">
+        <div style="flex:1">
+          <label>Sensory tag (optional)</label>
+          <input id="sensory" type="text" placeholder="sound / colour / light" />
+        </div>
+        <div>
+          <label>Glyph</label>
+          <div class="glyphs" id="glyphs">
+            <div class="glyph" data-g="∞" title="timeless">∞</div>
+            <div class="glyph" data-g="↔︎" title="stretched">↔︎</div>
+            <div class="glyph" data-g="•" title="still">•</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:8px"></div>
+
+      <div>
+        <label>Note (optional)</label>
+        <textarea id="note" placeholder="one or two lines"></textarea>
+      </div>
+
+      <div style="height:12px"></div>
+
+      <div class="bar">
+        <button class="btn" id="add">Add entry</button>
+        <button class="btn ghost" id="now">Now → End</button>
+        <button class="btn ghost" id="clear">Clear all</button>
+        <button class="btn ghost" id="export">Export</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="bar" style="justify-content:space-between">
+        <div style="font-weight:700">Entries</div>
+        <div class="small" id="count">0</div>
+      </div>
+      <div class="list" id="list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="small">earth.plnt.earth · imaginary time = felt time you notice, not math</div>
+  </footer>
+</div>
+
+<script>
+  var key = "earth.imaginaryTime.v1";
+  var data = [];
+
+  function load(){
+    try{ data = JSON.parse(localStorage.getItem(key)) || []; }catch(e){ data=[]; }
+    render();
+  }
+  function save(){ localStorage.setItem(key, JSON.stringify(data)); }
+
+  function pad(n){ return n<10?("0"+n):n; }
+  function nowTime(){ var d=new Date(); return pad(d.getHours())+":"+pad(d.getMinutes()); }
+
+  function setDefaults(){
+    var st=document.getElementById("startTime");
+    var et=document.getElementById("endTime");
+    if(!st.value){ st.value = nowTime(); }
+    if(!et.value){ et.value = nowTime(); }
+  }
+
+  function selectedTones(){
+    var out=[]; document.querySelectorAll("#tones .chip.active").forEach(c=>out.push(c.dataset.v));
+    return out.slice(0,3);
+  }
+  function selectedGlyph(){
+    var g = document.querySelector("#glyphs .glyph.active");
+    return g ? g.dataset.g : "";
+  }
+
+  function clearForm(){
+    document.getElementById("startTime").value="";
+    document.getElementById("endTime").value="";
+    document.getElementById("felt").value="long";
+    document.getElementById("sensory").value="";
+    document.getElementById("note").value="";
+    document.querySelectorAll("#tones .chip").forEach(c=>c.classList.remove("active"));
+    document.querySelectorAll("#glyphs .glyph").forEach(c=>c.classList.remove("active"));
+    setDefaults();
+  }
+
+  function addEntry(){
+    var st=document.getElementById("startTime").value.trim();
+    var et=document.getElementById("endTime").value.trim();
+    var felt=document.getElementById("felt").value;
+    if(!st||!et){ setDefaults(); return; }
+    var entry={
+      id: Date.now(),
+      date: new Date().toISOString(),
+      start: st, end: et,
+      felt: felt,
+      tones: selectedTones(),
+      glyph: selectedGlyph(),
+      sensory: document.getElementById("sensory").value.trim(),
+      note: document.getElementById("note").value.trim()
+    };
+    data.unshift(entry);
+    save(); render(); clearForm();
+  }
+
+  function del(id){
+    data = data.filter(x=>x.id!==id);
+    save(); render();
+  }
+
+  function render(){
+    document.getElementById("count").textContent = data.length;
+    var list=document.getElementById("list"); list.innerHTML="";
+    if(!data.length){ list.innerHTML = '<div class="small" style="opacity:.7">No entries yet.</div>'; return; }
+    data.forEach(it=>{
+      var tones = it.tones && it.tones.length ? (' · ' + it.tones.join(', ')) : '';
+      var tag = it.sensory ? (' · ' + it.sensory) : '';
+      var g = it.glyph ? (' ' + it.glyph) : '';
+      var note = it.note ? ('<div class="note">'+escapeHtml(it.note)+'</div>') : '';
+      var el = document.createElement("div");
+      el.className="item";
+      el.innerHTML =
+        '<div class="top">'+
+          '<div class="when">'+escapeHtml(it.start)+'–'+escapeHtml(it.end)+g+'</div>'+
+          '<button class="btn ghost" style="padding:8px 10px;font-weight:700" data-id="'+it.id+'">Delete</button>'+
+        '</div>'+
+        '<div class="felt">'+escapeHtml(it.felt)+'</div>'+
+        '<div class="tones">'+tones+'<span class="tags">'+tag+'</span></div>'+
+        note;
+      el.querySelector("button").addEventListener("click", function(){
+        del(parseInt(this.dataset.id,10));
+      }, {passive:true});
+      list.appendChild(el);
+    });
+  }
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  document.getElementById("add").addEventListener("click", addEntry, {passive:true});
+  document.getElementById("now").addEventListener("click", function(){
+    document.getElementById("endTime").value = nowTime();
+  }, {passive:true});
+  document.getElementById("clear").addEventListener("click", function(){
+    if(confirm("Delete all entries?")){ data=[]; save(); render(); }
+  }, {passive:true});
+  document.getElementById("export").addEventListener("click", function(){
+    var blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = "imaginary-time-log.json"; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 500);
+  }, {passive:true});
+
+  document.querySelectorAll("#tones .chip").forEach(c=>{
+    c.addEventListener("click", function(){
+      if(this.classList.contains("active")){ this.classList.remove("active"); return; }
+      var chosen = selectedTones();
+      if(chosen.length>=3) return;
+      this.classList.add("active");
+    }, {passive:true});
+  });
+  document.querySelectorAll("#glyphs .glyph").forEach(c=>{
+    c.addEventListener("click", function(){
+      document.querySelectorAll("#glyphs .glyph").forEach(x=>x.classList.remove("active"));
+      this.classList.add("active");
+    }, {passive:true});
+  });
+
+  load(); setDefaults();
+</script>
+</body>
+</html>
