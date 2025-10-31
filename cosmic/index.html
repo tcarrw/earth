@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Illumina Cosmic Sequence</title>
+<style>
+  :root{
+    --north:#6fb6ff;   /* silver-blue */
+    --east:#f1a5c6;    /* rose-chrome */
+    --south:#ffcf6a;   /* amber-gold */
+    --west:#b09bff;    /* violet-pearl */
+    --ink:#0b0b12;
+  }
+  html,body{height:100%;margin:0;background:var(--ink);color:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
+  .wrap{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden}
+  .bg{
+    position:absolute;inset:-20vmax;filter:blur(60px) saturate(120%);
+    background:radial-gradient(60% 60% at 50% 40%, var(--north), transparent 60%),
+               radial-gradient(60% 60% at 85% 50%, var(--east), transparent 60%),
+               radial-gradient(60% 60% at 50% 80%, var(--south), transparent 60%),
+               radial-gradient(60% 60% at 15% 50%, var(--west),  transparent 60%);
+    opacity:.35;transform:scale(1.05);pointer-events:none;
+  }
+  .tint{position:absolute;inset:0;mix-blend-mode:screen;opacity:.55;transition:opacity .5s ease;background:black}
+  .tint.north{background:radial-gradient(100% 100% at 50% 50%, var(--north), transparent 70%)}
+  .tint.east {background:radial-gradient(100% 100% at 50% 50%, var(--east),  transparent 70%)}
+  .tint.south{background:radial-gradient(100% 100% at 50% 50%, var(--south), transparent 70%)}
+  .tint.west {background:radial-gradient(100% 100% at 50% 50%, var(--west),  transparent 70%)}
+
+  .panel{position:relative;z-index:5;display:grid;gap:14px;justify-items:center;width:min(780px,92vw)}
+  .title{font-weight:700;font-size:clamp(18px,2.4vw,22px);letter-spacing:.35px;text-align:center;opacity:.95}
+
+  .btn{-webkit-tap-highlight-color:transparent;border:0;border-radius:999px;padding:14px 20px;
+    font-size:16px;font-weight:700;color:#0b0b12;background:#fff;cursor:pointer;transition:transform .12s ease,opacity .2s ease}
+  .btn:active{transform:scale(.98)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .chip{background:rgba(255,255,255,.12);padding:8px 12px;border-radius:999px;font-size:12px}
+  .stage{width:min(960px,96vw);aspect-ratio:16/9;max-height:64vh;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.45);background:#000}
+  iframe{width:100%;height:100%;display:block}
+  .dots{display:flex;gap:10px}
+  .dot{width:10px;height:10px;border-radius:50%;opacity:.35;background:#fff;transition:opacity .3s ease, transform .3s ease}
+  .dot.active{opacity:1;transform:scale(1.2)}
+  .tonebox{display:flex;gap:10px;align-items:center}
+  .slider{appearance:none;width:160px;height:6px;border-radius:999px;background:rgba(255,255,255,.2);outline:none}
+  .slider::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:50%;background:#fff}
+  .now{font-size:14px;opacity:.9}
+  @media (orientation:portrait){.stage{max-height:50vh}}
+
+  .note{background:rgba(255,255,255,.06);border-radius:12px;padding:12px 16px;font-size:13px;line-height:1.45;
+    color:#fff;max-width:640px;cursor:pointer;transition:background .3s ease;display:none}
+  .note.show{display:block}
+  .note:hover{background:rgba(255,255,255,.09)}
+  .note-head{font-weight:600;margin-bottom:6px;font-size:14px}
+  .note-body{display:none}
+  .note.open .note-body{display:block}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bg"></div>
+  <div class="tint north" id="tNorth" style="opacity:0"></div>
+  <div class="tint east"  id="tEast"  style="opacity:0"></div>
+  <div class="tint south" id="tSouth" style="opacity:0"></div>
+  <div class="tint west"  id="tWest"  style="opacity:0"></div>
+
+  <div class="panel">
+    <div class="title">Cosmic Sequence with Tones</div>
+
+    <div class="note" id="moniqueNote">
+      <div class="note-head">💬 Audio Note for Monique</div>
+      <div class="note-body">
+        <p>This sequence layers a low WebAudio tone with each song to mark Illumina quadrants: <strong>256 Hz</strong> (clarity), <strong>320 Hz</strong> (structure), <strong>128 Hz</strong> (emotion), <strong>160 Hz</strong> (creation). The tone is a reference signal — not music — so the listener always knows which field they’re in. Please help check balance: the tone should feel like it “belongs” under each track (never fighting the mix), and volume should be barely-there but perceivable.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <button class="btn" id="start">Begin</button>
+      <div class="tonebox">
+        <button class="btn" id="toneToggle">Tone On</button>
+        <input id="vol" class="slider" type="range" min="0" max="1" step="0.01" value="0.12" />
+        <span id="hz" class="chip">256 Hz</span>
+      </div>
+    </div>
+
+    <div class="now" id="now">Waiting</div>
+    <div class="stage"><div id="player"></div></div>
+    <div class="dots">
+      <div class="dot" id="d0" title="Sigrid"></div>
+      <div class="dot" id="d1" title="Dua Lipa"></div>
+      <div class="dot" id="d2" title="Sabrina"></div>
+      <div class="dot" id="d3" title="MARINA"></div>
+    </div>
+    <div class="row">
+      <span class="chip">Sigrid 256</span>
+      <span class="chip">Dua 320</span>
+      <span class="chip">Sabrina 128</span>
+      <span class="chip">Marina 160</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  var seq = [
+    {id:"4j7LGMc9ZGU", label:"Sigrid – It Gets Dark", tint:"north", hz:256},
+    {id:"TUVcZfQe-Kw", label:"Dua Lipa – Levitating", tint:"east", hz:320},
+    {id:"kLbn61Z4LDI", label:"Sabrina Carpenter – Feather", tint:"south", hz:128},
+    {id:"_V17JN76uxc", label:"MARINA – Ancient Dreams in a Modern Land", tint:"west", hz:160}
+  ];
+  var idx = 0, player, started = false;
+
+  var AC, osc, gain, filter;
+  var toneOn = true;
+  var vol = document.getElementById("vol");
+  var hzEl = document.getElementById("hz");
+
+  function initAudio(){
+    if (!AC){
+      AC = new (window.AudioContext || window.webkitAudioContext)();
+      osc = AC.createOscillator();
+      gain = AC.createGain();
+      filter = AC.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.value = 2000;
+      osc.type = "sine";
+      gain.gain.value = parseFloat(vol.value);
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(AC.destination);
+      osc.start();
+    }
+  }
+
+  function setTint(key){
+    var map={north:"tNorth",east:"tEast",south:"tSouth",west:"tWest"};
+    for (var k in map){document.getElementById(map[k]).style.opacity = (k===key?1:0);}
+  }
+  function setDots(i){
+    for (var d=0; d<4; d++){document.getElementById("d"+d).className = "dot" + (d===i?" active":"");}
+  }
+  function setNow(txt){document.getElementById("now").textContent = txt;}
+
+  function setTone(freq){
+    if (!AC) return;
+    var t = AC.currentTime;
+    var target = toneOn ? parseFloat(vol.value) : 0.0;
+    osc.frequency.setTargetAtTime(freq, t, 0.08);
+    gain.gain.setTargetAtTime(target, t, 0.08);
+    hzEl.textContent = Math.round(freq) + " Hz";
+  }
+
+  function loadTrack(i, auto){
+    idx = i<seq.length?i:0;
+    var item = seq[idx];
+    setTint(item.tint);
+    setDots(idx);
+    setNow(item.label);
+    if (player && typeof player.loadVideoById==="function"){
+      player.loadVideoById({videoId:item.id,startSeconds:0,suggestedQuality:"highres"});
+      if (auto){ try{ player.playVideo(); }catch(e){} }
+    }
+    setTone(item.hz);
+  }
+
+  function onYouTubeIframeAPIReady(){
+    player = new YT.Player('player',{
+      width:'100%', height:'100%',
+      videoId: seq[0].id,
+      playerVars:{autoplay:0,controls:1,rel:0,modestbranding:1,playsinline:1,fs:1},
+      events:{
+        'onReady': function(){
+          setTint(seq[0].tint); setDots(0); setNow("Ready"); setTone(seq[0].hz);
+        },
+        'onStateChange': function(ev){
+          if (ev.data===YT.PlayerState.PLAYING){
+            if (AC && AC.state==="suspended"){AC.resume();}
+            setTone(seq[idx].hz);
+          }
+          if (ev.data===YT.PlayerState.PAUSED || ev.data===YT.PlayerState.BUFFERING){
+            if (AC){gain.gain.setTargetAtTime(0.0, AC.currentTime, 0.05);}
+          }
+          if (ev.data===YT.PlayerState.ENDED){
+            loadTrack(idx+1,true);
+          }
+        }
+      }
+    });
+  }
+
+  document.getElementById("start").addEventListener("click", function(){
+    if (!started){
+      started = true;
+      initAudio();
+      this.style.opacity = .0; this.style.pointerEvents = "none";
+      try{ player.playVideo(); }catch(e){}
+    } else {
+      try{ player.playVideo(); }catch(e){}
+    }
+  }, {passive:true});
+
+  document.getElementById("toneToggle").addEventListener("click", function(){
+    toneOn = !toneOn;
+    this.textContent = toneOn ? "Tone On" : "Tone Off";
+    if (AC){
+      var t = AC.currentTime;
+      var target = toneOn ? parseFloat(vol.value) : 0.0;
+      gain.gain.setTargetAtTime(target, t, 0.06);
+    }
+  }, {passive:true});
+
+  vol.addEventListener("input", function(){
+    if (AC && toneOn){gain.gain.value = parseFloat(this.value);}
+  }, {passive:true});
+
+  (function(){
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  })();
+
+  (function(){
+    var n = document.getElementById("moniqueNote");
+    if (location.hostname.endsWith("earth.plnt.earth")){ n.classList.add("show"); }
+    n.addEventListener("click",function(){ this.classList.toggle("open"); });
+  })();
+</script>
+</body>
+</html>
