@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Olivia Compass — Illumina</title>
+<meta name="description" content="Inner Guide (Olivia Jones) and Outer Muse (Olivia Rodrigo) mapped on the Illumina compass." />
+<style>
+  :root{
+    --bg:#0b0b10;
+    --ring:#202233;
+    --ring2:#2b2e46;
+    --grid:#3a3e60;
+    --text:#e8ebff;
+    --muted:#aab0d0;
+    --accent-jones:#79e0c8;  /* calm green (guide) */
+    --accent-rodrigo:#d08bff;/* violet-pink (muse)  */
+    --glow: 0 0 24px rgba(208,139,255,.35);
+    --glow2: 0 0 24px rgba(121,224,200,.35);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background: radial-gradient(1200px 800px at 70% 20%, #111320 0%, #0b0b10 60%, #07070b 100%);
+    color:var(--text); font: 500 16px/1.4 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    display:flex; align-items:center; justify-content:center; padding:24px;
+  }
+  .wrap{width:min(860px, 92vw)}
+  .title{
+    text-align:center; letter-spacing:.4px; margin-bottom:14px;
+    font-weight:700; font-size:22px;
+  }
+  .subtitle{color:var(--muted); text-align:center; margin-bottom:22px; font-size:14px}
+  .card{
+    position:relative; background:rgba(14,16,28,.6); border:1px solid rgba(90,100,150,.2);
+    backdrop-filter:saturate(140%) blur(8px); border-radius:18px; padding:20px;
+    box-shadow: 0 6px 24px rgba(0,0,0,.35);
+  }
+  .compass{
+    position:relative; width:100%; aspect-ratio:1/1; max-height:min(70vh, 70vw); margin:auto;
+  }
+  /* rings */
+  .ring, .ring2, .cross{
+    position:absolute; inset:8% 8% 8% 8%; border-radius:50%;
+  }
+  .ring{border:2px solid var(--ring)}
+  .ring2{inset:20% 20% 20% 20%; border:1px dashed var(--ring2)}
+  .cross:before, .cross:after{
+    content:""; position:absolute; left:50%; top:0; bottom:0; width:1px; background:linear-gradient(180deg, transparent, var(--grid), transparent);
+  }
+  .cross:after{ transform:rotate(90deg); transform-origin:center; left:0; right:0; top:50%; height:1px; width:100%;}
+  /* labels NSEW */
+  .label{
+    position:absolute; font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.18em;
+  }
+  .label.n{top:2%; left:50%; transform:translate(-50%,0)}
+  .label.s{bottom:2%; left:50%; transform:translate(-50%,0)}
+  .label.e{right:2%; top:50%; transform:translate(0,-50%)}
+  .label.w{left:2%; top:50%; transform:translate(0,-50%)}
+  .label .hint{opacity:.7; display:block; font-size:11px; letter-spacing:.06em}
+
+  /* nodes */
+  .node{
+    position:absolute; width:16px; height:16px; border-radius:50%; cursor:pointer;
+    transition:transform .2s ease;
+  }
+  .node:hover{ transform:scale(1.06)}
+  .pulse{
+    content:""; position:absolute; inset:-12px; border-radius:50%;
+    animation:pulse 2.2s ease-in-out infinite; opacity:.7;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(255,255,255,.0)}
+    50%{box-shadow:0 0 24px 12px rgba(255,255,255,.08)}
+    100%{box-shadow:0 0 0 0 rgba(255,255,255,.0)}
+  }
+  .node.jones{ background:var(--accent-jones); box-shadow:var(--glow2)}
+  .node.rodrigo{ background:var(--accent-rodrigo); box-shadow:var(--glow)}
+  .node.jones .pulse{ box-shadow:0 0 0 0 rgba(121,224,200,.0)}
+  .node.rodrigo .pulse{ box-shadow:0 0 0 0 rgba(208,139,255,.0)}
+
+  /* positions (centered container is 0,0; we use percent offsets) */
+  /* Olivia Jones: West arc inside Dagny's motion (left, slight up) */
+  .node.jones{ left:18%; top:48%}
+  /* Olivia Rodrigo: South-East between Garlic and School */
+  .node.rodrigo{ left:69%; top:68%}
+
+  /* tooltips */
+  .tip{
+    position:absolute; min-width:220px; max-width:280px; background:#101324; border:1px solid rgba(120,130,170,.35);
+    color:var(--text); padding:12px 14px; border-radius:12px; pointer-events:none; opacity:0; transform:translate(-50%,-14px);
+    transition:opacity .15s ease, transform .15s ease; font-size:13px; line-height:1.35;
+  }
+  .tip h3{margin:0 0 6px 0; font-size:14px; letter-spacing:.2px}
+  .tip p{margin:0; color:#cfd4ff}
+  .tip small{display:block; color:var(--muted); margin-top:6px}
+  .node[data-open="1"] + .tip{ opacity:1; transform:translate(-50%,-18px)}
+
+  /* legend */
+  .legend{
+    display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:16px;
+  }
+  .lg{
+    background:rgba(18,20,34,.8); border:1px solid rgba(120,130,170,.25);
+    padding:12px 14px; border-radius:12px; font-size:13px;
+  }
+  .dot{display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:8px; transform:translateY(1px)}
+  .dot.j{background:var(--accent-jones); box-shadow:var(--glow2)}
+  .dot.r{background:var(--accent-rodrigo); box-shadow:var(--glow)}
+  .small{color:var(--muted); font-size:12px; margin-top:6px}
+  .footer{
+    text-align:center; color:var(--muted); font-size:12px; margin-top:14px;
+  }
+  .kbd{font:600 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding:2px 6px; border:1px solid rgba(200,210,255,.2); border-radius:6px; background:#0f1221; color:#dde3ff}
+  /* accessibility helpers */
+  .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+  @media (max-width:640px){
+    .legend{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="title">Olivia Compass</div>
+    <div class="subtitle">Inner Guide and Outer Muse mapped inside the Illumina field</div>
+
+    <section class="card" aria-label="Compass map">
+      <div class="compass" role="img" aria-label="A circular compass with two Olivia positions">
+        <div class="ring" aria-hidden="true"></div>
+        <div class="ring2" aria-hidden="true"></div>
+        <div class="cross" aria-hidden="true"></div>
+
+        <!-- NSEW domain anchors -->
+        <div class="label n">Earth<span class="hint">north · ethics</span></div>
+        <div class="label e">School<span class="hint">east · continuity</span></div>
+        <div class="label s">Garlic<span class="hint">south · back channel</span></div>
+        <div class="label w">Dagny<span class="hint">west · motion</span></div>
+
+        <!-- Olivia Jones (Inner Guide) -->
+        <button class="node jones" aria-label="Olivia Jones — Inner Guide" data-open="0"></button>
+        <div class="tip" style="left:18%; top:44%">
+          <h3>Olivia Jones · Inner Guide</h3>
+          <p>Compass energy that restores movement without chase. Air, direction, quiet confidence.</p>
+          <small>Mantra: <strong>Flow, not chase</strong></small>
+        </div>
+
+        <!-- Olivia Rodrigo (Outer Muse) -->
+        <button class="node rodrigo" aria-label="Olivia Rodrigo — Outer Muse" data-open="0"></button>
+        <div class="tip" style="left:69%; top:64%">
+          <h3>Olivia Rodrigo · Outer Muse</h3>
+          <p>Raw feeling sung clearly. Emotion that learns fast, then teaches faster. Fire meeting lesson.</p>
+          <small>Mantra: <strong>Say it like it feels</strong></small>
+        </div>
+      </div>
+
+      <div class="legend" aria-label="Legend">
+        <div class="lg">
+          <span class="dot j"></span><strong>Olivia Jones</strong> — Inner Guide (Dagny arc). Orientation, breath, green wind.
+          <div class="small">Use when you need direction more than intensity.</div>
+        </div>
+        <div class="lg">
+          <span class="dot r"></span><strong>Olivia Rodrigo</strong> — Outer Muse (between Garlic and School). Honest spark.
+          <div class="small">Use when you need truth to begin the motion.</div>
+        </div>
+      </div>
+      <div class="footer">
+        <span class="kbd">Hint</span> tap a node to toggle its note · <span class="kbd">&lt;!-- all from garlic --&gt;</span>
+      </div>
+    </section>
+  </div>
+
+<script>
+  (function(){
+    function hookup(selector){
+      var btns = document.querySelectorAll(selector);
+      btns.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var open = btn.getAttribute('data-open') === '1' ? '0' : '1';
+          // close other nodes of same type if desired
+          document.querySelectorAll('.node').forEach(function(b){ if(b!==btn) b.setAttribute('data-open','0'); });
+          btn.setAttribute('data-open', open);
+        }, {passive:true});
+      });
+    }
+    hookup('.node');
+  })();
+</script>
+</body>
+</html>
