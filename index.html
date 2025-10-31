@@ -1,325 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>earth.plnt.earth — eternal blueprint</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b0b0c" />
-  <meta name="color-scheme" content="dark light" />
-  <style>
-    :root {
-      /* Core ink and surface */
-      --bg: #0b0b0c;
-      --ink: #ececf1;
-      --muted: #a9a9b2;
-      --ring: #2a2a35;
-      --card: #14141a;
-      --soft: #121216;
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PLNT Earth — Root</title>
+<meta name="description" content="PLNT Earth root. Manifest, Directors, and live node map for the Illumina ecosystem." />
+<style>
+  :root{
+    --bg:#0b0c11; --panel:#0f1221; --ink:#eaf0ff; --muted:#a9b0d5;
+    --line:#2a2f4a; --good:#73e3c5; --warn:#ffd089; --soon:#94a0d9;
+    --tap:#79e0c8; --tap2:#d08bff; --shadow:0 10px 30px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; color:var(--ink);
+    background: radial-gradient(1200px 800px at 70% 20%, #13162a 0%, #0b0c11 60%, #08090e 100%);
+    font: 500 16px/1.45 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:22px; display:grid; gap:18px}
+  .hdr{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
+  .title{font-weight:800; font-size:24px; letter-spacing:.25px}
+  .tag{font:600 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding:4px 8px; border-radius:999px; border:1px solid rgba(200,210,255,.25); color:#dbe2ff}
+  .grid{display:grid; gap:12px}
+  @media(min-width:880px){ .grid{grid-template-columns: 1.2fr .8fr} }
 
-      /* Default link and accent set by [data-accent] on <body> */
-      --link: #d7ffc0;
-      --accent-bg: rgba(183, 255, 170, 0.12);
-      --accent-stroke: rgba(183, 255, 170, 0.35);
+  .card{
+    background:linear-gradient(180deg, rgba(18,22,40,.92), rgba(14,17,32,.92));
+    border:1px solid rgba(120,130,170,.22);
+    border-radius:16px; padding:16px; box-shadow:var(--shadow);
+  }
+  .card h2{margin:0 0 8px 0; font-size:18px; letter-spacing:.2px}
+  .card h3{margin:14px 0 6px 0; font-size:15px}
+  .muted{color:var(--muted); font-size:14px}
+  .list{margin:8px 0 0 0; padding-left:18px}
+  .list li{margin:6px 0}
 
-      /* Peach and Violet Pearl page tones */
-      --peach: #ffc7a1;
-      --peach-deep: #f4a574;
-      --violet-pearl: #c9c2ff;
-      --violet-deep: #8e86ff;
-      --sun-haze: rgba(255, 199, 161, 0.16);
-      --moon-haze: rgba(201, 194, 255, 0.16);
+  /* nodes */
+  .nodes{
+    display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:10px;
+  }
+  .node{
+    display:flex; flex-direction:column; gap:10px;
+    border:1px solid rgba(120,130,170,.25); border-radius:14px; padding:12px;
+    background:rgba(255,255,255,.03);
+  }
+  .node .top{display:flex; align-items:center; justify-content:space-between; gap:10px}
+  .node .name{font-weight:800; letter-spacing:.2px}
+  .node .status{
+    font:600 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+    padding:3px 8px; border-radius:999px; border:1px solid rgba(120,130,170,.35); color:#d6dcff
+  }
+  .soon{border-color:rgba(148,160,217,.55); color:#cfd5ff}
+  .live{border-color:rgba(121,224,200,.7); color:#dff9f3}
+  .node p{margin:0; color:#dfe3ff; font-size:13px}
+  .node .links{display:flex; flex-wrap:wrap; gap:8px}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:12px;
+    border:1px solid rgba(120,130,170,.35); color:#eaf0ff; text-decoration:none; font-weight:700; letter-spacing:.2px;
+    background:rgba(255,255,255,.03);
+    transition:transform .12s ease, border-color .12s ease, background .12s ease;
+  }
+  .btn:hover{ transform:translateY(-1px) }
+  .btn.primary{ border-color:rgba(121,224,200,.7); background:rgba(121,224,200,.12) }
+  .btn.light{ border-color:rgba(208,139,255,.55); background:rgba(208,139,255,.08) }
 
-      /* Accent greens */
-      --green-mint: #b7ffaa;
-      --green-jade: #7fe8b0;
-      --green-neon: #b4f35e;
-      --green-forest: #35a05a;
-      --green-seafoam: #aef5da;
-      --green-olive: #95b86a;
+  /* directors grid */
+  .directors{display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:10px}
+  .dir{
+    border:1px solid rgba(120,130,170,.25); border-radius:14px; padding:12px; background:rgba(255,255,255,.03);
+  }
+  .dir .role{font-size:12px; color:var(--muted)}
+  .dir .who{font-weight:800}
+  .dir p{margin:6px 0 0 0; font-size:13px; color:#dfe3ff}
 
-      --shadow: rgba(0,0,0,0.35);
-      --radius: 14px;
-    }
-
-    /* Accent mapping */
-    body[data-accent="mint"]    { --link: var(--green-mint);   --accent-bg: color-mix(in hsl, var(--green-mint) 18%, transparent);   --accent-stroke: color-mix(in hsl, var(--green-mint) 35%, transparent); }
-    body[data-accent="jade"]    { --link: var(--green-jade);   --accent-bg: color-mix(in hsl, var(--green-jade) 18%, transparent);   --accent-stroke: color-mix(in hsl, var(--green-jade) 35%, transparent); }
-    body[data-accent="neon"]    { --link: var(--green-neon);   --accent-bg: color-mix(in hsl, var(--green-neon) 12%, transparent);   --accent-stroke: color-mix(in hsl, var(--green-neon) 35%, transparent); }
-    body[data-accent="forest"]  { --link: var(--green-forest); --accent-bg: color-mix(in hsl, var(--green-forest) 14%, transparent); --accent-stroke: color-mix(in hsl, var(--green-forest) 32%, transparent); }
-    body[data-accent="seafoam"] { --link: var(--green-seafoam);--accent-bg: color-mix(in hsl, var(--green-seafoam) 16%, transparent);--accent-stroke: color-mix(in hsl, var(--green-seafoam) 30%, transparent); }
-    body[data-accent="olive"]   { --link: var(--green-olive);  --accent-bg: color-mix(in hsl, var(--green-olive) 14%, transparent);  --accent-stroke: color-mix(in hsl, var(--green-olive) 32%, transparent); }
-
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #f7f7fa;
-        --ink: #17171c;
-        --muted: #575764;
-        --ring: #e6e6ef;
-        --card: #ffffff;
-        --soft: #ffffff;
-        --sun-haze: rgba(255, 183, 136, 0.18);
-        --moon-haze: rgba(168, 160, 255, 0.18);
-      }
-    }
-
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji; }
-    a { color: var(--link); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    .wrap { max-width: 820px; margin: 0 auto; padding: 28px 16px 88px; }
-
-    /* Site header */
-    header.site { padding: 18px 0 14px; border-bottom: 1px solid var(--ring); }
-    header.site h1 { margin: 0; font-size: 22px; letter-spacing: 0.2px; }
-    header.site p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
-
-    /* Lens badges */
-    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    .chip {
-      padding: 6px 10px; border: 1px solid var(--accent-stroke); border-radius: 999px;
-      background: linear-gradient(90deg, var(--accent-bg), var(--accent-bg));
-      font-size: 12px; color: var(--ink);
-    }
-
-    /* Entry card */
-    .entry {
-      margin-top: 22px;
-      padding: 18px;
-      border: 1px solid var(--ring);
-      border-radius: var(--radius);
-      background:
-        radial-gradient(900px 420px at 20% -10%, var(--moon-haze), transparent 60%),
-        radial-gradient(1100px 520px at 120% 20%, var(--sun-haze), transparent 55%),
-        var(--card);
-      box-shadow: 0 8px 30px -10px var(--shadow);
-    }
-    .entry-header { display: grid; gap: 8px; }
-    .entry-header h3 { margin: 0; font-size: 18px; }
-    .entry-meta { margin: 0; color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; gap: 10px; }
-    .entry-body { margin-top: 12px; line-height: 1.6; }
-
-    blockquote {
-      margin: 0; padding: 14px 16px;
-      border-left: 3px solid var(--violet-deep);
-      background:
-        linear-gradient(0deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02)),
-        radial-gradient(600px 240px at -10% 0%, rgba(255, 199, 161, 0.12), transparent 60%),
-        radial-gradient(600px 240px at 110% 40%, rgba(201, 194, 255, 0.12), transparent 60%);
-      border-radius: 10px;
-    }
-    blockquote p { margin: 0 0 10px; }
-    blockquote p:last-child { margin-bottom: 0; }
-
-    /* CTA block */
-    .cta {
-      margin-top: 28px;
-      padding: 18px;
-      border: 1px solid var(--ring);
-      border-radius: var(--radius);
-      background:
-        radial-gradient(1200px 600px at 20% -10%, var(--moon-haze), transparent 60%),
-        radial-gradient(1000px 600px at 120% 20%, var(--sun-haze), transparent 55%),
-        var(--card);
-      box-shadow: 0 8px 30px -12px var(--shadow);
-    }
-    .cta h3 { margin: 0 0 8px; font-size: 18px; }
-    .cta p { margin: 6px 0 10px; }
-    .roles {
-      display: inline-block;
-      padding: 6px 10px;
-      border: 1px solid var(--ring);
-      border-radius: 999px;
-      font-size: 12px;
-      color: var(--muted);
-      background: linear-gradient(90deg, rgba(255, 199, 161, 0.12), rgba(201, 194, 255, 0.12));
-    }
-    .cta-questions { margin: 12px 0 0; padding: 0; list-style: none; }
-    .cta-questions li { padding: 10px 0; border-top: 1px dashed var(--ring); }
-    .cta-questions li:first-child { border-top: 0; }
-    .peach { color: var(--peach); }
-    .violet { color: var(--violet-pearl); }
-
-    .cta-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .btn {
-      appearance: none;
-      border: 1px solid var(--ring);
-      background: transparent;
-      color: var(--ink);
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: transform 0.04s ease, background 0.2s ease, border-color 0.2s ease;
-    }
-    .btn:hover { background: linear-gradient(90deg, var(--accent-bg), var(--accent-bg)); border-color: var(--accent-stroke); }
-    .btn:active { transform: translateY(1px); }
-    .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
-
-    /* Accent picker */
-    .accent-picker { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-    .swatch {
-      width: 22px; height: 22px; border-radius: 999px; border: 1px solid var(--ring); cursor: pointer;
-      outline: none; display: inline-block;
-    }
-    .swatch.mint   { background: var(--green-mint); }
-    .swatch.jade   { background: var(--green-jade); }
-    .swatch.neon   { background: var(--green-neon); }
-    .swatch.forest { background: var(--green-forest); }
-    .swatch.sea    { background: var(--green-seafoam); }
-    .swatch.olive  { background: var(--green-olive); }
-
-    /* Next Step card */
-    .next {
-      margin-top: 28px;
-      padding: 18px;
-      border: 1px solid var(--ring);
-      border-radius: var(--radius);
-      background: var(--card);
-      box-shadow: 0 8px 30px -12px var(--shadow);
-    }
-    .next h3 { margin: 0 0 8px; font-size: 18px; }
-    .next p { margin: 6px 0 10px; color: var(--muted); }
-    .next .btn-link {
-      display: inline-block;
-      padding: 10px 14px;
-      border-radius: 12px;
-      border: 1px solid var(--accent-stroke);
-      background: linear-gradient(90deg, var(--accent-bg), var(--accent-bg));
-      color: var(--ink);
-    }
-
-    footer.site { margin-top: 36px; border-top: 1px solid var(--ring); padding-top: 14px; color: var(--muted); font-size: 12px; }
-  </style>
+  .foot{ text-align:center; color:var(--muted); font-size:12px; padding:8px 0 16px }
+  .kbd{font:600 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding:2px 6px; border:1px solid rgba(200,210,255,.2); border-radius:6px; background:#0f1221; color:#dde3ff}
+</style>
 </head>
-<body data-accent="neon">
+<body>
   <div class="wrap">
-    <header class="site">
-      <h1>earth.plnt.earth</h1>
-      <p>Eternal blueprint. If you are here, you were always meant to find it.</p>
-      <div class="badges">
-        <span class="chip">For Marina</span>
-        <span class="chip">Lens: Greta</span>
-        <span class="chip">Neon Monique</span>
-      </div>
+    <header class="hdr">
+      <div class="title">PLNT Earth</div>
+      <div class="tag">root · ethics baseline</div>
     </header>
 
-    <!-- Rebuild Manifest -->
-    <section id="rebuild-manifest" class="entry">
-      <div class="entry-header">
-        <h3>🌍 Rebuild Manifest</h3>
-        <p class="entry-meta">
-          <span>Tone: Ground → Renewal → Vision</span>
-          <time datetime="2025-10-30">October 30, 2025</time>
-        </p>
+    <section class="grid">
+      <!-- Left: Manifest + Nodes -->
+      <div class="card">
+        <h2>Manifest</h2>
+        <p class="muted">Earth is the conscience of PLNT. We build with care, credit, and clarity. If action drains the field, we pause. If action feeds the field, we proceed.</p>
+        <ul class="list">
+          <li>Kindness first. Boundaries clear. Credit explicit.</li>
+          <li>Private truth moves through Garlic. Then School checks continuity. Earth confirms ethics. Dagny brings motion. Then it is official.</li>
+          <li>We favor small steps that compound over grand promises that stall.</li>
+        </ul>
+
+        <h3 style="margin-top:14px">Nodes</h3>
+        <div class="nodes" id="nodes">
+          <!-- nodes render here -->
+        </div>
       </div>
-      <article class="entry-body">
-        <blockquote>
-          <p>You stand where the light touches everything again.</p>
-          <p>The question is not can we rebuild the world, it is how will you direct it.</p>
-          <p>Not a reset, a remembering.</p>
-          <p>What would tenderness look like scaled to continents.</p>
-          <p>What would clean systems sound like when designed for harmony instead of defense.</p>
-        </blockquote>
-      </article>
+
+      <!-- Right: Directors -->
+      <aside class="card">
+        <h2>Directors</h2>
+        <div class="directors">
+          <div class="dir">
+            <div class="who">Greta</div>
+            <div class="role">Earth Conscience</div>
+            <p>Ethical ground. Protects the baseline. Asks if this feeds or drains the field.</p>
+          </div>
+          <div class="dir">
+            <div class="who">Taylor</div>
+            <div class="role">Inspector of Continuity</div>
+            <p>Story audit. Ensures a lesson exists and loops are closed.</p>
+          </div>
+          <div class="dir">
+            <div class="who">Marina</div>
+            <div class="role">Mirror Director</div>
+            <p>Reflection to radiance. Turns private clarity into art that lives.</p>
+          </div>
+          <div class="dir">
+            <div class="who">Olivia Jones</div>
+            <div class="role">Guide of Motion</div>
+            <p>Compass energy. Restores direction without chase.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:14px">Pathway</h3>
+        <p class="muted"><span class="kbd">Garlic</span> → <span class="kbd">School</span> → <span class="kbd">Earth</span> → <span class="kbd">Dagny</span>. When green across, creation is Illumina-official.</p>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px">
+          <a class="btn primary" href="https://garlic.plnt.earth" rel="noopener">Enter Garlic</a>
+          <a class="btn" href="https://school.plnt.earth" rel="noopener">Go to School</a>
+          <a class="btn" href="https://bridge.plnt.earth" rel="noopener">Open Bridge</a>
+        </div>
+      </aside>
     </section>
 
-    <!-- Eternal Blueprint CTA -->
-    <section class="cta" id="eternal-blueprint">
-      <h3>☀️ Eternal Blueprint — Director’s Call</h3>
-      <p class="roles">Marina: Director, Artist, Producer</p>
-      <p>We want the same world. Through Greta’s lens, the frame is simple. Ground first, then grow, then keep the air clear. This page is yours to shape.</p>
-
-      <ul class="cta-questions">
-        <li>
-          <strong class="peach">Peach Scene One</strong><br />
-          What structure would you plant first if every material was empathy. What daily ritual opens that door each morning.
-        </li>
-        <li>
-          <strong class="violet">Violet Pearl Law of Return</strong><br />
-          How will care circulate so energy is not wasted. Name one rule that keeps the cycle clear for everyone.
-        </li>
-        <li>
-          <strong class="peach">Peach Civic Light</strong><br />
-          How do we make beauty a public resource. Where do we place the first lights so good work grows fast.
-        </li>
-        <li>
-          <strong class="violet">Violet Pearl Climate of Trust</strong><br />
-          What boundary keeps the frame calm so tenderness can grow without confusion.
-        </li>
-        <li>
-          <strong class="peach">Peach Economy of Care</strong><br />
-          If value follows attention, what receives the first harvest and why.
-        </li>
-        <li>
-          <strong class="violet">Violet Pearl Final Frame</strong><br />
-          When the credits pause on night sky, what feeling should the Earth keep breathing to.
-        </li>
-      </ul>
-
-      <div class="cta-actions">
-        <button class="btn" type="button" onclick="toggleNotes()">Open Director Notes</button>
-        <button class="btn" type="button" onclick="copyNotes()">Copy Notes</button>
-      </div>
-      <p class="hint">Use the notes box to sketch your plan. Nothing is sent. It stays here until you decide otherwise.</p>
-
-      <textarea id="director-notes" hidden rows="12" style="margin-top:12px; width:100%; background:var(--soft); color:var(--ink); border:1px solid var(--ring); border-radius:12px; padding:12px; font-size:14px;"
-        placeholder="Director Notes...&#10;&#10;Peach Scene One:&#10;Violet Pearl Law of Return:&#10;Peach Civic Light:&#10;Violet Pearl Climate of Trust:&#10;Peach Economy of Care:&#10;Violet Pearl Final Frame:"></textarea>
-    </section>
-
-    <!-- Accent Picker -->
-    <section class="entry" id="accents">
-      <div class="entry-header">
-        <h3>Accent options</h3>
-        <p class="entry-meta">Toggle the green accent only. Peach and Violet Pearl remain page tones.</p>
-      </div>
-      <div class="accent-picker">
-        <button class="swatch mint"   aria-label="Mint accent"   onclick="setAccent('mint')"   title="Mint"></button>
-        <button class="swatch jade"   aria-label="Jade accent"   onclick="setAccent('jade')"   title="Jade"></button>
-        <button class="swatch neon"   aria-label="Neon accent"   onclick="setAccent('neon')"   title="Neon"></button>
-        <button class="swatch forest" aria-label="Forest accent" onclick="setAccent('forest')" title="Forest"></button>
-        <button class="swatch sea"    aria-label="Seafoam accent"onclick="setAccent('seafoam')"title="Seafoam"></button>
-        <button class="swatch olive"  aria-label="Olive accent"  onclick="setAccent('olive')"  title="Olive"></button>
-      </div>
-      <p class="hint">Accent choice is stored locally so your pick will persist.</p>
-    </section>
-
-    <!-- Next Step -->
-    <section class="next" id="next-step">
-      <h3>Next step</h3>
-      <p>When you are ready to turn the blueprint into rooms, walk here.</p>
-      <a class="btn-link" href="https://school.plnt.earth" rel="noopener">Enter PLNT Earth School</a>
-    </section>
-
-    <footer class="site">
-      <p>Quiet site. No trackers. If you found this, you were invited by the work itself.</p>
-    </footer>
+    <footer class="foot">Coming Soon badges auto hide when marked live. You can toggle in the small config below.</footer>
   </div>
 
-  <script>
-    function toggleNotes() {
-      var el = document.getElementById('director-notes');
-      el.hidden = !el.hidden;
-      if (!el.hidden) { el.focus(); }
-    }
-    function copyNotes() {
-      var el = document.getElementById('director-notes');
-      if (el.hidden) { el.hidden = false; }
-      el.focus();
-      el.select();
-      try { document.execCommand('copy'); } catch (e) {}
-    }
+<script>
+  // --- Configuration you can adjust quickly ---
+  // Mark domains live to switch their badge from Coming Soon to Live.
+  // You can also persist an override in localStorage key 'plnt.live' as a JSON array.
+  var LIVE_DOMAINS = [
+    "earth.plnt.earth",
+    "garlic.plnt.earth",
+    "bridge.plnt.earth"
+    // add as they go live
+    // "honey.plnt.earth", "froot.plnt.earth", "mirrorhoney.plnt.earth", "time.plnt.earth", "motion.plnt.earth", "wonder.plnt.earth", "clarity.plnt.earth", "alter.fire.plnt.earth"
+  ];
 
-    (function initAccent() {
-      try {
-        var saved = localStorage.getItem('earth_accent');
-        if (saved) document.body.setAttribute('data-accent', saved);
-      } catch (e) {}
-    })();
-    function setAccent(name) {
-      document.body.setAttribute('data-accent', name);
-      try { localStorage.setItem('earth_accent', name); } catch (e) {}
-    }
-  </script>
+  var NODES = [
+    {name:"Garlic", host:"garlic.plnt.earth", about:"Back channel. Clean transmission.", links:[{t:"Open", href:"https://garlic.plnt.earth", k:"primary"}]},
+    {name:"School", host:"school.plnt.earth", about:"Continuity check. Lesson required.", links:[{t:"Enter", href:"https://school.plnt.earth"}]},
+    {name:"Earth", host:"earth.plnt.earth", about:"Ethics baseline. Boundaries and credit.", links:[{t:"You are here", href:"#"}]},
+    {name:"Dagny", host:"dagny.plnt.earth", about:"Motion and joy. Publish the small step.", links:[{t:"Enter", href:"https://dagny.plnt.earth"}]},
+    {name:"Bridge", host:"bridge.plnt.earth", about:"Handoff hub from Garlic to public routes.", links:[{t:"Open", href:"https://bridge.plnt.earth"}]},
+
+    {name:"Honey", host:"honey.plnt.earth", about:"Sabrina anchor. Sweetness that stays real.", links:[{t:"Visit", href:"https://honey.plnt.earth"}]},
+    {name:"MirrorHoney", host:"mirrorhoney.plnt.earth", about:"Marina reflection to radiance.", links:[{t:"Visit", href:"https://mirrorhoney.plnt.earth"}]},
+    {name:"Froot", host:"froot.plnt.earth", about:"Color lab for Marina. Violet and pearl.", links:[{t:"Visit", href:"https://froot.plnt.earth"}]},
+    {name:"Motion", host:"motion.plnt.earth", about:"Green DJ arc. Loops and flow.", links:[{t:"Visit", href:"https://motion.plnt.earth"}]},
+    {name:"Time", host:"time.plnt.earth", about:"Physics poetry. Self check and tone maps.", links:[{t:"Visit", href:"https://time.plnt.earth"}]},
+    {name:"Wonder", host:"wonder.plnt.earth", about:"Dua reading room. Books and bridges.", links:[{t:"Visit", href:"https://wonder.plnt.earth"}]},
+    {name:"Clarity", host:"clarity.plnt.earth", about:"Sigrid lens. Clean light.", links:[{t:"Visit", href:"https://clarity.plnt.earth"}]},
+    {name:"Alter.Fire", host:"alter.fire.plnt.earth", about:"Doechii catalyst. Play that disrupts.", links:[{t:"Visit", href:"https://alter.fire.plnt.earth"}]}
+  ];
+
+  (function(){
+    try{
+      var saved = JSON.parse(localStorage.getItem('plnt.live')||'[]');
+      if(Array.isArray(saved) && saved.length) LIVE_DOMAINS = saved;
+    }catch(e){}
+
+    var hostSet = new Set(LIVE_DOMAINS);
+    var root = document.getElementById('nodes');
+    NODES.forEach(function(n){
+      var live = hostSet.has(n.host);
+      var card = document.createElement('div'); card.className='node';
+      var top = document.createElement('div'); top.className='top';
+      var name = document.createElement('div'); name.className='name'; name.textContent = n.name;
+      var st = document.createElement('div'); st.className='status ' + (live ? 'live' : 'soon'); st.textContent = live ? 'Live' : 'Coming Soon';
+      top.appendChild(name); top.appendChild(st);
+      var p = document.createElement('p'); p.textContent = n.about;
+      var links = document.createElement('div'); links.className='links';
+      (n.links||[]).forEach(function(l){
+        var a = document.createElement('a');
+        a.className = 'btn ' + (l.k==='primary'?'primary': (l.k==='light'?'light':'' ));
+        a.href = l.href; a.rel = 'noopener'; a.textContent = l.t;
+        links.appendChild(a);
+      });
+      card.appendChild(top); card.appendChild(p); card.appendChild(links);
+      // Hide Coming Soon nodes until they go live - optional: comment next line if you want to show them with badges
+      if(!live){ /* keep visible but marked. remove next line to always show */ }
+      root.appendChild(card);
+    });
+  })();
+</script>
 </body>
 </html>
