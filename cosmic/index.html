@@ -6,10 +6,10 @@
 <title>Illumina Cosmic Sequence</title>
 <style>
   :root{
-    --north:#6fb6ff;   /* silver-blue */
-    --east:#f1a5c6;    /* rose-chrome */
-    --south:#ffcf6a;   /* amber-gold */
-    --west:#b09bff;    /* violet-pearl */
+    --north:#6fb6ff;
+    --east:#f1a5c6;
+    --south:#ffcf6a;
+    --west:#b09bff;
     --ink:#0b0b12;
   }
   html,body{height:100%;margin:0;background:var(--ink);color:#fff;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Helvetica,Arial,sans-serif}
@@ -17,7 +17,7 @@
   .bg{
     position:absolute;inset:-20vmax;filter:blur(60px) saturate(120%);
     background:radial-gradient(60% 60% at 50% 40%, var(--north), transparent 60%),
-               radial-gradient(60% 60% at 85% 50%, var(--east), transparent 60%),
+               radial-gradient(60% 60% at 85% 50%, var(--east),  transparent 60%),
                radial-gradient(60% 60% at 50% 80%, var(--south), transparent 60%),
                radial-gradient(60% 60% at 15% 50%, var(--west),  transparent 60%);
     opacity:.35;transform:scale(1.05);pointer-events:none;
@@ -36,14 +36,18 @@
   .btn:active{transform:scale(.98)}
   .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
   .chip{background:rgba(255,255,255,.12);padding:8px 12px;border-radius:999px;font-size:12px}
+
   .stage{width:min(960px,96vw);aspect-ratio:16/9;max-height:64vh;border-radius:16px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.45);background:#000}
   iframe{width:100%;height:100%;display:block}
+
   .dots{display:flex;gap:10px}
   .dot{width:10px;height:10px;border-radius:50%;opacity:.35;background:#fff;transition:opacity .3s ease, transform .3s ease}
   .dot.active{opacity:1;transform:scale(1.2)}
+
   .tonebox{display:flex;gap:10px;align-items:center}
   .slider{appearance:none;width:160px;height:6px;border-radius:999px;background:rgba(255,255,255,.2);outline:none}
   .slider::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:50%;background:#fff}
+
   .now{font-size:14px;opacity:.9}
   @media (orientation:portrait){.stage{max-height:50vh}}
 
@@ -54,6 +58,12 @@
   .note-head{font-weight:600;margin-bottom:6px;font-size:14px}
   .note-body{display:none}
   .note.open .note-body{display:block}
+
+  .jump{margin-top:6px}
+  .linkbtn{display:inline-block;text-decoration:none;color:#fff;background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.14);padding:10px 14px;border-radius:12px;font-weight:700}
+  .linkbtn:active{transform:scale(.98)}
+  .foot{position:fixed;inset:auto 0 14px 0;text-align:center;font-size:12px;opacity:.75}
 </style>
 </head>
 <body>
@@ -70,7 +80,7 @@
     <div class="note" id="moniqueNote">
       <div class="note-head">💬 Audio Note for Monique</div>
       <div class="note-body">
-        <p>This sequence layers a low WebAudio tone with each song to mark Illumina quadrants: <strong>256 Hz</strong> (clarity), <strong>320 Hz</strong> (structure), <strong>128 Hz</strong> (emotion), <strong>160 Hz</strong> (creation). The tone is a reference signal — not music — so the listener always knows which field they’re in. Please help check balance: the tone should feel like it “belongs” under each track (never fighting the mix), and volume should be barely-there but perceivable.</p>
+        <p>This sequence layers a low WebAudio tone with each song to mark Illumina quadrants: <strong>256 Hz</strong> (clarity), <strong>320 Hz</strong> (structure), <strong>128 Hz</strong> (emotion), <strong>160 Hz</strong> (creation). The tone is a reference signal — not music — so the listener always knows which field they’re in. Please help check balance: the tone should feel like it belongs under each track (never fighting the mix) and be barely-there yet perceivable.</p>
       </div>
     </div>
 
@@ -91,14 +101,20 @@
       <div class="dot" id="d2" title="Sabrina"></div>
       <div class="dot" id="d3" title="MARINA"></div>
     </div>
+
     <div class="row">
       <span class="chip">Sigrid 256</span>
       <span class="chip">Dua 320</span>
       <span class="chip">Sabrina 128</span>
       <span class="chip">Marina 160</span>
     </div>
+
+    <div class="jump">
+      <a class="linkbtn" href="/time" aria-label="Go to Imaginary Time Log">→ Imaginary Time Log</a>
+    </div>
   </div>
 </div>
+<div class="foot">One tap starts audio and video. Keep the tab visible on iPhone.</div>
 
 <script>
   var seq = [
