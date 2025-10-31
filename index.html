@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>PLNT Earth — Root</title>
-<meta name="description" content="PLNT Earth root. Manifest, Directors, and live node map for the Illumina ecosystem." />
+<meta name="description" content="PLNT Earth root. Manifest, Directors, and a live nodes map for the Illumina ecosystem." />
 <style>
   :root{
     --bg:#0b0c11; --panel:#0f1221; --ink:#eaf0ff; --muted:#a9b0d5;
@@ -22,6 +22,7 @@
   .hdr{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
   .title{font-weight:800; font-size:24px; letter-spacing:.25px}
   .tag{font:600 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding:4px 8px; border-radius:999px; border:1px solid rgba(200,210,255,.25); color:#dbe2ff}
+
   .grid{display:grid; gap:12px}
   @media(min-width:880px){ .grid{grid-template-columns: 1.2fr .8fr} }
 
@@ -63,7 +64,6 @@
   }
   .btn:hover{ transform:translateY(-1px) }
   .btn.primary{ border-color:rgba(121,224,200,.7); background:rgba(121,224,200,.12) }
-  .btn.light{ border-color:rgba(208,139,255,.55); background:rgba(208,139,255,.08) }
 
   /* directors grid */
   .directors{display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:10px}
@@ -73,6 +73,21 @@
   .dir .role{font-size:12px; color:var(--muted)}
   .dir .who{font-weight:800}
   .dir p{margin:6px 0 0 0; font-size:13px; color:#dfe3ff}
+
+  /* queue card */
+  .q{
+    display:grid; gap:8px;
+  }
+  .qrow{
+    display:flex; align-items:center; justify-content:space-between; gap:8px;
+    border:1px solid rgba(120,130,170,.28); border-radius:12px; padding:10px; background:rgba(255,255,255,.03);
+    color:#dfe3ff; font-size:13px;
+  }
+  .flag{
+    font:700 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding:3px 8px; border-radius:999px; border:1px solid rgba(120,130,170,.35); color:#d6dcff
+  }
+  .ok{ border-color:rgba(121,224,200,.8); color:#eafff8 }
+  .warn{ border-color:rgba(255,208,137,.8); color:#fff3dc }
 
   .foot{ text-align:center; color:var(--muted); font-size:12px; padding:8px 0 16px }
   .kbd{font:600 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding:2px 6px; border:1px solid rgba(200,210,255,.2); border-radius:6px; background:#0f1221; color:#dde3ff}
@@ -86,19 +101,30 @@
     </header>
 
     <section class="grid">
-      <!-- Left: Manifest + Nodes -->
+      <!-- Left: Manifest + Nodes + Queue -->
       <div class="card">
         <h2>Manifest</h2>
         <p class="muted">Earth is the conscience of PLNT. We build with care, credit, and clarity. If action drains the field, we pause. If action feeds the field, we proceed.</p>
         <ul class="list">
           <li>Kindness first. Boundaries clear. Credit explicit.</li>
-          <li>Private truth moves through Garlic. Then School checks continuity. Earth confirms ethics. Dagny brings motion. Then it is official.</li>
+          <li>Private truth moves through Garlic. Then School checks continuity. Earth confirms ethics. Harbor grants consent & resources. Dagny brings motion. Then it is official.</li>
           <li>We favor small steps that compound over grand promises that stall.</li>
         </ul>
 
         <h3 style="margin-top:14px">Nodes</h3>
-        <div class="nodes" id="nodes">
-          <!-- nodes render here -->
+        <div class="nodes" id="nodes"><!-- populated by JS --></div>
+
+        <h3 style="margin-top:14px">Bridge Queue (read-only)</h3>
+        <div class="q" id="queue">
+          <!-- safe, local-only status mirrors; no undefined refs -->
+          <div class="qrow">
+            <div>Garlic Path <span class="muted">· four checks</span></div>
+            <div id="q-garlic" class="flag">—</div>
+          </div>
+          <div class="qrow">
+            <div>Harbor Clearance <span class="muted">· credit · consent · resource</span></div>
+            <div id="q-harbor" class="flag">—</div>
+          </div>
         </div>
       </div>
 
@@ -126,61 +152,89 @@
             <div class="role">Guide of Motion</div>
             <p>Compass energy. Restores direction without chase.</p>
           </div>
+          <div class="dir">
+            <div class="who">Sanela</div>
+            <div class="role">Harbor Mediator</div>
+            <p>Consent & resources. Grants clearance before motion.</p>
+          </div>
         </div>
 
         <h3 style="margin-top:14px">Pathway</h3>
-        <p class="muted"><span class="kbd">Garlic</span> → <span class="kbd">School</span> → <span class="kbd">Earth</span> → <span class="kbd">Dagny</span>. When green across, creation is Illumina-official.</p>
+        <p class="muted"><span class="kbd">Garlic</span> → <span class="kbd">School</span> → <span class="kbd">Earth</span> → <span class="kbd">Harbor</span> → <span class="kbd">Dagny</span>.</p>
 
         <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px">
           <a class="btn primary" href="https://garlic.plnt.earth" rel="noopener">Enter Garlic</a>
           <a class="btn" href="https://school.plnt.earth" rel="noopener">Go to School</a>
+          <a class="btn" href="https://harbor.plnt.earth" rel="noopener">Open Harbor</a>
           <a class="btn" href="https://bridge.plnt.earth" rel="noopener">Open Bridge</a>
         </div>
       </aside>
     </section>
 
-    <footer class="foot">Coming Soon badges auto hide when marked live. You can toggle in the small config below.</footer>
+    <footer class="foot">“Ground first, then cross.” — Earth</footer>
   </div>
 
 <script>
-  // --- Configuration you can adjust quickly ---
-  // Mark domains live to switch their badge from Coming Soon to Live.
-  // You can also persist an override in localStorage key 'plnt.live' as a JSON array.
-  var LIVE_DOMAINS = [
+(function(){
+  // ---------- Safe helpers ----------
+  function truthy(v){
+    if(v==null) return false;
+    var s = String(v).toLowerCase().trim();
+    return !(s===""||s==="0"||s==="false"||s==="null"||s==="undefined");
+  }
+  function getJSON(key, fallback){
+    try{
+      var raw = localStorage.getItem(key);
+      if(!raw) return fallback;
+      var val = JSON.parse(raw);
+      return (val && typeof val==="object") ? val : fallback;
+    }catch(e){ return fallback; }
+  }
+  function getArr(key, fallback){
+    try{
+      var raw = localStorage.getItem(key);
+      var val = JSON.parse(raw);
+      return Array.isArray(val) ? val : fallback;
+    }catch(e){ return fallback; }
+  }
+
+  // ---------- Config (safe defaults) ----------
+  var LIVE_DOMAINS_DEFAULT = [
     "earth.plnt.earth",
     "garlic.plnt.earth",
-    "bridge.plnt.earth"
-    // add as they go live
-    // "honey.plnt.earth", "froot.plnt.earth", "mirrorhoney.plnt.earth", "time.plnt.earth", "motion.plnt.earth", "wonder.plnt.earth", "clarity.plnt.earth", "alter.fire.plnt.earth"
+    "bridge.plnt.earth",
+    "harbor.plnt.earth",
+    "dagny.plnt.earth"
   ];
+  // Allow local override with key 'plnt.live' (array of strings)
+  var LIVE_DOMAINS = getArr('plnt.live', LIVE_DOMAINS_DEFAULT);
 
   var NODES = [
     {name:"Garlic", host:"garlic.plnt.earth", about:"Back channel. Clean transmission.", links:[{t:"Open", href:"https://garlic.plnt.earth", k:"primary"}]},
     {name:"School", host:"school.plnt.earth", about:"Continuity check. Lesson required.", links:[{t:"Enter", href:"https://school.plnt.earth"}]},
     {name:"Earth", host:"earth.plnt.earth", about:"Ethics baseline. Boundaries and credit.", links:[{t:"You are here", href:"#"}]},
+    {name:"Harbor", host:"harbor.plnt.earth", about:"Consent & resources. Grants clearance.", links:[{t:"Open", href:"https://harbor.plnt.earth"}]},
     {name:"Dagny", host:"dagny.plnt.earth", about:"Motion and joy. Publish the small step.", links:[{t:"Enter", href:"https://dagny.plnt.earth"}]},
-    {name:"Bridge", host:"bridge.plnt.earth", about:"Handoff hub from Garlic to public routes.", links:[{t:"Open", href:"https://bridge.plnt.earth"}]},
+
+    {name:"Bridge", host:"bridge.plnt.earth", about:"Handoff hub from private to public routes.", links:[{t:"Open", href:"https://bridge.plnt.earth"}]},
 
     {name:"Honey", host:"honey.plnt.earth", about:"Sabrina anchor. Sweetness that stays real.", links:[{t:"Visit", href:"https://honey.plnt.earth"}]},
     {name:"MirrorHoney", host:"mirrorhoney.plnt.earth", about:"Marina reflection to radiance.", links:[{t:"Visit", href:"https://mirrorhoney.plnt.earth"}]},
-    {name:"Froot", host:"froot.plnt.earth", about:"Color lab for Marina. Violet and pearl.", links:[{t:"Visit", href:"https://froot.plnt.earth"}]},
+    {name:"Froot", host:"froot.plnt.earth", about:"Color lab for Marina. Violet & pearl.", links:[{t:"Visit", href:"https://froot.plnt.earth"}]},
     {name:"Motion", host:"motion.plnt.earth", about:"Green DJ arc. Loops and flow.", links:[{t:"Visit", href:"https://motion.plnt.earth"}]},
-    {name:"Time", host:"time.plnt.earth", about:"Physics poetry. Self check and tone maps.", links:[{t:"Visit", href:"https://time.plnt.earth"}]},
-    {name:"Wonder", host:"wonder.plnt.earth", about:"Dua reading room. Books and bridges.", links:[{t:"Visit", href:"https://wonder.plnt.earth"}]},
+    {name:"Time", host:"time.plnt.earth", about:"Physics poetry. Self check & tone maps.", links:[{t:"Visit", href:"https://time.plnt.earth"}]},
+    {name:"Wonder", host:"wonder.plnt.earth", about:"Dua reading room. Books & bridges.", links:[{t:"Visit", href:"https://wonder.plnt.earth"}]},
     {name:"Clarity", host:"clarity.plnt.earth", about:"Sigrid lens. Clean light.", links:[{t:"Visit", href:"https://clarity.plnt.earth"}]},
     {name:"Alter.Fire", host:"alter.fire.plnt.earth", about:"Doechii catalyst. Play that disrupts.", links:[{t:"Visit", href:"https://alter.fire.plnt.earth"}]}
   ];
 
-  (function(){
-    try{
-      var saved = JSON.parse(localStorage.getItem('plnt.live')||'[]');
-      if(Array.isArray(saved) && saved.length) LIVE_DOMAINS = saved;
-    }catch(e){}
-
-    var hostSet = new Set(LIVE_DOMAINS);
+  // ---------- Render nodes ----------
+  (function renderNodes(){
     var root = document.getElementById('nodes');
+    if(!root) return;
+    var liveSet = new Set(LIVE_DOMAINS || []);
     NODES.forEach(function(n){
-      var live = hostSet.has(n.host);
+      var live = liveSet.has(n.host);
       var card = document.createElement('div'); card.className='node';
       var top = document.createElement('div'); top.className='top';
       var name = document.createElement('div'); name.className='name'; name.textContent = n.name;
@@ -190,16 +244,39 @@
       var links = document.createElement('div'); links.className='links';
       (n.links||[]).forEach(function(l){
         var a = document.createElement('a');
-        a.className = 'btn ' + (l.k==='primary'?'primary': (l.k==='light'?'light':'' ));
+        a.className = 'btn ' + (l.k==='primary'?'primary':'');
         a.href = l.href; a.rel = 'noopener'; a.textContent = l.t;
         links.appendChild(a);
       });
       card.appendChild(top); card.appendChild(p); card.appendChild(links);
-      // Hide Coming Soon nodes until they go live - optional: comment next line if you want to show them with badges
-      if(!live){ /* keep visible but marked. remove next line to always show */ }
       root.appendChild(card);
     });
   })();
+
+  // ---------- Safe “Bridge Queue” mirrors (no undefined refs) ----------
+  (function renderQueue(){
+    var qGarlic = document.getElementById('q-garlic');
+    var qHarbor = document.getElementById('q-harbor');
+    if(qGarlic){
+      var garlicState = getJSON('illumina.afg.v1', {});
+      var gAll = garlicState && ['garlic','school','earth','dagny'].every(function(k){ return !!garlicState[k]; });
+      qGarlic.classList.add(gAll ? 'ok' : 'warn');
+      qGarlic.textContent = gAll ? 'all green' : 'pending';
+    }
+    if(qHarbor){
+      var credit   = truthy(localStorage.getItem('harbor.credit'));
+      var consent  = truthy(localStorage.getItem('harbor.consent'));
+      var resource = truthy(localStorage.getItem('harbor.resource'));
+      var hAll = credit && consent && resource;
+      qHarbor.classList.add(hAll ? 'ok' : 'warn');
+      qHarbor.textContent = hAll ? 'clear' : ['credit','consent','resource'].filter(function(k){
+        if(k==='credit')   return !credit;
+        if(k==='consent')  return !consent;
+        if(k==='resource') return !resource;
+      }).join(' · ') || 'clear';
+    }
+  })();
+})();
 </script>
 </body>
 </html>
