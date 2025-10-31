@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Dagny Queue — Northern Pulse</title>
+<style>
+  :root{--ink:#0a0e14; --north:#9fd6ff; --rose:#efb1cb; --amber:#ffd07a; --violet:#b7a6ff;}
+  html,body{height:100%;margin:0;background:
+    radial-gradient(120% 120% at 15% 20%, rgba(159,214,255,.22), transparent 40%),
+    radial-gradient(120% 120% at 85% 85%, rgba(183,166,255,.18), transparent 40%),
+    var(--ink);color:#fff;font-family:system-ui,-apple-system,Inter,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  .wrap{min-height:100%;display:grid;place-items:center;padding:26px}
+  .card{width:min(980px,96vw);background:linear-gradient(180deg,#101629 0%,#0c1222 100%);
+        border:1px solid #1e2536;border-radius:18px;box-shadow:0 18px 60px rgba(0,0,0,.45);padding:20px}
+  .head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .brand{font-weight:900;font-size:clamp(20px,5vw,28px)}
+  .links{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{display:inline-block;text-decoration:none;color:#0b0b12;background:#fff;border:0;border-radius:10px;padding:10px 12px;font-weight:800}
+  .ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.16)}
+  .sub{opacity:.9;font-size:13px;margin:8px 0 12px}
+  .stage{position:relative;width:100%;aspect-ratio:16/9;max-height:64vh;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 10px 40px rgba(0,0,0,.45)}
+  iframe{width:100%;height:100%;display:block}
+  .overlay{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.35)}
+  .start{border:0;border-radius:999px;padding:14px 18px;font-weight:900;background:#fff;color:#0b0b12}
+  .now{margin-top:10px;font-weight:700}
+  .airplay{margin-top:6px;text-align:center;font-size:12px;opacity:.8}
+  .queue{margin-top:10px;display:grid;gap:8px}
+  .row{display:flex;gap:10px;align-items:center;justify-content:space-between;background:rgba(255,255,255,.06);
+       border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:8px 10px}
+  .meta{display:flex;gap:8px;align-items:center}
+  .dot{width:8px;height:8px;border-radius:50%;background:#fff;opacity:.35}
+  .row.active .dot{opacity:1;box-shadow:0 0 12px rgba(255,255,255,.6)}
+  .title{font-size:14px}
+  .chip{font-size:11px;opacity:.9;border:1px solid rgba(255,255,255,.2);padding:4px 8px;border-radius:99px}
+  .controls{display:flex;gap:8px;margin-top:10px}
+  .cbtn{border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;border-radius:10px;padding:10px 12px;font-weight:800}
+  .hot{background:linear-gradient(90deg,var(--amber),var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900}
+  /* Bee notes (Norwegian) */
+  .bee{margin-top:12px;background:rgba(159,214,255,.09);border:1px solid rgba(159,214,255,.25);border-radius:12px;padding:12px}
+  .toggle{margin-top:6px}
+  .togglebtn{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.08);color:#fff;border-radius:12px;
+             padding:8px 10px;font-weight:700;cursor:pointer}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <div class="brand">Dagny Queue</div>
+      <div class="links">
+        <a class="btn ghost" href="https://earth.plnt.earth/dagny">Dagny page</a>
+        <a class="btn" href="https://earth.plnt.earth/cosmic">Cosmic</a>
+      </div>
+    </div>
+    <div class="sub">Northern Pulse — clear air moving. <span class="hot">“Love You Like That” = Hot To Go spark.</span></div>
+
+    <div class="stage">
+      <div id="player"></div>
+      <div class="overlay" id="overlay"><button class="start" id="start">Start Queue</button></div>
+    </div>
+
+    <div class="controls">
+      <button class="cbtn" id="prev">◀︎ Prev</button>
+      <button class="cbtn" id="play">▶︎ Play</button>
+      <button class="cbtn" id="pause">⏸︎ Pause</button>
+      <button class="cbtn" id="next">Next ▶︎</button>
+    </div>
+    <div class="now" id="now">Ready</div>
+    <div class="airplay">🔊 AirPlay: Kontrollsenter → trykk på lydkortet → AirPlay → velg høyttaler/TV</div>
+
+    <div class="queue" id="queue"></div>
+
+    <!-- Bee Notes to Sigrid (Norwegian, from the future) -->
+    <div class="bee">
+      <div style="font-weight:800;margin-bottom:6px">Bie-notater til Sigrid (fra fremtiden)</div>
+      <div id="beeBody" class="hidden" style="line-height:1.55;font-size:13.5px">
+        <p><strong>Når Dagny løfter tempoet:</strong> Hold lyset klart, ikke hardt. Pusten først.</p>
+        <p><strong>Hvis hjertet hopper:</strong> La beina følge — én lett sving, én rolig tanke.</p>
+        <p><strong>Når refrenget åpner gaten:</strong> Vi går inn sammen, men vi presser ikke.</p>
+        <p><em>Fra morgendagen:</em> Jeg er rett bak deg. Lyset er der allerede.</p>
+      </div>
+      <div class="toggle"><button id="beeToggle" class="togglebtn">Vis / skjul notater</button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var tracks = [
+    {id:"bnQBqinwlwQ", t:"Love You Like That", tag:"Hot To Go"},
+    {id:"7K0y1RT6M68", t:"Backbeat", tag:"Origin"},
+    {id:"qO-U2WlgroQ", t:"Somebody", tag:"North → Heart"},
+    {id:"JO5trT-iZZY", t:"Heartbreak In The Making", tag:"Elle"},
+    {id:"BskeuUMp_lo", t:"Brightsider", tag:"Light"},
+    {id:"XQiGNAeEv7c", t:"Come Over", tag:"Invite"}
+  ];
+  var ids = tracks.map(x=>x.id);
+  var idx = 0, player;
+
+  function renderQueue(){
+    var q = document.getElementById("queue"); q.innerHTML="";
+    tracks.forEach(function(it,i){
+      var row = document.createElement("div");
+      row.className = "row" + (i===idx?" active":"");
+      row.innerHTML = '<div class="meta"><div class="dot"></div><div class="title">'+(i+1)+'. '+escapeHtml(it.t)+'</div></div><div class="chip">'+escapeHtml(it.tag)+'</div>';
+      row.addEventListener("click", function(){ setIndex(i,true); }, {passive:true});
+      q.appendChild(row);
+    });
+  }
+  function setNow(){
+    document.getElementById("now").textContent = (idx+1)+"/"+tracks.length+" — Dagny — "+tracks[idx].t;
+  }
+  function syncIndexFromPlayer(){
+    try{ var pi = player.getPlaylistIndex(); if(typeof pi==="number" && !isNaN(pi)){ idx = pi; } }catch(e){}
+    setNow(); renderQueue();
+  }
+  function setIndex(i, play){
+    idx = (i+tracks.length)%tracks.length;
+    try{
+      player.loadPlaylist({playlist: ids, index: idx, startSeconds: 0, suggestedQuality: "highres"});
+      if(play){ player.playVideo(); }
+    }catch(e){}
+    setNow(); renderQueue();
+  }
+
+  function onYouTubeIframeAPIReady(){
+    player = new YT.Player('player',{
+      width:'100%', height:'100%',
+      videoId: ids[0],
+      playerVars:{
+        autoplay:0, controls:1, rel:0, modestbranding:1, playsinline:1, fs:1,
+        playlist: ids.slice(1).join(',')
+      },
+      events:{
+        onReady: function(){ setNow(); renderQueue(); },
+        onStateChange: function(ev){
+          if(ev.data===YT.PlayerState.PLAYING){ syncIndexFromPlayer(); }
+          if(ev.data===YT.PlayerState.ENDED){ syncIndexFromPlayer(); }
+        }
+      }
+    });
+  }
+
+  document.getElementById("prev").addEventListener("click", function(){ try{ player.previousVideo(); }catch(e){} }, {passive:true});
+  document.getElementById("next").addEventListener("click", function(){ try{ player.nextVideo(); }catch(e){} }, {passive:true});
+  document.getElementById("play").addEventListener("click", function(){ try{ player.playVideo(); }catch(e){} }, {passive:true});
+  document.getElementById("pause").addEventListener("click", function(){ try{ player.pauseVideo(); }catch(e){} }, {passive:true});
+
+  document.getElementById("start").addEventListener("click", function(){
+    document.getElementById("overlay").style.display="none";
+    try{
+      player.loadPlaylist({playlist: ids, index: 0, startSeconds: 0, suggestedQuality: "highres"});
+      player.playVideo();
+    }catch(e){}
+  }, {passive:true});
+
+  function escapeHtml(s){return (s+"").replace(/[&<>"']/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));}
+
+  (function(){ var tag=document.createElement('script'); tag.src="https://www.youtube.com/iframe_api";
+    var s=document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tag,s); })();
+
+  // Bee notes toggle (Norwegian)
+  var beeToggle = document.getElementById("beeToggle");
+  var beeBody = document.getElementById("beeBody");
+  beeToggle.addEventListener("click", function(){
+    beeBody.classList.toggle("hidden");
+  }, {passive:true});
+</script>
+</body>
+</html>
