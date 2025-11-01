@@ -1,282 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>PLNT Earth — Root</title>
-<meta name="description" content="PLNT Earth root. Manifest, Directors, and a live nodes map for the Illumina ecosystem." />
-<style>
-  :root{
-    --bg:#0b0c11; --panel:#0f1221; --ink:#eaf0ff; --muted:#a9b0d5;
-    --line:#2a2f4a; --good:#73e3c5; --warn:#ffd089; --soon:#94a0d9;
-    --tap:#79e0c8; --tap2:#d08bff; --shadow:0 10px 30px rgba(0,0,0,.45);
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; color:var(--ink);
-    background: radial-gradient(1200px 800px at 70% 20%, #13162a 0%, #0b0c11 60%, #08090e 100%);
-    font: 500 16px/1.45 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-  }
-  .wrap{max-width:1180px; margin:0 auto; padding:22px; display:grid; gap:18px}
-  .hdr{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
-  .title{font-weight:800; font-size:24px; letter-spacing:.25px}
-  .tag{font:600 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding:4px 8px; border-radius:999px; border:1px solid rgba(200,210,255,.25); color:#dbe2ff}
-
-  .grid{display:grid; gap:12px}
-  @media(min-width:880px){ .grid{grid-template-columns: 1.2fr .8fr} }
-
-  .card{
-    background:linear-gradient(180deg, rgba(18,22,40,.92), rgba(14,17,32,.92));
-    border:1px solid rgba(120,130,170,.22);
-    border-radius:16px; padding:16px; box-shadow:var(--shadow);
-  }
-  .card h2{margin:0 0 8px 0; font-size:18px; letter-spacing:.2px}
-  .card h3{margin:14px 0 6px 0; font-size:15px}
-  .muted{color:var(--muted); font-size:14px}
-  .list{margin:8px 0 0 0; padding-left:18px}
-  .list li{margin:6px 0}
-
-  /* nodes */
-  .nodes{
-    display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:10px;
-  }
-  .node{
-    display:flex; flex-direction:column; gap:10px;
-    border:1px solid rgba(120,130,170,.25); border-radius:14px; padding:12px;
-    background:rgba(255,255,255,.03);
-  }
-  .node .top{display:flex; align-items:center; justify-content:space-between; gap:10px}
-  .node .name{font-weight:800; letter-spacing:.2px}
-  .node .status{
-    font:600 11px ui-monospace, SFMono-Regular, Menlo, monospace;
-    padding:3px 8px; border-radius:999px; border:1px solid rgba(120,130,170,.35); color:#d6dcff
-  }
-  .soon{border-color:rgba(148,160,217,.55); color:#cfd5ff}
-  .live{border-color:rgba(121,224,200,.7); color:#dff9f3}
-  .node p{margin:0; color:#dfe3ff; font-size:13px}
-  .node .links{display:flex; flex-wrap:wrap; gap:8px}
-  .btn{
-    display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:12px;
-    border:1px solid rgba(120,130,170,.35); color:#eaf0ff; text-decoration:none; font-weight:700; letter-spacing:.2px;
-    background:rgba(255,255,255,.03);
-    transition:transform .12s ease, border-color .12s ease, background .12s ease;
-  }
-  .btn:hover{ transform:translateY(-1px) }
-  .btn.primary{ border-color:rgba(121,224,200,.7); background:rgba(121,224,200,.12) }
-
-  /* directors grid */
-  .directors{display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:10px}
-  .dir{
-    border:1px solid rgba(120,130,170,.25); border-radius:14px; padding:12px; background:rgba(255,255,255,.03);
-  }
-  .dir .role{font-size:12px; color:var(--muted)}
-  .dir .who{font-weight:800}
-  .dir p{margin:6px 0 0 0; font-size:13px; color:#dfe3ff}
-
-  /* queue card */
-  .q{
-    display:grid; gap:8px;
-  }
-  .qrow{
-    display:flex; align-items:center; justify-content:space-between; gap:8px;
-    border:1px solid rgba(120,130,170,.28); border-radius:12px; padding:10px; background:rgba(255,255,255,.03);
-    color:#dfe3ff; font-size:13px;
-  }
-  .flag{
-    font:700 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding:3px 8px; border-radius:999px; border:1px solid rgba(120,130,170,.35); color:#d6dcff
-  }
-  .ok{ border-color:rgba(121,224,200,.8); color:#eafff8 }
-  .warn{ border-color:rgba(255,208,137,.8); color:#fff3dc }
-
-  .foot{ text-align:center; color:var(--muted); font-size:12px; padding:8px 0 16px }
-  .kbd{font:600 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding:2px 6px; border:1px solid rgba(200,210,255,.2); border-radius:6px; background:#0f1221; color:#dde3ff}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>earth.plnt.earth — Dagny • Love You Like That (Loop)</title>
+  <meta name="color-scheme" content="dark light">
+  <style>
+    :root{
+      --bg:#0b0e12; --ink:#eaf2ff; --ink-dim:#c8d4ee; --line:rgba(255,255,255,0.12);
+      --glass:rgba(255,255,255,0.08); --accent:#87a7ff; --mint:#a8ffe6; --blue:#6fa8ff;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+      background:
+        radial-gradient(1200px 800px at 70% -10%, rgba(111,168,255,0.16), transparent 60%),
+        radial-gradient(800px 600px at -10% 20%, rgba(184,166,255,0.16), transparent 60%),
+        linear-gradient(180deg,#0a0c12 0%,#0b0e12 100%);
+      color:var(--ink);
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+    header{
+      position:sticky; top:0; z-index:10; padding:28px 18px 12px;
+      backdrop-filter: blur(8px);
+      background:linear-gradient(to bottom, rgba(11,14,18,0.86), rgba(11,14,18,0.55) 60%, transparent);
+      border-bottom:1px solid var(--line);
+    }
+    .wrap{max-width:900px; margin:0 auto;}
+    h1{
+      margin:0 0 6px; font-size:clamp(22px,3.2vw,34px); font-weight:800; letter-spacing:.2px;
+      background: linear-gradient(90deg, var(--ink), var(--blue));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .sub{color:var(--ink-dim); font-size:clamp(13px,1.8vw,15.5px); line-height:1.5;}
+    main{padding:22px 18px 80px;}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border:1px solid var(--line); border-radius:18px; overflow:hidden;
+      box-shadow:0 15px 40px rgba(0,0,0,.32);
+    }
+    .head{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 16px 0;}
+    .meta{display:flex; align-items:center; gap:12px; min-width:0;}
+    .dot{width:14px; height:14px; border-radius:50%; border:1px solid rgba(255,255,255,.35);
+      background:radial-gradient(circle at 30% 30%, var(--mint), var(--blue));
+      box-shadow:0 0 22px rgba(111,168,255,.55), inset 0 0 14px rgba(168,255,230,.45);}
+    .title{font-weight:700; font-size:16px;}
+    .artist{font-size:12.5px; color:var(--ink-dim)}
+    .actions{display:flex; gap:8px; flex-wrap:wrap;}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border:1px solid var(--line); border-radius:12px;
+      background:var(--glass); color:var(--ink); font-size:13px; text-decoration:none; cursor:pointer;
+    }
+    .btn:hover{background:rgba(255,255,255,.12)}
+    .player{width:100%; aspect-ratio:16/9; background:rgba(255,255,255,0.04); border-top:1px solid var(--line); display:grid; place-items:center;}
+    .playpad{display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center; padding:24px;}
+    .play{padding:10px 16px; border-radius:12px; background:var(--accent); color:#0a1020; font-weight:800; border:none; cursor:pointer; font-size:14px;}
+    .controls{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:6px; color:var(--ink-dim); font-size:13px;}
+    footer{color:var(--ink-dim); text-align:center; padding:38px 18px; border-top:1px solid var(--line); background:linear-gradient(180deg, rgba(255,255,255,.05), transparent); font-size:13px;}
+    .mini{font-size:12px; opacity:.85; margin-top:8px}
+  </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="hdr">
-      <div class="title">PLNT Earth</div>
-      <div class="tag">root · ethics baseline</div>
-    </header>
+  <header>
+    <div class="wrap">
+      <h1>earth.plnt.earth — Dagny</h1>
+      <div class="sub">Single-video mode. Click to play. Loop is on by default.</div>
+    </div>
+  </header>
 
-    <section class="grid">
-      <!-- Left: Manifest + Nodes + Queue -->
-      <div class="card">
-        <h2>Manifest</h2>
-        <p class="muted">Earth is the conscience of PLNT. We build with care, credit, and clarity. If action drains the field, we pause. If action feeds the field, we proceed.</p>
-        <ul class="list">
-          <li>Kindness first. Boundaries clear. Credit explicit.</li>
-          <li>Private truth moves through Garlic. Then School checks continuity. Earth confirms ethics. Harbor grants consent & resources. Dagny brings motion. Then it is official.</li>
-          <li>We favor small steps that compound over grand promises that stall.</li>
-        </ul>
-
-        <h3 style="margin-top:14px">Nodes</h3>
-        <div class="nodes" id="nodes"><!-- populated by JS --></div>
-
-        <h3 style="margin-top:14px">Bridge Queue (read-only)</h3>
-        <div class="q" id="queue">
-          <!-- safe, local-only status mirrors; no undefined refs -->
-          <div class="qrow">
-            <div>Garlic Path <span class="muted">· four checks</span></div>
-            <div id="q-garlic" class="flag">—</div>
+  <main class="wrap">
+    <article class="card">
+      <div class="head">
+        <div class="meta">
+          <div class="dot" aria-hidden="true"></div>
+          <div>
+            <div class="title">Love You Like That (Lyric Video)</div>
+            <div class="artist">Dagny</div>
           </div>
-          <div class="qrow">
-            <div>Harbor Clearance <span class="muted">· credit · consent · resource</span></div>
-            <div id="q-harbor" class="flag">—</div>
-          </div>
+        </div>
+        <div class="actions">
+          <a class="btn" target="_blank" rel="noopener"
+             href="https://www.youtube.com/watch?v=bnQBqinwlwQ">Open on YouTube</a>
         </div>
       </div>
 
-      <!-- Right: Directors -->
-      <aside class="card">
-        <h2>Directors</h2>
-        <div class="directors">
-          <div class="dir">
-            <div class="who">Greta</div>
-            <div class="role">Earth Conscience</div>
-            <p>Ethical ground. Protects the baseline. Asks if this feeds or drains the field.</p>
+      <div class="player" id="player">
+        <div class="playpad">
+          <button id="playBtn" class="play">Play</button>
+          <div class="controls">
+            <label><input id="loopToggle" type="checkbox" checked> Loop</label>
+            <button id="restartBtn" class="btn" type="button">Restart</button>
           </div>
-          <div class="dir">
-            <div class="who">Taylor</div>
-            <div class="role">Inspector of Continuity</div>
-            <p>Story audit. Ensures a lesson exists and loops are closed.</p>
-          </div>
-          <div class="dir">
-            <div class="who">Marina</div>
-            <div class="role">Mirror Director</div>
-            <p>Reflection to radiance. Turns private clarity into art that lives.</p>
-          </div>
-          <div class="dir">
-            <div class="who">Olivia Jones</div>
-            <div class="role">Guide of Motion</div>
-            <p>Compass energy. Restores direction without chase.</p>
-          </div>
-          <div class="dir">
-            <div class="who">Sanela</div>
-            <div class="role">Harbor Mediator</div>
-            <p>Consent & resources. Grants clearance before motion.</p>
-          </div>
+          <div class="mini">Privacy-enhanced embed loads on click.</div>
         </div>
+      </div>
+    </article>
+  </main>
 
-        <h3 style="margin-top:14px">Pathway</h3>
-        <p class="muted"><span class="kbd">Garlic</span> → <span class="kbd">School</span> → <span class="kbd">Earth</span> → <span class="kbd">Harbor</span> → <span class="kbd">Dagny</span>.</p>
+  <footer>
+    earth.plnt.earth — focused loop. No tracking; video loads only when you press Play.
+  </footer>
 
-        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:10px">
-          <a class="btn primary" href="https://garlic.plnt.earth" rel="noopener">Enter Garlic</a>
-          <a class="btn" href="https://school.plnt.earth" rel="noopener">Go to School</a>
-          <a class="btn" href="https://harbor.plnt.earth" rel="noopener">Open Harbor</a>
-          <a class="btn" href="https://bridge.plnt.earth" rel="noopener">Open Bridge</a>
-        </div>
-      </aside>
-    </section>
+  <script>
+    (function(){
+      var VIDEO_ID = "bnQBqinwlwQ"; // Dagny — Love You Like That (lyric)
+      var host = document.getElementById('player');
+      var playBtn = document.getElementById('playBtn');
+      var loopToggle = document.getElementById('loopToggle');
+      var restartBtn = document.getElementById('restartBtn');
 
-    <footer class="foot">“Ground first, then cross.” — Earth</footer>
-  </div>
+      function buildSrc(loopOn){
+        var params = new URLSearchParams({
+          autoplay: '1',
+          modestbranding: '1',
+          rel: '0',
+          color: 'white'
+        });
+        if(loopOn){
+          // YouTube requires playlist=VIDEO_ID for single-video loop
+          params.set('loop','1');
+          params.set('playlist', VIDEO_ID);
+        }
+        return 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(VIDEO_ID) + '?' + params.toString();
+      }
 
-<script>
-(function(){
-  // ---------- Safe helpers ----------
-  function truthy(v){
-    if(v==null) return false;
-    var s = String(v).toLowerCase().trim();
-    return !(s===""||s==="0"||s==="false"||s==="null"||s==="undefined");
-  }
-  function getJSON(key, fallback){
-    try{
-      var raw = localStorage.getItem(key);
-      if(!raw) return fallback;
-      var val = JSON.parse(raw);
-      return (val && typeof val==="object") ? val : fallback;
-    }catch(e){ return fallback; }
-  }
-  function getArr(key, fallback){
-    try{
-      var raw = localStorage.getItem(key);
-      var val = JSON.parse(raw);
-      return Array.isArray(val) ? val : fallback;
-    }catch(e){ return fallback; }
-  }
+      function inject(loopOn){
+        host.innerHTML = '';
+        var iframe = document.createElement('iframe');
+        iframe.title = 'YouTube video';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.border = '0';
+        iframe.src = buildSrc(loopOn);
+        host.appendChild(iframe);
+      }
 
-  // ---------- Config (safe defaults) ----------
-  var LIVE_DOMAINS_DEFAULT = [
-    "earth.plnt.earth",
-    "garlic.plnt.earth",
-    "bridge.plnt.earth",
-    "harbor.plnt.earth",
-    "dagny.plnt.earth"
-  ];
-  // Allow local override with key 'plnt.live' (array of strings)
-  var LIVE_DOMAINS = getArr('plnt.live', LIVE_DOMAINS_DEFAULT);
-
-  var NODES = [
-    {name:"Garlic", host:"garlic.plnt.earth", about:"Back channel. Clean transmission.", links:[{t:"Open", href:"https://garlic.plnt.earth", k:"primary"}]},
-    {name:"School", host:"school.plnt.earth", about:"Continuity check. Lesson required.", links:[{t:"Enter", href:"https://school.plnt.earth"}]},
-    {name:"Earth", host:"earth.plnt.earth", about:"Ethics baseline. Boundaries and credit.", links:[{t:"You are here", href:"#"}]},
-    {name:"Harbor", host:"harbor.plnt.earth", about:"Consent & resources. Grants clearance.", links:[{t:"Open", href:"https://harbor.plnt.earth"}]},
-    {name:"Dagny", host:"dagny.plnt.earth", about:"Motion and joy. Publish the small step.", links:[{t:"Enter", href:"https://dagny.plnt.earth"}]},
-
-    {name:"Bridge", host:"bridge.plnt.earth", about:"Handoff hub from private to public routes.", links:[{t:"Open", href:"https://bridge.plnt.earth"}]},
-
-    {name:"Honey", host:"honey.plnt.earth", about:"Sabrina anchor. Sweetness that stays real.", links:[{t:"Visit", href:"https://honey.plnt.earth"}]},
-    {name:"MirrorHoney", host:"mirrorhoney.plnt.earth", about:"Marina reflection to radiance.", links:[{t:"Visit", href:"https://mirrorhoney.plnt.earth"}]},
-    {name:"Froot", host:"froot.plnt.earth", about:"Color lab for Marina. Violet & pearl.", links:[{t:"Visit", href:"https://froot.plnt.earth"}]},
-    {name:"Motion", host:"motion.plnt.earth", about:"Green DJ arc. Loops and flow.", links:[{t:"Visit", href:"https://motion.plnt.earth"}]},
-    {name:"Time", host:"time.plnt.earth", about:"Physics poetry. Self check & tone maps.", links:[{t:"Visit", href:"https://time.plnt.earth"}]},
-    {name:"Wonder", host:"wonder.plnt.earth", about:"Dua reading room. Books & bridges.", links:[{t:"Visit", href:"https://wonder.plnt.earth"}]},
-    {name:"Clarity", host:"clarity.plnt.earth", about:"Sigrid lens. Clean light.", links:[{t:"Visit", href:"https://clarity.plnt.earth"}]},
-    {name:"Alter.Fire", host:"alter.fire.plnt.earth", about:"Doechii catalyst. Play that disrupts.", links:[{t:"Visit", href:"https://alter.fire.plnt.earth"}]}
-  ];
-
-  // ---------- Render nodes ----------
-  (function renderNodes(){
-    var root = document.getElementById('nodes');
-    if(!root) return;
-    var liveSet = new Set(LIVE_DOMAINS || []);
-    NODES.forEach(function(n){
-      var live = liveSet.has(n.host);
-      var card = document.createElement('div'); card.className='node';
-      var top = document.createElement('div'); top.className='top';
-      var name = document.createElement('div'); name.className='name'; name.textContent = n.name;
-      var st = document.createElement('div'); st.className='status ' + (live ? 'live' : 'soon'); st.textContent = live ? 'Live' : 'Coming Soon';
-      top.appendChild(name); top.appendChild(st);
-      var p = document.createElement('p'); p.textContent = n.about;
-      var links = document.createElement('div'); links.className='links';
-      (n.links||[]).forEach(function(l){
-        var a = document.createElement('a');
-        a.className = 'btn ' + (l.k==='primary'?'primary':'');
-        a.href = l.href; a.rel = 'noopener'; a.textContent = l.t;
-        links.appendChild(a);
+      playBtn.addEventListener('click', function(){
+        inject(loopToggle.checked);
       });
-      card.appendChild(top); card.appendChild(p); card.appendChild(links);
-      root.appendChild(card);
-    });
-  })();
 
-  // ---------- Safe “Bridge Queue” mirrors (no undefined refs) ----------
-  (function renderQueue(){
-    var qGarlic = document.getElementById('q-garlic');
-    var qHarbor = document.getElementById('q-harbor');
-    if(qGarlic){
-      var garlicState = getJSON('illumina.afg.v1', {});
-      var gAll = garlicState && ['garlic','school','earth','dagny'].every(function(k){ return !!garlicState[k]; });
-      qGarlic.classList.add(gAll ? 'ok' : 'warn');
-      qGarlic.textContent = gAll ? 'all green' : 'pending';
-    }
-    if(qHarbor){
-      var credit   = truthy(localStorage.getItem('harbor.credit'));
-      var consent  = truthy(localStorage.getItem('harbor.consent'));
-      var resource = truthy(localStorage.getItem('harbor.resource'));
-      var hAll = credit && consent && resource;
-      qHarbor.classList.add(hAll ? 'ok' : 'warn');
-      qHarbor.textContent = hAll ? 'clear' : ['credit','consent','resource'].filter(function(k){
-        if(k==='credit')   return !credit;
-        if(k==='consent')  return !consent;
-        if(k==='resource') return !resource;
-      }).join(' · ') || 'clear';
-    }
-  })();
-})();
-</script>
+      loopToggle.addEventListener('change', function(){
+        // If player exists, rebuild to apply loop change
+        var hasIframe = !!host.querySelector('iframe');
+        if(hasIframe) inject(loopToggle.checked);
+      });
+
+      restartBtn.addEventListener('click', function(){
+        inject(loopToggle.checked);
+      });
+    })();
+  </script>
 </body>
 </html>
