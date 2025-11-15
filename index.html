@@ -22,12 +22,27 @@
       color:var(--ink);
       -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
     }
-    header{
-      position:sticky; top:0; z-index:10; padding:28px 18px 12px;
-      backdrop-filter: blur(8px);
-      background:linear-gradient(to bottom, rgba(11,14,18,0.86), rgba(11,14,18,0.55) 60%, transparent);
+
+    /* NAV BAR */
+    nav{
+      display:flex;
+      gap:16px;
+      padding:12px 18px 14px;
+      backdrop-filter:blur(10px);
+      background:rgba(10,12,18,.55);
       border-bottom:1px solid var(--line);
+      position:sticky;top:0;z-index:20;
+      font-size:14px;
     }
+    nav a{
+      color:var(--ink-dim); text-decoration:none; font-weight:500;
+    }
+    nav a:hover{color:var(--ink)}
+
+    header{
+      padding:24px 18px 10px;
+    }
+
     .wrap{max-width:900px; margin:0 auto;}
     h1{
       margin:0 0 6px; font-size:clamp(22px,3.2vw,34px); font-weight:800; letter-spacing:.2px;
@@ -64,6 +79,16 @@
   </style>
 </head>
 <body>
+
+  <nav>
+    <a href="https://time.plnt.earth/map">Map</a>
+    <a href="https://time.plnt.earth">Time</a>
+    <a href="https://mirrorhoney.plnt.earth">Marina</a>
+    <a href="https://honey.plnt.earth">Sabrina</a>
+    <a href="https://clarity.plnt.earth">Sigrid</a>
+    <a href="https://motion.plnt.earth">Dua</a>
+  </nav>
+
   <header>
     <div class="wrap">
       <h1>earth.plnt.earth — Dagny</h1>
@@ -106,7 +131,7 @@
 
   <script>
     (function(){
-      var VIDEO_ID = "bnQBqinwlwQ"; // Dagny — Love You Like That (lyric)
+      var VIDEO_ID = "bnQBqinwlwQ";
       var host = document.getElementById('player');
       var playBtn = document.getElementById('playBtn');
       var loopToggle = document.getElementById('loopToggle');
@@ -120,7 +145,6 @@
           color: 'white'
         });
         if(loopOn){
-          // YouTube requires playlist=VIDEO_ID for single-video loop
           params.set('loop','1');
           params.set('playlist', VIDEO_ID);
         }
@@ -145,7 +169,6 @@
       });
 
       loopToggle.addEventListener('change', function(){
-        // If player exists, rebuild to apply loop change
         var hasIframe = !!host.querySelector('iframe');
         if(hasIframe) inject(loopToggle.checked);
       });
