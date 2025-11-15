@@ -5,79 +5,164 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>earth.plnt.earth — Dagny • Love You Like That (Loop)</title>
   <meta name="color-scheme" content="dark light">
+
   <style>
     :root{
-      --bg:#0b0e12; --ink:#eaf2ff; --ink-dim:#c8d4ee; --line:rgba(255,255,255,0.12);
-      --glass:rgba(255,255,255,0.08); --accent:#87a7ff; --mint:#a8ffe6; --blue:#6fa8ff;
+      --bg:#080a10;
+      --ink:#f4f9ff;
+      --ink-dim:#c2d0e9;
+      --line:rgba(255,255,255,0.14);
+
+      /* Dagny snap colors */
+      --mint:#afffe4;
+      --mint-glow:rgba(175,255,228,0.55);
+      --sky:#7fb3ff;
+      --sky-glow:rgba(127,179,255,0.55);
+
+      --glass:rgba(255,255,255,0.06);
+      --glass2:rgba(255,255,255,0.12);
     }
-    *{box-sizing:border-box}
+
+    *{box-sizing:border-box;}
     html,body{height:100%}
+
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+      font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       background:
-        radial-gradient(1200px 800px at 70% -10%, rgba(111,168,255,0.16), transparent 60%),
-        radial-gradient(800px 600px at -10% 20%, rgba(184,166,255,0.16), transparent 60%),
-        linear-gradient(180deg,#0a0c12 0%,#0b0e12 100%);
+        radial-gradient(1400px 900px at 70% -20%, var(--sky-glow), transparent 60%),
+        radial-gradient(900px 700px at -10% 30%, var(--mint-glow), transparent 60%),
+        linear-gradient(180deg,#07090e 0%,#0a0c12 100%);
       color:var(--ink);
-      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
     }
 
     /* NAV BAR */
     nav{
-      display:flex;
-      gap:16px;
-      padding:12px 18px 14px;
-      backdrop-filter:blur(10px);
-      background:rgba(10,12,18,.55);
+      display:flex;gap:18px;
+      padding:14px 20px;
+      backdrop-filter:blur(14px);
+      background:rgba(10,12,18,0.55);
       border-bottom:1px solid var(--line);
       position:sticky;top:0;z-index:20;
       font-size:14px;
     }
     nav a{
-      color:var(--ink-dim); text-decoration:none; font-weight:500;
+      text-decoration:none;color:var(--ink-dim);font-weight:500;
+      transition:color .2s ease;
     }
     nav a:hover{color:var(--ink)}
 
+    /* HEADER */
     header{
-      padding:24px 18px 10px;
+      padding:26px 20px 10px;
+      text-align:left;
+    }
+    .wrap{max-width:900px;margin:0 auto;}
+    h1{
+      margin:0 0 6px;
+      font-size:clamp(24px,3.6vw,36px);
+      font-weight:800;
+      letter-spacing:.25px;
+      background:linear-gradient(90deg,var(--ink),var(--sky));
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+    .sub{color:var(--ink-dim);font-size:14px;margin-top:4px;}
+
+    /* CARD */
+    main{padding:28px 20px 100px;}
+    .card{
+      background:linear-gradient(180deg,var(--glass2),var(--glass));
+      border:1px solid var(--line);
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 18px 50px rgba(0,0,0,.35);
+      transform:translateZ(0);
+      animation:snapIn .65s cubic-bezier(.16,1,.3,1);
     }
 
-    .wrap{max-width:900px; margin:0 auto;}
-    h1{
-      margin:0 0 6px; font-size:clamp(22px,3.2vw,34px); font-weight:800; letter-spacing:.2px;
-      background: linear-gradient(90deg, var(--ink), var(--blue));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
+    @keyframes snapIn{
+      0%{opacity:0;transform:translateY(30px) scale(.97);}
+      60%{opacity:1;transform:translateY(0) scale(1.015);}
+      100%{transform:scale(1);}
     }
-    .sub{color:var(--ink-dim); font-size:clamp(13px,1.8vw,15.5px); line-height:1.5;}
-    main{padding:22px 18px 80px;}
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      border:1px solid var(--line); border-radius:18px; overflow:hidden;
-      box-shadow:0 15px 40px rgba(0,0,0,.32);
+
+    .head{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:18px 18px 0;
     }
-    .head{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 16px 0;}
-    .meta{display:flex; align-items:center; gap:12px; min-width:0;}
-    .dot{width:14px; height:14px; border-radius:50%; border:1px solid rgba(255,255,255,.35);
-      background:radial-gradient(circle at 30% 30%, var(--mint), var(--blue));
-      box-shadow:0 0 22px rgba(111,168,255,.55), inset 0 0 14px rgba(168,255,230,.45);}
-    .title{font-weight:700; font-size:16px;}
-    .artist{font-size:12.5px; color:var(--ink-dim)}
-    .actions{display:flex; gap:8px; flex-wrap:wrap;}
+    .meta{display:flex;align-items:center;gap:14px}
+    .dot{
+      width:16px;height:16px;border-radius:50%;
+      background:radial-gradient(circle at 35% 35%,var(--mint),var(--sky));
+      box-shadow:
+        0 0 20px var(--sky-glow),
+        inset 0 0 14px var(--mint-glow);
+      border:1px solid rgba(255,255,255,.3);
+    }
+    .title{font-weight:700;font-size:17px;}
+    .artist{font-size:13px;color:var(--ink-dim)}
+
+    .actions{display:flex;gap:10px;}
     .btn{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 12px; border:1px solid var(--line); border-radius:12px;
-      background:var(--glass); color:var(--ink); font-size:13px; text-decoration:none; cursor:pointer;
+      padding:8px 13px;
+      border-radius:14px;
+      background:var(--glass);
+      border:1px solid var(--line);
+      color:var(--ink);
+      font-size:13px;text-decoration:none;
+      transition:background .2s ease;
     }
-    .btn:hover{background:rgba(255,255,255,.12)}
-    .player{width:100%; aspect-ratio:16/9; background:rgba(255,255,255,0.04); border-top:1px solid var(--line); display:grid; place-items:center;}
-    .playpad{display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center; padding:24px;}
-    .play{padding:10px 16px; border-radius:12px; background:var(--accent); color:#0a1020; font-weight:800; border:none; cursor:pointer; font-size:14px;}
-    .controls{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:6px; color:var(--ink-dim); font-size:13px;}
-    footer{color:var(--ink-dim); text-align:center; padding:38px 18px; border-top:1px solid var(--line); background:linear-gradient(180deg, rgba(255,255,255,.05), transparent); font-size:13px;}
-    .mini{font-size:12px; opacity:.85; margin-top:8px}
+    .btn:hover{background:rgba(255,255,255,0.14)}
+
+    .player{
+      width:100%;aspect-ratio:16/9;
+      background:rgba(255,255,255,0.05);
+      border-top:1px solid var(--line);
+      display:grid;place-items:center;
+    }
+
+    .playpad{
+      display:flex;flex-direction:column;align-items:center;
+      gap:12px;text-align:center;padding:26px;
+    }
+    .play{
+      padding:12px 20px;
+      border-radius:16px;
+      background:var(--mint);
+      color:#062015;
+      font-weight:800;
+      border:none;
+      cursor:pointer;
+      font-size:15px;
+      transition:transform .15s ease;
+    }
+    .play:active{transform:scale(.93);}
+
+    .controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--ink-dim);}
+
+    footer{
+      color:var(--ink-dim);
+      text-align:center;
+      padding:36px 20px 20px;
+      border-top:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(255,255,255,.04),transparent);
+      font-size:13px;
+      margin-top:40px;
+    }
+
+    /* Earth Note */
+    .earth-note{
+      margin-top:16px;
+      font-size:12.8px;
+      opacity:.92;
+      color:var(--ink-dim);
+      line-height:1.45;
+    }
   </style>
 </head>
+
 <body>
 
   <nav>
@@ -100,7 +185,7 @@
     <article class="card">
       <div class="head">
         <div class="meta">
-          <div class="dot" aria-hidden="true"></div>
+          <div class="dot"></div>
           <div>
             <div class="title">Love You Like That (Lyric Video)</div>
             <div class="artist">Dagny</div>
@@ -127,56 +212,61 @@
 
   <footer>
     earth.plnt.earth — focused loop. No tracking; video loads only when you press Play.
+    <div class="earth-note">
+      Earth is a grounding page. This one stays.  
+      A place to hold joy, music, and motion — untouched by the noise.  
+      If the system shifts, Earth remains.
+    </div>
   </footer>
 
   <script>
     (function(){
-      var VIDEO_ID = "bnQBqinwlwQ";
-      var host = document.getElementById('player');
-      var playBtn = document.getElementById('playBtn');
-      var loopToggle = document.getElementById('loopToggle');
-      var restartBtn = document.getElementById('restartBtn');
+      var VIDEO_ID="bnQBqinwlwQ";
+      var host=document.getElementById('player');
+      var playBtn=document.getElementById('playBtn');
+      var loopToggle=document.getElementById('loopToggle');
+      var restartBtn=document.getElementById('restartBtn');
 
       function buildSrc(loopOn){
-        var params = new URLSearchParams({
-          autoplay: '1',
-          modestbranding: '1',
-          rel: '0',
-          color: 'white'
+        var params=new URLSearchParams({
+          autoplay:'1',
+          modestbranding:'1',
+          rel:'0',
+          color:'white'
         });
         if(loopOn){
           params.set('loop','1');
-          params.set('playlist', VIDEO_ID);
+          params.set('playlist',VIDEO_ID);
         }
-        return 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(VIDEO_ID) + '?' + params.toString();
+        return 'https://www.youtube-nocookie.com/embed/'+encodeURIComponent(VIDEO_ID)+'?'+params.toString();
       }
 
       function inject(loopOn){
-        host.innerHTML = '';
-        var iframe = document.createElement('iframe');
-        iframe.title = 'YouTube video';
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-        iframe.allowFullscreen = true;
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        iframe.style.border = '0';
-        iframe.src = buildSrc(loopOn);
+        host.innerHTML='';
+        var iframe=document.createElement('iframe');
+        iframe.title='YouTube video';
+        iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen=true;
+        iframe.style.width='100%';
+        iframe.style.height='100%';
+        iframe.style.border='0';
+        iframe.src=buildSrc(loopOn);
         host.appendChild(iframe);
       }
 
-      playBtn.addEventListener('click', function(){
+      playBtn.addEventListener('click',function(){
         inject(loopToggle.checked);
       });
 
-      loopToggle.addEventListener('change', function(){
-        var hasIframe = !!host.querySelector('iframe');
-        if(hasIframe) inject(loopToggle.checked);
+      loopToggle.addEventListener('change',function(){
+        if(host.querySelector('iframe')) inject(loopToggle.checked);
       });
 
-      restartBtn.addEventListener('click', function(){
+      restartBtn.addEventListener('click',function(){
         inject(loopToggle.checked);
       });
     })();
   </script>
+
 </body>
 </html>
