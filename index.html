@@ -19,6 +19,9 @@
       --sky:#7fb3ff;
       --sky-glow:rgba(127,179,255,0.55);
 
+      --accent:#7c3aed;
+      --accent-2:#f59e0b;
+
       --glass:rgba(255,255,255,0.06);
       --glass2:rgba(255,255,255,0.12);
     }
@@ -37,21 +40,71 @@
       -webkit-font-smoothing:antialiased;
     }
 
-    /* NAV BAR */
-    nav{
-      display:flex;gap:18px;
-      padding:14px 20px;
+    /* SITE HEADER */
+    .site-header{
       backdrop-filter:blur(14px);
       background:rgba(10,12,18,0.55);
       border-bottom:1px solid var(--line);
-      position:sticky;top:0;z-index:20;
-      font-size:14px;
+      padding:12px 20px;
+      position:sticky;
+      top:0;
+      z-index:20;
     }
-    nav a{
-      text-decoration:none;color:var(--ink-dim);font-weight:500;
+    .site-header-inner{
+      max-width:900px;
+      margin:0 auto;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:12px 24px;
+    }
+    .site-title{
+      font-weight:700;
+      font-size:18px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .site-title-text{
+      background:linear-gradient(135deg,var(--mint),var(--sky));
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      color:transparent;
+    }
+    .earth-spin{
+      display:inline-block;
+      width:1.2em;
+      height:1.2em;
+      position:relative;
+    }
+    .earth-spin span{
+      position:absolute;
+      top:0;
+      left:0;
+      opacity:0;
+      animation:earthRotate 1.5s infinite;
+    }
+    .earth-spin span:nth-child(1){animation-delay:0s}
+    .earth-spin span:nth-child(2){animation-delay:0.5s}
+    .earth-spin span:nth-child(3){animation-delay:1s}
+    @keyframes earthRotate{
+      0%,33.32%{opacity:1}
+      33.33%,100%{opacity:0}
+    }
+    .site-nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 16px;
+    }
+    .site-nav a{
+      color:var(--ink-dim);
+      text-decoration:none;
+      font-size:14px;
+      font-weight:500;
       transition:color .2s ease;
     }
-    nav a:hover{color:var(--ink)}
+    .site-nav a:hover{color:var(--ink)}
 
     /* HEADER */
     header{
@@ -66,6 +119,8 @@
       letter-spacing:.25px;
       background:linear-gradient(90deg,var(--ink),var(--sky));
       -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
       color:transparent;
     }
     .sub{color:var(--ink-dim);font-size:14px;margin-top:4px;}
@@ -91,6 +146,7 @@
     .head{
       display:flex;align-items:center;justify-content:space-between;gap:14px;
       padding:18px 18px 0;
+      flex-wrap:wrap;
     }
     .meta{display:flex;align-items:center;gap:14px}
     .dot{
@@ -100,6 +156,7 @@
         0 0 20px var(--sky-glow),
         inset 0 0 14px var(--mint-glow);
       border:1px solid rgba(255,255,255,.3);
+      flex-shrink:0;
     }
     .title{font-weight:700;font-size:17px;}
     .artist{font-size:13px;color:var(--ink-dim)}
@@ -111,7 +168,9 @@
       background:var(--glass);
       border:1px solid var(--line);
       color:var(--ink);
-      font-size:13px;text-decoration:none;
+      font-size:13px;
+      text-decoration:none;
+      cursor:pointer;
       transition:background .2s ease;
     }
     .btn:hover{background:rgba(255,255,255,0.14)}
@@ -138,9 +197,13 @@
       font-size:15px;
       transition:transform .15s ease;
     }
+    .play:hover{background:#c4ffec}
     .play:active{transform:scale(.93);}
 
-    .controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--ink-dim);}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;font-size:13px;color:var(--ink-dim);align-items:center;}
+    .controls label{display:flex;align-items:center;gap:4px;cursor:pointer;}
+
+    .mini{font-size:12px;color:var(--ink-dim);opacity:.8;margin-top:4px;}
 
     footer{
       color:var(--ink-dim);
@@ -151,6 +214,12 @@
       font-size:13px;
       margin-top:40px;
     }
+    footer a{
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:600;
+    }
+    footer a:hover{text-decoration:underline}
 
     /* Earth Note */
     .earth-note{
@@ -158,21 +227,34 @@
       font-size:12.8px;
       opacity:.92;
       color:var(--ink-dim);
-      line-height:1.45;
+      line-height:1.55;
     }
   </style>
 </head>
 
 <body>
 
-  <nav>
-    <a href="https://time.plnt.earth/map">Map</a>
-    <a href="https://time.plnt.earth">Time</a>
-    <a href="https://mirrorhoney.plnt.earth">Marina</a>
-    <a href="https://honey.plnt.earth">Sabrina</a>
-    <a href="https://clarity.plnt.earth">Sigrid</a>
-    <a href="https://motion.plnt.earth">Dua</a>
-  </nav>
+  <div class="site-header">
+    <div class="site-header-inner">
+      <div class="site-title">
+        <span class="earth-spin"><span>🌎</span><span>🌍</span><span>🌏</span></span>
+        <span class="site-title-text">Earth</span>
+      </div>
+      <nav class="site-nav">
+        <a href="https://manifolddynamics.plnt.earth">Manifold Dynamics</a>
+        <a href="https://manifolddynamics.plnt.earth/t">Manifold T</a>
+        <a href="https://infinity.plnt.earth">Infinity</a>
+        <a href="https://bejeweled.plnt.earth">Bejeweled</a>
+        <a href="https://time.plnt.earth">Time</a>
+        <a href="https://time.plnt.earth/elevator/index.html">Elevator</a>
+        <a href="https://honey.plnt.earth">Honey</a>
+        <a href="https://mirror.plnt.earth">Mirror</a>
+        <a href="https://earth.plnt.earth">Earth</a>
+        <a href="https://time.plnt.earth/anchors/index.html">Anchors</a>
+        <a href="https://time.plnt.earth/map/index.html">Map</a>
+      </nav>
+    </div>
+  </div>
 
   <header>
     <div class="wrap">
@@ -211,11 +293,9 @@
   </main>
 
   <footer>
-    earth.plnt.earth — focused loop. No tracking; video loads only when you press Play.
+    <a href="https://earth.plnt.earth">Earth</a> is a grounding page. This one stays. A place to hold joy, music, and motion — untouched by the noise. If the system shifts, Earth remains.
     <div class="earth-note">
-      Earth is a grounding page. This one stays.  
-      A place to hold joy, music, and motion — untouched by the noise.  
-      If the system shifts, Earth remains.
+      earth.plnt.earth — focused loop. No tracking; video loads only when you press Play.
     </div>
   </footer>
 
